@@ -1,5 +1,5 @@
 using Domain;
-using Logic;
+
 
 namespace WebApi
 {
@@ -16,7 +16,7 @@ namespace WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var servicesFactory = new ServicesFactory();
+            var servicesFactory = new ServicesFactory.ServicesFactory();
             servicesFactory.RegistrateServices(builder.Services);
 
             var app = builder.Build();

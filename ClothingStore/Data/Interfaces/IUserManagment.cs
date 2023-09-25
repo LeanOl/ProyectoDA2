@@ -4,16 +4,15 @@ using Domain;
 
 namespace Data.Interfaces
 {
-	public class IUserManagment
+	public interface IUserManagment
 	{
-		public IUserManagment()
-		{
+		
             IEnumerable<User> GetCharacters();
             User GetCharacterById(int id);
             void InsertCharacter(User? character);
             User? UpdateCharacter(User? character);
             void DeleteCharacter(int id);
-        }
+        
 	}
 }
 

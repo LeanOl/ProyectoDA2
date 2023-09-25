@@ -4,9 +4,9 @@ using Domain;
 
 namespace Data.Concrete
 {
-	public class UserManagment : GenericRepository<User>
+	public class UserManagement : GenericRepository<User>
 	{
-		public UserManagment(DbContext context)
+		public UserManagement(DbContext context)
 		{
 			Context = context;
 		}

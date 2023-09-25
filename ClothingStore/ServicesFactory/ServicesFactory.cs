@@ -1,12 +1,16 @@
 ﻿using System;
 using Data;
+using Data.Interfaces;
+using Data.Concrete;
 using Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Logic.ServicesFactory
+namespace ServicesFactory
 {
-	public class ServiceFactory
+	public class ServicesFactory
 	{
-		public ServiceFactory()
+		public ServicesFactory()
 		{
 		}
 

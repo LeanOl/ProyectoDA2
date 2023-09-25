@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using Data.Interfaces;
 
 namespace Data.Concrete
 {
@@ -38,6 +39,7 @@ namespace Data.Concrete
             Context.Entry(entity).State = EntityState.Modified;
         }
 
+
         public void Delete(T entity)
         {
             Context.Set<T>().Remove(entity);
@@ -66,6 +68,7 @@ namespace Data.Concrete
         {
             Context.SaveChanges();
         }
+
     }
 }
 

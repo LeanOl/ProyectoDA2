@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.SqlServer;
 namespace Data
 {
 	public class ClothingStoreContext : DbContext
