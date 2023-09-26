@@ -1,5 +1,6 @@
 ﻿using Data.Interfaces;
 using Domain;
+using Exceptions.LogicExceptions;
 using Logic.Concrete;
 
 namespace Tests.LogicTests;
@@ -13,10 +14,10 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Condition = new PromotionCondition
+            ProductCondition = new PromotionProductCondition
             {
-                Category = new ConditionProperty { Count = 2, Match = "Same" },
-                Color = new ConditionProperty { Count = 2, Match = "Different" }
+                Category = new PromotionCondition { Count = 2 },
+                Color = new PromotionCondition { Count = 2 }
             },
             FreeProductCount = 1
         };
@@ -30,4 +31,42 @@ public class PromotionLogicTests
         // Assert
         Assert.AreEqual(expected, result);
     }
+
+    [TestMethod]
+    public void CreatePromotion_ConditionCountLessThanOne_Error()
+    {
+        // Arrange
+        Promotion expected = new FreeProductPromotion
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test Promotion",
+            ProductCondition = new PromotionProductCondition
+            {
+                Category = new PromotionCondition { Count = 0 },
+                Color = new PromotionCondition { Count = -1 },
+                Brand = new PromotionCondition { Count = -2 }
+            },
+            FreeProductCount = 1
+        };
+        Mock<IGenericRepository<Promotion>> mockRepo = new Mock<IGenericRepository<Promotion>>();
+
+        PromotionLogic logic = new PromotionLogic(mockRepo.Object);
+        Exception ex = null;
+        try
+        {
+            // Act
+            Promotion result = logic.CreatePromotion(expected);
+        }
+        catch (Exception e)
+        {
+            ex = e;
+        }
+
+        // Assert
+        mockRepo.VerifyAll();
+        Assert.IsNotNull(ex);
+        Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgument));
+        Assert.AreEqual(ex.Message, LogicExceptionMessages.InvalidConditionProductCount);
+    }
+
 }

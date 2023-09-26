@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="InputModels\" />
     <Folder Include="OutputModels\" />
   </ItemGroup>
 

@@ -22,11 +22,11 @@ public class PromotionControllerTests
         {
             Name = "Test Promotion",
             PromotionType = "FreeProducts",
-            Condition = new PromotionConditionRequest
+            Condition = new PromotionProductConditionsRequest
             {
-                Category = new ConditionPropertyRequest { Count = 2, Match = "Same" },
-                Brand = new ConditionPropertyRequest { Count = 2, Match = "Same" },
-                Color = new ConditionPropertyRequest { Count = 2, Match = "Different" }
+                Category = new PromotionConditionRequest { Count = 2, Match = ConditionMatchType.Any },
+                Brand = new PromotionConditionRequest { Count = 2, Match = ConditionMatchType.Same },
+                Color = new PromotionConditionRequest { Count = 2, Match = ConditionMatchType.Any }
             },
             FreeProductCount = 1
         };
@@ -34,11 +34,11 @@ public class PromotionControllerTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Condition = new PromotionCondition
+            ProductCondition = new PromotionProductCondition
             {
-                Category = new ConditionProperty { Count = 2, Match = "Same" },
-                Brand = new ConditionProperty { Count = 2, Match = "Same" },
-                Color = new ConditionProperty { Count = 2, Match = "Different" }
+                Category = new PromotionCondition { Count = 2 },
+                Brand = new PromotionCondition { Count = 2 },
+                Color = new PromotionCondition { Count = 2 }
             },
             FreeProductCount = 1
         };
@@ -46,9 +46,9 @@ public class PromotionControllerTests
         {
             Name = "Test Promotion",
             PromotionType = "Discount",
-            Condition = new PromotionConditionRequest
+            Condition = new PromotionProductConditionsRequest
             {
-                Category = new ConditionPropertyRequest { Count = 2, Match = "Same" }
+                Category = new PromotionConditionRequest { Count = 2, Match = ConditionMatchType.Same}
             },
             DiscountPercentage = 10
         };
@@ -56,9 +56,9 @@ public class PromotionControllerTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Condition = new PromotionCondition
+            ProductCondition = new PromotionProductCondition
             {
-                Category = new ConditionProperty { Count = 2, Match = "Same" },
+                Category = new PromotionCondition { Count = 2 },
 
             },
             DiscountPercentage = 10

@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesFactory", "ServicesFactory\ServicesFactory.csproj", "{15477376-2EA2-4055-899B-BEC25B04C75A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIModels", "APIModels\APIModels.csproj", "{4600D367-E296-4177-8A67-ABB325ED0C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIModels", "APIModels\APIModels.csproj", "{4600D367-E296-4177-8A67-ABB325ED0C7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{4600D367-E296-4177-8A67-ABB325ED0C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4600D367-E296-4177-8A67-ABB325ED0C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4600D367-E296-4177-8A67-ABB325ED0C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

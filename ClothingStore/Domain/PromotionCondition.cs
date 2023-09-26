@@ -1,8 +1,16 @@
-﻿namespace Domain;
+﻿
+using Exceptions.LogicExceptions;
+
+namespace Domain;
 
 public class PromotionCondition
 {
-    public ConditionProperty? Category { get; set; }
-    public ConditionProperty? Brand { get; set; }
-    public ConditionProperty? Color { get; set; }
+    public int Count { get; set; }
+
+    public void SelfValidate()
+    {
+        if (Count <= 0)
+            throw new InvalidConditionArgument(LogicExceptionMessages.InvalidConditionProductCount);
+        
+    }
 }

@@ -14,6 +14,7 @@ public class PromotionLogic : IPromotionLogic
 
     public Promotion CreatePromotion(Promotion aPromotion)
     {
+        aPromotion.SelfValidate();
         return _repository.Insert(aPromotion);
     }
 
