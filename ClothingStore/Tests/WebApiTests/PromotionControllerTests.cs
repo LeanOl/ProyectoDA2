@@ -18,13 +18,13 @@ public class PromotionControllerTests
         {
             Name = "Test Promotion",
             PromotionType = "FreeProducts",
-            Condition = new PromotionConditionRequest 
+            Condition = new PromotionConditionRequest
             {
-                Category = new ConditionPropertyRequest { Count = 2, Match = "Same"},
+                Category = new ConditionPropertyRequest { Count = 2, Match = "Same" },
                 Brand = new ConditionPropertyRequest { Count = 2, Match = "Same" },
                 Color = new ConditionPropertyRequest { Count = 2, Match = "Different" }
             },
-            FreeProductCount= 1
+            FreeProductCount = 1
         };
         Promotion expected = new FreeProductPromotion
         {
@@ -43,7 +43,8 @@ public class PromotionControllerTests
         Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
         logic.Setup(l => l.CreatePromotion(It.IsAny<Promotion>())).Returns(expected);
         PromotionController controller = new PromotionController(logic.Object);
-        CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion","CreatePromotion",new {id=5},expectedMappedResult);
+        CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion", "CreatePromotion",
+            new { id = 5 }, expectedMappedResult);
 
         // Act
         IActionResult result = controller.CreatePromotion(received);
@@ -86,7 +87,8 @@ public class PromotionControllerTests
         Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
         logic.Setup(l => l.CreatePromotion(It.IsAny<Promotion>())).Returns(expected);
         PromotionController controller = new PromotionController(logic.Object);
-        CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion", "CreatePromotion", new { id = 5 }, expectedMappedResult);
+        CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion", "CreatePromotion",
+            new { id = 5 }, expectedMappedResult);
         // Act
         IActionResult result = controller.CreatePromotion(received);
         // Assert
@@ -143,6 +145,24 @@ public class PromotionControllerTests
         Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
         CollectionAssert.AreEquivalent(expectedMappedResult.ToList(), resultValue.ToList());
     }
+
+    [TestMethod]
+    public void DeletePromotion()
+    {
+        // Arrange
+        Guid id = Guid.NewGuid();
+        Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+        logic.Setup(l => l.DeletePromotion(id));
+        PromotionController controller = new PromotionController(logic.Object);
+        OkResult expectedObjectResult = new OkResult();
+        // Act
+        IActionResult result = controller.DeletePromotion(id);
+        // Assert
+        logic.VerifyAll();
+        OkResult resultObject = result as OkResult;
+        Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+    }
+
 }
 
 

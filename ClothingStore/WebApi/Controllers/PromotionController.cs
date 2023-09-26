@@ -32,5 +32,11 @@ namespace WebApi.Controllers
             var result =  promotions.Select(p => new PromotionResponse(p)).ToList();
             return Ok(result);
         }
+
+        public IActionResult DeletePromotion(Guid id)
+        {
+            _promotionLogic.DeletePromotion(id);
+            return Ok();
+        }
     }
 }
