@@ -69,4 +69,28 @@ public class PromotionLogicTests
         Assert.AreEqual(ex.Message, LogicExceptionMessages.InvalidConditionProductCount);
     }
 
+    [TestMethod]
+    public void GetAllPromotionsOk()
+    {
+        // Arrange
+        Promotion expected = new FreeProductPromotion
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test Promotion",
+            ProductCondition = new PromotionProductCondition
+            {
+                Category = new PromotionCondition { Count = 2 },
+                Color = new PromotionCondition { Count = 2 }
+            },
+            FreeProductCount = 1
+        };
+        Mock<IGenericRepository<Promotion>> mockRepo = new Mock<IGenericRepository<Promotion>>();
+        mockRepo.Setup(repo => repo.GetAll<Promotion>()).Returns(new List<Promotion> { expected });
+        PromotionLogic logic = new PromotionLogic(mockRepo.Object);
+        // Act
+        IEnumerable<Promotion> result = logic.GetAllPromotions();
+        // Assert
+        mockRepo.VerifyAll();
+        Assert.AreEqual(expected, result.First());
+    }
 }

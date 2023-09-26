@@ -59,7 +59,6 @@ public class PromotionControllerTests
             ProductCondition = new PromotionProductCondition
             {
                 Category = new PromotionCondition { Count = 2 },
-
             },
             DiscountPercentage = 10
         };

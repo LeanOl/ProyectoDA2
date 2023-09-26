@@ -20,7 +20,7 @@ public class PromotionLogic : IPromotionLogic
 
     public IEnumerable<Promotion> GetAllPromotions()
     {
-        throw new NotImplementedException();
+        return _repository.GetAll<Promotion>();
     }
 
     public void DeletePromotion(Guid id)
