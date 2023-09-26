@@ -10,11 +10,15 @@ namespace Tests.WebApiTests;
 [TestClass]
 public class PromotionControllerTests
 {
-    [TestMethod]
-    public void CreateFreeProductPromotion()
+    private PromotionRequest _receivedFreePromotionRequest;
+    private PromotionRequest _receivedDiscountPromotionRequest;
+    private Promotion _expectedFreePromotion;
+    private Promotion _expectedDiscountPromotion;
+
+    [TestInitialize]
+    public void Initialize()
     {
-        // Arrange
-        PromotionRequest received = new PromotionRequest
+        _receivedFreePromotionRequest = new PromotionRequest
         {
             Name = "Test Promotion",
             PromotionType = "FreeProducts",
@@ -26,7 +30,7 @@ public class PromotionControllerTests
             },
             FreeProductCount = 1
         };
-        Promotion expected = new FreeProductPromotion
+        _expectedFreePromotion= new FreeProductPromotion
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
@@ -38,30 +42,7 @@ public class PromotionControllerTests
             },
             FreeProductCount = 1
         };
-
-        var expectedMappedResult = new PromotionResponse(expected);
-        Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
-        logic.Setup(l => l.CreatePromotion(It.IsAny<Promotion>())).Returns(expected);
-        PromotionController controller = new PromotionController(logic.Object);
-        CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion", "CreatePromotion",
-            new { id = 5 }, expectedMappedResult);
-
-        // Act
-        IActionResult result = controller.CreatePromotion(received);
-
-        // Assert
-        logic.VerifyAll();
-        CreatedAtActionResult resultObject = result as CreatedAtActionResult;
-        PromotionResponse resultValue = resultObject.Value as PromotionResponse;
-        Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
-        Assert.AreEqual(expectedMappedResult, resultValue);
-    }
-
-    [TestMethod]
-    public void CreateDiscountPromotion()
-    {
-        // Arrange
-        PromotionRequest received = new PromotionRequest
+        _receivedDiscountPromotionRequest = new PromotionRequest
         {
             Name = "Test Promotion",
             PromotionType = "Discount",
@@ -71,8 +52,7 @@ public class PromotionControllerTests
             },
             DiscountPercentage = 10
         };
-
-        Promotion expected = new DiscountPromotion
+        _expectedDiscountPromotion = new DiscountPromotion
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
@@ -83,14 +63,35 @@ public class PromotionControllerTests
             },
             DiscountPercentage = 10
         };
+
+    }
+
+    [TestCleanup]
+    public void Cleanup()
+    {
+        _receivedFreePromotionRequest = null;
+        _receivedDiscountPromotionRequest = null;
+        _expectedFreePromotion = null;
+        _expectedDiscountPromotion = null;
+    }
+
+    [TestMethod]
+    public void CreateFreeProductPromotionOk()
+    {
+        // Arrange
+        PromotionRequest received = _receivedFreePromotionRequest;
+        Promotion expected = _expectedFreePromotion;
+
         var expectedMappedResult = new PromotionResponse(expected);
         Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
         logic.Setup(l => l.CreatePromotion(It.IsAny<Promotion>())).Returns(expected);
         PromotionController controller = new PromotionController(logic.Object);
         CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion", "CreatePromotion",
             new { id = 5 }, expectedMappedResult);
+
         // Act
         IActionResult result = controller.CreatePromotion(received);
+
         // Assert
         logic.VerifyAll();
         CreatedAtActionResult resultObject = result as CreatedAtActionResult;
@@ -100,33 +101,36 @@ public class PromotionControllerTests
     }
 
     [TestMethod]
-    public void GetAllPromotions()
+    public void CreateDiscountPromotionOk()
+    {
+        // Arrange
+        PromotionRequest received = _receivedDiscountPromotionRequest;
+        Promotion expected = _expectedDiscountPromotion;
+        var expectedMappedResult = new PromotionResponse(expected);
+        Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+        logic.Setup(l => l.CreatePromotion(It.IsAny<Promotion>())).Returns(expected);
+        PromotionController controller = new PromotionController(logic.Object);
+        CreatedAtActionResult expectedObjectResult = new CreatedAtActionResult("CreatePromotion", "CreatePromotion",
+            new { id = 5 }, expectedMappedResult);
+        // Act
+        IActionResult result = controller.CreatePromotion(received);
+
+        // Assert
+        logic.VerifyAll();
+        CreatedAtActionResult resultObject = result as CreatedAtActionResult;
+        PromotionResponse resultValue = resultObject.Value as PromotionResponse;
+        Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+        Assert.AreEqual(expectedMappedResult, resultValue);
+    }
+
+    [TestMethod]
+    public void GetAllPromotionsOk()
     {
         // Arrange
         IEnumerable<Promotion> expected = new List<Promotion>
         {
-            new FreeProductPromotion
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test Promotion",
-                Condition = new PromotionCondition
-                {
-                    Category = new ConditionProperty { Count = 2, Match = "Same" },
-                    Brand = new ConditionProperty { Count = 2, Match = "Same" },
-                    Color = new ConditionProperty { Count = 2, Match = "Different" }
-                },
-                FreeProductCount = 1
-            },
-            new DiscountPromotion
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test Promotion",
-                Condition = new PromotionCondition
-                {
-                    Category = new ConditionProperty { Count = 2, Match = "Same" },
-                },
-                DiscountPercentage = 10
-            }
+            _expectedFreePromotion,
+            _expectedDiscountPromotion
         };
 
         var expectedMappedResult = expected.Select(p => new PromotionResponse(p));
@@ -162,6 +166,7 @@ public class PromotionControllerTests
         OkResult resultObject = result as OkResult;
         Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
     }
+
 
 }
 
