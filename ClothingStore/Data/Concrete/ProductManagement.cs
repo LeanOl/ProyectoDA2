@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace Data.Concrete
 {
     public class ProductManagement : GenericRepository<Product> //trae de generic repository
@@ -23,7 +25,7 @@ namespace Data.Concrete
             return Context.Set<Product>().ToList();
         }
 
-        public Product GetProductById(int id)
+        public Product GetProductById(int id)//ahora es guid como se cambia esto ?
         {
             return Context.Set<Product>().Find(id);//resolver
         }
