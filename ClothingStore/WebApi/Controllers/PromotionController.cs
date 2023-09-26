@@ -25,5 +25,12 @@ namespace WebApi.Controllers
 
             return CreatedAtAction(nameof(CreatePromotion), new {id = result.Id},result);
         }
+        [HttpGet]
+        public IActionResult GetAllPromotions()
+        {
+            var promotions = _promotionLogic.GetAllPromotions();
+            var result =  promotions.Select(p => new PromotionResponse(p)).ToList();
+            return Ok(result);
+        }
     }
 }

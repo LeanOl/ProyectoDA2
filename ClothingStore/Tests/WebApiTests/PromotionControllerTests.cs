@@ -96,7 +96,53 @@ public class PromotionControllerTests
         Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
         Assert.AreEqual(expectedMappedResult, resultValue);
     }
-    
+
+    [TestMethod]
+    public void GetAllPromotions()
+    {
+        // Arrange
+        IEnumerable<Promotion> expected = new List<Promotion>
+        {
+            new FreeProductPromotion
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Promotion",
+                Condition = new PromotionCondition
+                {
+                    Category = new ConditionProperty { Count = 2, Match = "Same" },
+                    Brand = new ConditionProperty { Count = 2, Match = "Same" },
+                    Color = new ConditionProperty { Count = 2, Match = "Different" }
+                },
+                FreeProductCount = 1
+            },
+            new DiscountPromotion
+            {
+                Id = Guid.NewGuid(),
+                Name = "Test Promotion",
+                Condition = new PromotionCondition
+                {
+                    Category = new ConditionProperty { Count = 2, Match = "Same" },
+                },
+                DiscountPercentage = 10
+            }
+        };
+
+        var expectedMappedResult = expected.Select(p => new PromotionResponse(p));
+        Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+        logic.Setup(l => l.GetAllPromotions()).Returns(expected);
+        PromotionController controller = new PromotionController(logic.Object);
+        OkObjectResult expectedObjectResult = new OkObjectResult(expectedMappedResult);
+
+        // Act
+        IActionResult result = controller.GetAllPromotions();
+
+        // Assert
+        logic.VerifyAll();
+        OkObjectResult resultObject = result as OkObjectResult;
+        IEnumerable<PromotionResponse> resultValue = resultObject.Value as List<PromotionResponse>;
+        Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+        CollectionAssert.AreEquivalent(expectedMappedResult.ToList(), resultValue.ToList());
+    }
 }
 
 
