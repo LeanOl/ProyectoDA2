@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Logic/Logic.csproj" />
+    <ProjectReference Include="..\APIModels\APIModels.csproj" />
     <ProjectReference Include="..\ServicesFactory\ServicesFactory.csproj" />
   </ItemGroup>
 

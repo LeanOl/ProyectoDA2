@@ -10,6 +10,6 @@ namespace Data.Concrete
 		{
 			Context = context;
 		}
-	}
+    }
 }
 
