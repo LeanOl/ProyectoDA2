@@ -6,6 +6,7 @@ public class PromotionResponse
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public string PromotionType { get; set; }
 
     public PromotionResponse(Promotion aPromotion)
     {

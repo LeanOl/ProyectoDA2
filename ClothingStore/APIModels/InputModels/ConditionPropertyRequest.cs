@@ -7,7 +7,7 @@ public class ConditionPropertyRequest
     public int Count { get; set; }
     public string Match { get; set; }
 
-    public ConditionProperty ToEntity()
+    public ConditionProperty? ToEntity()
     {
         return new ConditionProperty
         {

@@ -12,11 +12,34 @@ public class PromotionRequest
 
     public Promotion ToEntity()
     {
+        switch (PromotionType)
+        {
+            case "FreeProducts":
+                return ToFreeProductPromotion();
+            case "Discount":
+                return ToDiscountPromotion();
+            default:
+                throw new ArgumentException("Invalid promotion type");
+        }
+    }
+
+    private Promotion ToFreeProductPromotion()
+    {
         return new FreeProductPromotion
         {
             Name = Name,
             Condition = Condition.ToEntity(),
             FreeProductCount = FreeProductCount
+        };
+    }
+
+    public Promotion ToDiscountPromotion()
+    {
+        return new DiscountPromotion
+        {
+            Name = Name,
+            Condition = Condition.ToEntity(),
+            DiscountPercentage = DiscountPercentage
         };
     }
 }
