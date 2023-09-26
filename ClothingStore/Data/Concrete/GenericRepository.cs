@@ -29,14 +29,16 @@ namespace Data.Concrete
         }
 
 
-        public virtual void Insert(T entity)
+        public virtual T Insert(T entity)
         {
-            Context.Set<T>().Add(entity);
+            var result=Context.Set<T>().Add(entity);
+            return result.Entity;
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
+            return entity;
         }
 
 
