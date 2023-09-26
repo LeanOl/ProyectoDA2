@@ -32,11 +32,19 @@ namespace WebApi.Controllers
             var result =  promotions.Select(p => new PromotionResponse(p)).ToList();
             return Ok(result);
         }
-
-        public IActionResult DeletePromotion(Guid id)
+        [HttpDelete("{id}")]
+        public IActionResult DeletePromotion([FromRoute]Guid id)
         {
             _promotionLogic.DeletePromotion(id);
             return Ok();
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdatePromotion([FromRoute]Guid id, [FromBody]PromotionRequest received)
+        {
+            var promotion = received.ToEntity();
+            var updatedPromotion=_promotionLogic.UpdatePromotion(id, promotion);
+            var result = new PromotionResponse(updatedPromotion);
+            return Ok(result);
         }
     }
 }

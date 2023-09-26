@@ -167,7 +167,32 @@ public class PromotionControllerTests
         Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
     }
 
+    [TestMethod]
+    public void UpdatePromotionOk()
+    {
+        // Arrange
+        Guid id = Guid.NewGuid();
+        PromotionRequest received = _receivedFreePromotionRequest;
+        Promotion expected = _expectedFreePromotion;
+        var expectedMappedResult = new PromotionResponse(expected);
+        Mock<IPromotionLogic> logic = new Mock<IPromotionLogic>(MockBehavior.Strict);
 
+        logic.Setup(l => l.UpdatePromotion(id, It.IsAny<Promotion>())).Returns(expected);
+
+        PromotionController controller = new PromotionController(logic.Object);
+        OkObjectResult expectedObjectResult = new OkObjectResult(expectedMappedResult);
+
+        // Act
+        IActionResult result = controller.UpdatePromotion(id, received);
+
+        // Assert
+        logic.VerifyAll();
+        OkObjectResult resultObject = result as OkObjectResult;
+        PromotionResponse resultValue = resultObject.Value as PromotionResponse;
+        Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+        Assert.AreEqual(expectedMappedResult, resultValue);
+
+    }
 }
 
 
