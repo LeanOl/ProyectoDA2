@@ -4,6 +4,8 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System.Data;
+
 namespace Data
 {
 	public class ClothingStoreContext : DbContext
@@ -12,6 +14,8 @@ namespace Data
         public ClothingStoreContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<User>? Users { get; set; }
+        public virtual DbSet<Product>? Products { get; set; }
+        public virtual DbSet<Role>? Roles { get; set; } //el ? le permite ser null 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
