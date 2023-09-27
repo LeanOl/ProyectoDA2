@@ -25,7 +25,8 @@ public class PromotionLogic : IPromotionLogic
 
     public void DeletePromotion(Guid id)
     {
-        throw new NotImplementedException();
+        Promotion promotion = _repository.Get(x => x.Id == id);
+        _repository.Delete(promotion);
     }
 
     public Promotion UpdatePromotion(Guid id, Promotion isAny)

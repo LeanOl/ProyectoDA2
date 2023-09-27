@@ -93,4 +93,32 @@ public class PromotionLogicTests
         mockRepo.VerifyAll();
         Assert.AreEqual(expected, result.First());
     }
+
+    [TestMethod]
+    public void DeletePromotionOk()
+    {
+        Guid id = Guid.NewGuid();
+        Promotion expected = new FreeProductPromotion
+        {
+            Id = id,
+            Name = "Test Promotion",
+            ProductCondition = new PromotionProductCondition
+            {
+                Category = new PromotionCondition { Count = 2 },
+                Color = new PromotionCondition { Count = 2 }
+            },
+            FreeProductCount = 1
+        };
+        Mock<IGenericRepository<Promotion>> mockRepo = new Mock<IGenericRepository<Promotion>>();
+        mockRepo.Setup(repo => repo.Get(p => p.Id == id,null)).Returns(expected);
+        mockRepo.Setup(repo => repo.Delete(expected));
+
+        PromotionLogic logic = new PromotionLogic(mockRepo.Object);
+
+        // Act
+        logic.DeletePromotion(id);
+
+        // Assert
+        mockRepo.VerifyAll();
+    }
 }
