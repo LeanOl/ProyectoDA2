@@ -12,8 +12,12 @@ namespace Data
         public ClothingStoreContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<User>? Users { get; set; }
+        public virtual DbSet<Promotion> Promotions { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
