@@ -121,4 +121,31 @@ public class PromotionLogicTests
         // Assert
         mockRepo.VerifyAll();
     }
+
+    [TestMethod]
+    public void UpdatePromotionOk()
+    {
+        // Arrange
+        Guid id = Guid.NewGuid();
+        Promotion expected = new FreeProductPromotion
+        {
+            Id = id,
+            Name = "Test Promotion",
+            ProductCondition = new PromotionProductCondition
+            {
+                Category = new PromotionCondition { Count = 2 },
+                Color = new PromotionCondition { Count = 2 }
+            },
+            FreeProductCount = 1
+        };
+        Mock<IGenericRepository<Promotion>> mockRepo = new Mock<IGenericRepository<Promotion>>();
+        mockRepo.Setup(repo => repo.Get(p => p.Id == id,null)).Returns(expected);
+        mockRepo.Setup(repo => repo.Update(expected)).Returns(expected);
+        PromotionLogic logic = new PromotionLogic(mockRepo.Object);
+        // Act
+        Promotion result = logic.UpdatePromotion(id, expected);
+        // Assert
+        mockRepo.VerifyAll();
+        Assert.AreEqual(expected, result);
+    }
 }

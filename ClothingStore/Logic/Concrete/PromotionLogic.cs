@@ -29,8 +29,11 @@ public class PromotionLogic : IPromotionLogic
         _repository.Delete(promotion);
     }
 
-    public Promotion UpdatePromotion(Guid id, Promotion isAny)
+    public Promotion UpdatePromotion(Guid id, Promotion updatedPromotion)
     {
-        throw new NotImplementedException();
+        Promotion promotion = _repository.Get(x => x.Id == id);
+        promotion.Name = updatedPromotion.Name;
+        promotion.ProductCondition = updatedPromotion.ProductCondition;
+        return _repository.Update(promotion);
     }
 }
