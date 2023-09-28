@@ -33,7 +33,7 @@ public class PromotionLogic : IPromotionLogic
     {
         Promotion promotion = _repository.Get(x => x.Id == id);
         promotion.Name = updatedPromotion.Name;
-        promotion.ProductCondition = updatedPromotion.ProductCondition;
+        promotion.Conditions = updatedPromotion.Conditions;
         return _repository.Update(promotion);
     }
 }

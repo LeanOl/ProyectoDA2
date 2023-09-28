@@ -4,25 +4,15 @@ namespace APIModels.InputModels;
 
 public class PromotionConditionRequest
 {
-    public int Count { get; set; }
-    public string Match { get; set; }
+    public string ProductPropertyCondition { get; set; }
+    public string QuantityCondition { get; set; }
 
-    public PromotionCondition? ToEntity()
+    public PromotionCondition ToEntity()
     {
-        switch (Match)
-        {
-            case ConditionMatchType.Same:
-                return new ConditionSame()
-                {
-                    Count = Count
-                };
-            case ConditionMatchType.Any:
-                return new ConditionAny()
-                {
-                    Count = Count
-                };
-            default:
-                return null;
-        }
-    }
+       return new PromotionCondition
+       {
+           ProductPropertyCondition = ProductPropertyCondition,
+           CountCondition = QuantityCondition
+       };
+   }
 }

@@ -14,10 +14,13 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 2 },
-                Color = new PromotionCondition { Count = 2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "Count() >= 3",
+                }
             },
             FreeProductCount = 1
         };
@@ -33,18 +36,20 @@ public class PromotionLogicTests
     }
 
     [TestMethod]
-    public void CreatePromotion_ConditionCountLessThanOne_Error()
+    public void CreatePromotion_InvalidCondition_Error()
     {
         // Arrange
         Promotion expected = new FreeProductPromotion
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 0 },
-                Color = new PromotionCondition { Count = -1 },
-                Brand = new PromotionCondition { Count = -2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "InvalidCondition",
+                }
             },
             FreeProductCount = 1
         };
@@ -66,7 +71,7 @@ public class PromotionLogicTests
         mockRepo.VerifyAll();
         Assert.IsNotNull(ex);
         Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgument));
-        Assert.AreEqual(ex.Message, LogicExceptionMessages.InvalidConditionProductCount);
+        Assert.AreEqual(LogicExceptionMessages.InvalidCondition,ex.Message );
     }
 
     [TestMethod]
@@ -77,10 +82,13 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 2 },
-                Color = new PromotionCondition { Count = 2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "Count() >= 3",
+                }
             },
             FreeProductCount = 1
         };
@@ -102,10 +110,13 @@ public class PromotionLogicTests
         {
             Id = id,
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 2 },
-                Color = new PromotionCondition { Count = 2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "Count() >= 3",
+                }
             },
             FreeProductCount = 1
         };
@@ -131,10 +142,13 @@ public class PromotionLogicTests
         {
             Id = id,
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 2 },
-                Color = new PromotionCondition { Count = 2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "Count() >= 3",
+                }
             },
             FreeProductCount = 1
         };

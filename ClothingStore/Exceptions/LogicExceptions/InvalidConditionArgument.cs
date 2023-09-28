@@ -2,7 +2,7 @@
 
 public class InvalidConditionArgument: Exception
 {
-    public InvalidConditionArgument(string message) : base(message)
+    public InvalidConditionArgument(string message, Exception exception) : base(message, exception)
     {
     }
 }

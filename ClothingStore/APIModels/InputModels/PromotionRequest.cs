@@ -6,7 +6,7 @@ public class PromotionRequest
 {
     public string Name { get; set; }
     public string PromotionType { get; set; }
-    public PromotionProductConditionsRequest Condition { get; set; }
+    public List<PromotionConditionRequest> Conditions { get; set; }
     public int FreeProductCount { get; set; }
     public double DiscountPercentage { get; set; }
 
@@ -28,7 +28,7 @@ public class PromotionRequest
         return new FreeProductPromotion
         {
             Name = Name,
-            ProductCondition = Condition.ToEntity(),
+            Conditions = Conditions.Select(c => c.ToEntity()),
             FreeProductCount = FreeProductCount
         };
     }
@@ -38,7 +38,7 @@ public class PromotionRequest
         return new DiscountPromotion
         {
             Name = Name,
-            ProductCondition = Condition.ToEntity(),
+            Conditions = Conditions.Select(c => c.ToEntity()),
             DiscountPercentage = DiscountPercentage
         };
     }

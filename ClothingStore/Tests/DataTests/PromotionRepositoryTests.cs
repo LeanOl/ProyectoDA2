@@ -17,11 +17,13 @@ public class PromotionRepositoryTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 2 },
-                Brand = new PromotionCondition { Count = 2 },
-                Color = new PromotionCondition { Count = 2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "Count() >= 3",
+                }
             },
             FreeProductCount = 1
         };
@@ -45,11 +47,13 @@ public class PromotionRepositoryTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            ProductCondition = new PromotionProductCondition
+            Conditions = new List<PromotionCondition>()
             {
-                Category = new PromotionCondition { Count = 2 },
-                Brand = new PromotionCondition { Count = 2 },
-                Color = new PromotionCondition { Count = 2 }
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "Brand",
+                    CountCondition = "Count() >= 3",
+                }
             },
             FreeProductCount = 1
         };
@@ -60,6 +64,8 @@ public class PromotionRepositoryTests
         // Assert
         Assert.AreEqual(expected, result.First());
     }
+
+
 
     private DbContext createDbContext(string dbName)
     {
