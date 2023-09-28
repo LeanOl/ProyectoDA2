@@ -75,6 +75,43 @@ public class PromotionLogicTests
     }
 
     [TestMethod]
+    public void AddPromotion_InvalidConditionProperty_Error()
+    {
+                // Arrange
+        Promotion expected = new FreeProductPromotion
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test Promotion",
+            Conditions = new List<PromotionCondition>()
+            {
+                new PromotionCondition()
+                {
+                    ProductPropertyCondition= "InvalidProperty",
+                    CountCondition = "Count() >= 3",
+                }
+            },
+            FreeProductCount = 1
+        };
+        Mock<IGenericRepository<Promotion>> mockRepo = new Mock<IGenericRepository<Promotion>>();
+        PromotionLogic logic = new PromotionLogic(mockRepo.Object);
+        Exception ex = null;
+        try
+        {
+            // Act
+            Promotion result = logic.CreatePromotion(expected);
+        }
+        catch (Exception e)
+        {
+            ex = e;
+        }
+        // Assert
+        mockRepo.VerifyAll();
+        Assert.IsNotNull(ex);
+        Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgument));
+        Assert.AreEqual(LogicExceptionMessages.InvalidCondition, ex.Message);
+    }
+
+    [TestMethod]
     public void GetAllPromotionsOk()
     {
         // Arrange
