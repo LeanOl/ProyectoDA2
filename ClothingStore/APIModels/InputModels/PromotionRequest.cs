@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Exceptions.ApiModelExceptions;
 
 namespace APIModels.InputModels;
 
@@ -19,7 +20,7 @@ public class PromotionRequest
             case "Discount":
                 return ToDiscountPromotion();
             default:
-                throw new ArgumentException("Invalid promotion type");
+                throw new InvalidTypeException("Invalid promotion type");
         }
     }
 

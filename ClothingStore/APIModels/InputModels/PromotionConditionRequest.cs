@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Exceptions.ApiModelExceptions;
 
 namespace APIModels.InputModels;
 
@@ -17,7 +18,7 @@ public class PromotionConditionRequest
             case "Collection":
                 return ToCollectionPromotionCondition();
             default:
-                throw new ArgumentException("Invalid condition type");
+                throw new InvalidTypeException("Invalid condition type");
         }
    }
 

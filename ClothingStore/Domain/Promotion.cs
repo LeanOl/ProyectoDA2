@@ -60,7 +60,7 @@ public class Promotion
         }
         catch (ParseException e)
         {
-            throw new InvalidConditionArgument(LogicExceptionMessages.InvalidCondition, e);
+            throw new InvalidConditionArgumentException(LogicExceptionMessages.InvalidCondition, e);
         }
     }
 }

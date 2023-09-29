@@ -70,7 +70,7 @@ public class PromotionLogicTests
         // Assert
         mockRepo.VerifyAll();
         Assert.IsNotNull(ex);
-        Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgument));
+        Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgumentException));
         Assert.AreEqual(LogicExceptionMessages.InvalidCondition,ex.Message );
     }
 
@@ -107,7 +107,7 @@ public class PromotionLogicTests
         // Assert
         mockRepo.VerifyAll();
         Assert.IsNotNull(ex);
-        Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgument));
+        Assert.IsInstanceOfType(ex, typeof(InvalidConditionArgumentException));
         Assert.AreEqual(LogicExceptionMessages.InvalidCondition, ex.Message);
     }
 

@@ -1,4 +1,5 @@
-﻿using Exceptions.LogicExceptions;
+﻿using Exceptions.ApiModelExceptions;
+using Exceptions.LogicExceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -10,10 +11,10 @@ public class ExceptionFilter : Attribute, IExceptionFilter
     {
         switch (context.Exception)
         {
-            case ArgumentException:
+            case InvalidTypeException:
                 context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
                 break;
-            case InvalidConditionArgument:
+            case InvalidConditionArgumentException:
                 context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
                 break;
             default:
