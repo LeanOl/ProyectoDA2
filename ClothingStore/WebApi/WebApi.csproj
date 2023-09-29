@@ -23,6 +23,9 @@
     <ProjectReference Include="..\APIModels\APIModels.csproj" />
     <ProjectReference Include="..\ServicesFactory\ServicesFactory.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Filters\" />
+  </ItemGroup>
 
 
 

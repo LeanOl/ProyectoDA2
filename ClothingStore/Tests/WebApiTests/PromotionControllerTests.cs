@@ -38,10 +38,10 @@ public class PromotionControllerTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition()
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             FreeProductCount = 1
@@ -66,10 +66,10 @@ public class PromotionControllerTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             DiscountPercentage = 10

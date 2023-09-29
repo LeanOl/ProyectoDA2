@@ -32,12 +32,14 @@ namespace Data.Concrete
         public virtual T Insert(T entity)
         {
             var result=Context.Set<T>().Add(entity);
+            Save();
             return result.Entity;
         }
 
         public T Update(T entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
+            Save();
             return entity;
         }
 
@@ -45,6 +47,7 @@ namespace Data.Concrete
         public void Delete(T entity)
         {
             Context.Set<T>().Remove(entity);
+            Save();
         }
 
         public bool CheckConnection()

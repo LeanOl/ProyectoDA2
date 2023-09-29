@@ -28,10 +28,33 @@ public class Promotion
                 Name = "a",
                 Price = 1
             };
-            var products = new List<Product> { product };
+            var product2 = new Product()
+            {
+                Brand = "b",
+                Category = "b",
+                Colors = new List<string> { "a" },
+                Description = "b",
+                Name = "b",
+                Price = 2
+            };
+            var product3 = new Product()
+            {
+                Brand = "c",
+                Category = "c",
+                Colors = new List<string> { "b","a" },
+                Description = "c",
+                Name = "c",
+                Price = 3
+            };
+            var products = new List<Product>
+            {
+                product, product2, product3
+            };
+            
             foreach (var condition in Conditions)
             {
-                products.AsQueryable().GroupBy(condition.ProductPropertyCondition).Any(condition.CountCondition);
+                condition.SelfValidate();
+                
             }
             
         }

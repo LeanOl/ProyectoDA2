@@ -3,6 +3,8 @@ using Data;
 using Data.Interfaces;
 using Data.Concrete;
 using Domain;
+using Logic.Concrete;
+using Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +20,8 @@ namespace ServicesFactory
         {
             serviceCollection.AddDbContext<DbContext, ClothingStoreContext>();
             serviceCollection.AddScoped<IGenericRepository<User>, UserManagement>();
+            serviceCollection.AddScoped<IGenericRepository<Promotion>,PromotionManagement>();
+            serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
 
             // Lo hago scoped ya que este manager maneja estado, tiene el currentUser
             //serviceCollection.AddScoped<ISessionService, SessionService>();

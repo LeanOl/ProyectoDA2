@@ -1,7 +1,8 @@
 ﻿namespace Domain;
 
-public class PromotionCondition
+public abstract class PromotionCondition
 {
     public string ProductPropertyCondition { get; set; }
-    public string CountCondition { get; set; }
+    public string QuantityCondition { get; set; }
+    public abstract void SelfValidate();
 }

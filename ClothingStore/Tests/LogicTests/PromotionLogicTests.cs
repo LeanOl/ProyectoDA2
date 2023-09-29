@@ -16,10 +16,10 @@ public class PromotionLogicTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             FreeProductCount = 1
@@ -45,10 +45,10 @@ public class PromotionLogicTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition()
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "InvalidCondition",
+                    QuantityCondition = "InvalidCondition",
                 }
             },
             FreeProductCount = 1
@@ -84,10 +84,10 @@ public class PromotionLogicTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition()
                 {
                     ProductPropertyCondition= "InvalidProperty",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             FreeProductCount = 1
@@ -121,10 +121,10 @@ public class PromotionLogicTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             FreeProductCount = 1
@@ -149,10 +149,10 @@ public class PromotionLogicTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             FreeProductCount = 1
@@ -181,10 +181,10 @@ public class PromotionLogicTests
             Name = "Test Promotion",
             Conditions = new List<PromotionCondition>()
             {
-                new PromotionCondition()
+                new SingularPromotionCondition
                 {
                     ProductPropertyCondition= "Brand",
-                    CountCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3",
                 }
             },
             FreeProductCount = 1
