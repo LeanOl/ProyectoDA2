@@ -28,6 +28,7 @@ public class PromotionControllerTests
                 {
                     ProductPropertyCondition= "Brand",
                     QuantityCondition = "Count() >= 3",
+                    ConditionType = "Singular"
                 }
             },
             FreeProductCount = 1
@@ -36,7 +37,7 @@ public class PromotionControllerTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition()
                 {
@@ -56,6 +57,7 @@ public class PromotionControllerTests
                 {
                     ProductPropertyCondition= "Brand",
                     QuantityCondition = "Count() >= 3",
+                    ConditionType = "Singular"
                 }
             },
             DiscountPercentage = 10
@@ -64,12 +66,12 @@ public class PromotionControllerTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition
                 {
                     ProductPropertyCondition= "Brand",
-                    QuantityCondition = "Count() >= 3",
+                    QuantityCondition = "Count() >= 3"
                 }
             },
             DiscountPercentage = 10
@@ -138,7 +140,7 @@ public class PromotionControllerTests
     public void GetAllPromotionsOk()
     {
         // Arrange
-        IEnumerable<Promotion> expected = new List<Promotion>
+        ICollection<Promotion> expected = new List<Promotion>
         {
             _expectedFreePromotion,
             _expectedDiscountPromotion

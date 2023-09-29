@@ -4,11 +4,11 @@ using System.Linq.Dynamic.Core.Exceptions;
 using Exceptions.LogicExceptions;
 
 namespace Domain;
-public class Promotion
+public abstract class Promotion
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
-    public IEnumerable<PromotionCondition> Conditions;
+    public ICollection<PromotionCondition> PromotionConditions;
 
     public void SelfValidate()
     {
@@ -51,7 +51,7 @@ public class Promotion
                 product, product2, product3
             };
             
-            foreach (var condition in Conditions)
+            foreach (var condition in PromotionConditions)
             {
                 condition.SelfValidate();
                 

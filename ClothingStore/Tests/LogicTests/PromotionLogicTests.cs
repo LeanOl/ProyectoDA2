@@ -14,7 +14,7 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition
                 {
@@ -43,7 +43,7 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition()
                 {
@@ -82,7 +82,7 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition()
                 {
@@ -119,7 +119,7 @@ public class PromotionLogicTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition
                 {
@@ -147,7 +147,7 @@ public class PromotionLogicTests
         {
             Id = id,
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition
                 {
@@ -179,7 +179,7 @@ public class PromotionLogicTests
         {
             Id = id,
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition
                 {

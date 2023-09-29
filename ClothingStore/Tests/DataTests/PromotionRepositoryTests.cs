@@ -17,7 +17,7 @@ public class PromotionRepositoryTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition()
                 {
@@ -47,7 +47,7 @@ public class PromotionRepositoryTests
         {
             Id = Guid.NewGuid(),
             Name = "Test Promotion",
-            Conditions = new List<PromotionCondition>()
+            PromotionConditions = new List<PromotionCondition>()
             {
                 new SingularPromotionCondition
                 {

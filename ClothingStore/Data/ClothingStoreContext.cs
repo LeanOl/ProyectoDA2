@@ -12,11 +12,18 @@ namespace Data
         public ClothingStoreContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<User>? Users { get; set; }
-        public virtual DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<PromotionCondition> PromotionConditions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Promotion>()
+                .HasMany(p => p.PromotionConditions);
+            modelBuilder.Entity<FreeProductPromotion>();
+            modelBuilder.Entity<DiscountPromotion>();
+            modelBuilder.Entity<SingularPromotionCondition>();
+            modelBuilder.Entity<CollectionPromotionCondition>();
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
