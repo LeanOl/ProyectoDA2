@@ -12,6 +12,7 @@ public class PromotionResponse
     {
         Id = aPromotion.Id;
         Name = aPromotion.Name;
+        PromotionType = aPromotion.GetType().Name;
     }
 
     public override bool Equals(object? obj)

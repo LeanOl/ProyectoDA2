@@ -23,9 +23,7 @@ namespace ServicesFactory
             serviceCollection.AddScoped<IGenericRepository<Promotion>,PromotionManagement>();
             serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
 
-            // Lo hago scoped ya que este manager maneja estado, tiene el currentUser
-            //serviceCollection.AddScoped<ISessionService, SessionService>();
-            //serviceCollection.AddScoped<ICharacterService, CharacterService>();
+            
         }
     }
 }

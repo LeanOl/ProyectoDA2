@@ -3,10 +3,12 @@ using APIModels.OutputModels;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
     [Route("api/promotions")]
+    [ExceptionFilter]
     [ApiController]
     public class PromotionController : ControllerBase
     {

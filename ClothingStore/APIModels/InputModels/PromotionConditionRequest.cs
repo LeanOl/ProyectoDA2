@@ -6,18 +6,18 @@ public class PromotionConditionRequest
 {
     public string ProductPropertyCondition { get; set; }
     public string QuantityCondition { get; set; }
-    public string PromotionType { get; set; }
+    public string ConditionType { get; set; }
 
     public PromotionCondition ToEntity()
     {
-        switch (PromotionType)
+        switch (ConditionType)
         {
             case "Singular":
                 return ToSingularPromotionCondition();
             case "Collection":
                 return ToCollectionPromotionCondition();
             default:
-                throw new ArgumentException("Invalid promotion type");
+                throw new ArgumentException("Invalid condition type");
         }
    }
 
