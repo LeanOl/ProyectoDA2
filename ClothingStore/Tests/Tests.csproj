@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="LogicTests\" />
     <Folder Include="DataTests\" />
+    <Folder Include="DomainTest\" />
     <Folder Include="WebApiTests\" />
   </ItemGroup>
 
