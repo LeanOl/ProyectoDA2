@@ -19,7 +19,7 @@ namespace Data.Concrete
         {
             Context = context;
         }
-
+            
         public IEnumerable<Product> GetAllProducts()
         {
             return Context.Set<Product>().ToList();
