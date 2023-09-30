@@ -4,7 +4,7 @@ public class DiscountPromotion : Promotion
 {
     public double DiscountPercentage { get; set; }
 
-    public decimal GetDiscount(ShoppingCart cart)
+    public override decimal GetDiscount(ShoppingCart cart)
     {
         bool isConditionApplicable = true;
         decimal discount = 0;
@@ -15,11 +15,21 @@ public class DiscountPromotion : Promotion
 
         if (isConditionApplicable)
         {
-            Product mostExpensiveProduct = cart.ProductList
-                .OrderByDescending(x => x.Price)
-                .FirstOrDefault();
-            discount = mostExpensiveProduct.Price * (decimal)DiscountPercentage / 100;
+            Product? mostExpensiveProduct = FindMostExpensiveProduct(cart);
+            discount = ApplyDiscount(mostExpensiveProduct);
         }
         return discount;
+    }
+
+    private Product? FindMostExpensiveProduct(ShoppingCart cart)
+    {
+        return cart.ProductList.MaxBy(x => x.Price);
+    }
+
+    private decimal ApplyDiscount(Product? mostExpensiveProduct)
+    {
+        if (mostExpensiveProduct == null)
+            return 0;
+        return mostExpensiveProduct.Price * (decimal)DiscountPercentage / 100;
     }
 }

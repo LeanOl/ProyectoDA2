@@ -6,7 +6,7 @@ public class FreeProductPromotion : Promotion
 {
     public int FreeProductCount { get; set; }
 
-    public decimal GetDiscount(ShoppingCart cart)
+    public override decimal GetDiscount(ShoppingCart cart)
     {
         bool isConditionApplicable = true;
         decimal discount = 0;
@@ -19,9 +19,7 @@ public class FreeProductPromotion : Promotion
         if (isConditionApplicable)
         {
             IEnumerable<Product> products = cart.ProductList;
-            var lessValueableProducts = products
-                .OrderBy(x => x.Price)
-                .Take(FreeProductCount);
+            var lessValueableProducts = GetLessValueableProducts(products);
             foreach (var product in lessValueableProducts)
             {
                 discount+= product.Price;
@@ -29,5 +27,12 @@ public class FreeProductPromotion : Promotion
         }
 
         return discount;
+    }
+
+    private IEnumerable<Product> GetLessValueableProducts(IEnumerable<Product> products)
+    {
+        return products
+            .OrderBy(x => x.Price)
+            .Take(FreeProductCount);
     }
 }

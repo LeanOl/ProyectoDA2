@@ -9,6 +9,7 @@ public abstract class Promotion
     public Guid Id { get; set; }
     public string Name { get; set; }
     public ICollection<PromotionCondition> PromotionConditions;
+    public abstract decimal GetDiscount(ShoppingCart cart);
 
     public void SelfValidate()
     {
