@@ -40,7 +40,7 @@ public class SingularPromotionCondition : PromotionCondition
         products.AsQueryable().GroupBy(ProductPropertyCondition).Any(QuantityCondition);
     }
 
-    public bool VerifyCartCondition(ShoppingCart cart)
+    public override bool VerifyCartCondition(ShoppingCart cart)
     {
         var products = cart.ProductList.AsQueryable();
         var groupedProducts = products.GroupBy(ProductPropertyCondition);

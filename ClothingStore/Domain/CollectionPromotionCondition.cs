@@ -38,4 +38,11 @@ public class CollectionPromotionCondition : PromotionCondition
         products.AsQueryable().SelectMany(ProductPropertyCondition).GroupBy("it").Any(QuantityCondition);
 
     }
+
+    public override bool VerifyCartCondition(ShoppingCart cart)
+    {
+        var products = cart.ProductList.AsQueryable();
+        var groupedProducts = products.SelectMany(ProductPropertyCondition).GroupBy("it");
+        return groupedProducts.Any(QuantityCondition);
+    }
 }
