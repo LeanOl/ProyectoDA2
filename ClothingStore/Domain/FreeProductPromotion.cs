@@ -6,7 +6,7 @@ public class FreeProductPromotion : Promotion
 {
     public int FreeProductCount { get; set; }
 
-    public decimal ApplyPromotion(ShoppingCart cart)
+    public decimal GetDiscount(ShoppingCart cart)
     {
         bool isConditionApplicable = true;
         decimal discount = 0;
