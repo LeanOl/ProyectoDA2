@@ -69,6 +69,28 @@ namespace Tests.DataTests
             Assert.AreEqual(expected, result.First());
         }
 
-        
+        [TestMethod]
+        public void UpdateUser()
+        {
+            // Arrange
+            var dbContext = createDbContext("UpdateUser");
+            var userManagement = new UserManagement(dbContext);
+            var expected = new User(
+                "test@test.com",
+                "ADMIN",
+                "Cuareim 1234"
+            );
+
+            // Act
+            userManagement.Insert(expected);
+
+            var address = "Paraguay 3131";
+            expected.DeliveryAddress = address;
+
+            var result = userManagement.Update(expected);
+
+            // Assert
+            Assert.AreEqual(address, result.DeliveryAddress);
+        }
     }
 }
