@@ -6,6 +6,7 @@ using Domain;
 using Data.Interfaces;
 using Logic.Interfaces;
 using Logic.Concrete;
+using Exceptions.LogicExceptions;
 
 namespace Tests.LogicTests
 {
@@ -29,6 +30,25 @@ namespace Tests.LogicTests
 
             // Assert
             Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void CreateNewUserInvalidEmail()
+        {
+            Mock<IGenericRepository<User>> mockRepo = new Mock<IGenericRepository<User>>();
+            IUserLogic logic = new UserLogic(mockRepo.Object);
+
+            Assert.ThrowsException<InvalidFormatEmailException>(() =>
+            {
+                var expected = new User(
+                    "test1est-com",  // Este correo es inválido
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
+
+                // Act
+                User result = logic.CreateUser(expected);
+            });
         }
     }
 }

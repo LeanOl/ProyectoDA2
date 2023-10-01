@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Data.Interfaces;
 using Logic.Interfaces;
+using Exceptions.LogicExceptions;
 
 namespace Logic.Concrete
 {

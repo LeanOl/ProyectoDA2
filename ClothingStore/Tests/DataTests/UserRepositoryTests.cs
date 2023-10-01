@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Data.Concrete;
 using Domain;
+using Exceptions.LogicExceptions;
 
 namespace Tests.DataTests
 {
@@ -141,11 +142,10 @@ namespace Tests.DataTests
         [TestMethod]
         public void AddUserWithInvalidFormatEmail()
         {
-            //Este test falla!!! Dejarlo hasta que lo arregle
             // Arrange
             var dbContext = createDbContext("AddUserWithInvalidFormatEmail");
             var userManagement = new UserManagement(dbContext);
-            Assert.ThrowsException<ValidationException>(() =>
+            Assert.ThrowsException<InvalidFormatEmailException>(() =>
             {
                 var expected = new User(
                     "test1est-com",  // Este correo es inválido

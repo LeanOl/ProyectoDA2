@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Exceptions.LogicExceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
@@ -12,10 +13,33 @@ namespace Domain
 
         public User(string email, string role, string deliveryAddress)
         {
+            Validations(email);
             Id = Guid.NewGuid();
             Email = email;
             Role = role;
             DeliveryAddress = deliveryAddress;
         }
+
+        private void Validations(string email)
+        {
+            if (!IsValidEmail(email))
+            {
+                throw new InvalidFormatEmailException("El campo 'Email' no tiene un formato de dirección de correo electrónico válido.");
+            }
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var address = new System.Net.Mail.MailAddress(email);
+                return address.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
