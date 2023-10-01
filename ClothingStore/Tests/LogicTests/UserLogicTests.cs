@@ -7,6 +7,8 @@ using Data.Interfaces;
 using Logic.Interfaces;
 using Logic.Concrete;
 using Exceptions.LogicExceptions;
+using APIModels.InputModels;
+using APIModels.OutputModels;
 
 namespace Tests.LogicTests
 {
@@ -16,20 +18,26 @@ namespace Tests.LogicTests
         [TestMethod]
         public void CreateNewUserOk()
         {
-            var expected = new User(
+            var userMock = new User(
                     "test@test.com",
                     "ADMIN",
                     "Cuareim 1234"
                 );
             Mock<IGenericRepository<User>> mockRepo = new Mock<IGenericRepository<User>>();
-            mockRepo.Setup(repo => repo.Insert(It.IsAny<User>())).Returns(expected);
+            mockRepo.Setup(repo => repo.Insert(It.IsAny<User>())).Returns(userMock);
             IUserLogic logic = new UserLogic(mockRepo.Object);
 
+            var expected = new UserRequest(
+                    "test@test.com",
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
+
             // Act
-            User result = logic.CreateUser(expected);
+            UserResponse result = logic.CreateUser(expected);
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected.Email, result.Email);
             mockRepo.VerifyAll();
         }
 
@@ -41,14 +49,14 @@ namespace Tests.LogicTests
 
             Assert.ThrowsException<InvalidFormatEmailException>(() =>
             {
-                var expected = new User(
+                var expected = new UserRequest(
                     "test1est-com",  // Este correo es inválido
                     "ADMIN",
                     "Cuareim 1234"
                 );
 
                 // Act
-                User result = logic.CreateUser(expected);
+                UserResponse result = logic.CreateUser(expected);
             });
         }
 
@@ -65,10 +73,10 @@ namespace Tests.LogicTests
             IUserLogic logic = new UserLogic(mockRepo.Object);
 
             // Act
-            IEnumerable<User> result = logic.GetAllUsers();
+            IEnumerable<UserResponse> result = logic.GetAllUsers();
             // Assert
             mockRepo.VerifyAll();
-            Assert.AreEqual(expected, result.First());
+            Assert.AreEqual(expected.Email, result.First().Email);
         }
 
         [TestMethod]
@@ -99,20 +107,26 @@ namespace Tests.LogicTests
         {
             // Arrange
             Guid id = Guid.NewGuid();
-            var expected = new User(
+            var userMock = new User(
                     "test@test.com",
                     "ADMIN",
                     "Cuareim 1234"
                 );
             Mock<IGenericRepository<User>> mockRepo = new Mock<IGenericRepository<User>>();
-            mockRepo.Setup(repo => repo.Get(p => p.Id == id, null)).Returns(expected);
-            mockRepo.Setup(repo => repo.Update(expected)).Returns(expected);
+            mockRepo.Setup(repo => repo.Get(p => p.Id == id, null)).Returns(userMock);
+            mockRepo.Setup(repo => repo.Update(userMock)).Returns(userMock);
             UserLogic logic = new UserLogic(mockRepo.Object);
+
+            var expected = new UserRequest(
+                    "test@test.com",
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
             // Act
-            User result = logic.UpdateUser(id, expected);
+            UserResponse result = logic.UpdateUser(id, expected);
             // Assert
             mockRepo.VerifyAll();
-            Assert.AreEqual(expected, result);
+            Assert.AreEqual(expected.Email, result.Email);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Data;
+﻿using Data;
 using Data.Interfaces;
 using Data.Concrete;
 using Domain;
@@ -23,9 +22,6 @@ namespace ServicesFactory
             serviceCollection.AddScoped<IGenericRepository<Promotion>,PromotionManagement>();
             serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
             serviceCollection.AddScoped<IUserLogic, UserLogic>();
-
-
-
         }
     }
 }

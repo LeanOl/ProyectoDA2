@@ -2,6 +2,8 @@
 using Data.Interfaces;
 using Logic.Interfaces;
 using Exceptions.LogicExceptions;
+using APIModels.OutputModels;
+using APIModels.InputModels;
 
 namespace Logic.Concrete
 {
@@ -13,14 +15,16 @@ namespace Logic.Concrete
             _repository = repository;
         }
 
-        public User CreateUser(User user)
+        public UserResponse CreateUser(UserRequest userRequest)
         {
-            return _repository.Insert(user);
+            return new UserResponse (_repository.Insert(userRequest.ToEntity()));
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<UserResponse> GetAllUsers()
         {
-            return _repository.GetAll<User>();
+            var users = _repository.GetAll<User>();
+            var userResponses = users.Select(user => new UserResponse(user));
+            return userResponses;
         }
 
         public void DeleteUser(Guid id)
@@ -29,7 +33,7 @@ namespace Logic.Concrete
             _repository.Delete(user);
         }
 
-        public User UpdateUser(Guid id, User updatedUser)
+        public UserResponse UpdateUser(Guid id, UserRequest updatedUser)
         {
             User user = _repository.Get(x => x.Id == id);
             if(user.Email != null || !"".Equals(updatedUser.Email.Trim()))
@@ -45,7 +49,7 @@ namespace Logic.Concrete
                 user.Role = updatedUser.Role;
             }
             user.SelfValidations(user.Email, user.Role);
-            return _repository.Update(user);
+            return new UserResponse(_repository.Update(user));
         }
     }
 }

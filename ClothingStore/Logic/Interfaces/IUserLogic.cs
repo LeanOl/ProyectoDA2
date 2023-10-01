@@ -1,12 +1,14 @@
 ﻿using Domain;
+using APIModels.OutputModels;
+using APIModels.InputModels;
 
 namespace Logic.Interfaces
 {
     public interface IUserLogic
     {
-        User CreateUser(User user);
-        IEnumerable<User> GetAllUsers();
+        UserResponse CreateUser(UserRequest user);
+        IEnumerable<UserResponse> GetAllUsers();
         void DeleteUser(Guid id);
-        User UpdateUser(Guid id, User isAny);
+        UserResponse UpdateUser(Guid id, UserRequest isAny);
     }
 }
