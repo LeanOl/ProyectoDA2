@@ -13,7 +13,6 @@ namespace Data.Interfaces
 
         T? Update(T entity);
         T Get(Expression<Func<T, bool>> searchCondition, List<string> includes = null);
-        void Save();
         void Delete(T entity);
         bool CheckConnection();
     }

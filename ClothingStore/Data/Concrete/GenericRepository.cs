@@ -69,7 +69,7 @@ namespace Data.Concrete
                 .FirstOrDefault();
         }
 
-        public void Save()
+        private void Save()
         {
             Context.SaveChanges();
         }
