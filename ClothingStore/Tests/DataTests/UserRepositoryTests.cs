@@ -43,5 +43,32 @@ namespace Tests.DataTests
             // Assert
             Assert.AreEqual(expected, result.First());
         }
+
+        [TestMethod]
+        public void GetAllUsersByCondition()
+        {
+            // Arrange
+            var dbContext = createDbContext("GetAllUsersByCondition");
+            var userManagement = new UserManagement(dbContext);
+            var email = "test@test.com";
+            var expected = new User(
+                email,
+                "ADMIN",
+                "Cuareim 1234"
+            );
+
+            Func<User, bool> searchCondition = user =>
+                user.GetType().GetProperty("Email")?.GetValue(user)?.ToString() == email;
+
+
+            dbContext.Set<User>().Add(expected);
+            dbContext.SaveChanges();
+            // Act
+            var result = userManagement.GetAll<User>(searchCondition);
+            // Assert
+            Assert.AreEqual(expected, result.First());
+        }
+
+        
     }
 }
