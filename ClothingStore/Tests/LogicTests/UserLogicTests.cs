@@ -70,5 +70,49 @@ namespace Tests.LogicTests
             mockRepo.VerifyAll();
             Assert.AreEqual(expected, result.First());
         }
+
+        [TestMethod]
+        public void DeleteUserOk()
+        {
+            Guid id = Guid.NewGuid();
+            var expected = new User(
+                    "test@test.com",
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
+
+            Mock<IGenericRepository<User>> mockRepo = new Mock<IGenericRepository<User>>();
+            mockRepo.Setup(repo => repo.Get(p => p.Id == id, null)).Returns(expected);
+            mockRepo.Setup(repo => repo.Delete(expected));
+
+            IUserLogic logic = new UserLogic(mockRepo.Object);
+
+            // Act
+            logic.DeleteUser(id);
+
+            // Assert
+            mockRepo.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateUserOk()
+        {
+            // Arrange
+            Guid id = Guid.NewGuid();
+            var expected = new User(
+                    "test@test.com",
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
+            Mock<IGenericRepository<User>> mockRepo = new Mock<IGenericRepository<User>>();
+            mockRepo.Setup(repo => repo.Get(p => p.Id == id, null)).Returns(expected);
+            mockRepo.Setup(repo => repo.Update(expected)).Returns(expected);
+            UserLogic logic = new UserLogic(mockRepo.Object);
+            // Act
+            User result = logic.UpdateUser(id, expected);
+            // Assert
+            mockRepo.VerifyAll();
+            Assert.AreEqual(expected, result);
+        }
     }
 }
