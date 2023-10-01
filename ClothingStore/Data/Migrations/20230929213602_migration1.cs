@@ -36,6 +36,7 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.CheckConstraint("CHK_ValidEmail", "Email LIKE '%@%.%'");
                 });
 
             migrationBuilder.CreateTable(
