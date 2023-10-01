@@ -23,6 +23,7 @@ namespace Data
             modelBuilder.Entity<DiscountPromotion>();
             modelBuilder.Entity<SingularPromotionCondition>();
             modelBuilder.Entity<CollectionPromotionCondition>();
+            //modelBuilder.Entity<User>();
 
         }
 
@@ -42,6 +43,7 @@ namespace Data
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
+
     }
 }
 

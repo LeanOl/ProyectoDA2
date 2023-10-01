@@ -1,7 +1,8 @@
-﻿namespace Exceptions.LogicExceptions;
-
-public static class LogicExceptionMessages
+﻿namespace Exceptions.LogicExceptions
 {
-    public const string InvalidCondition = "The promotion condition is invalid.";
+    public static class LogicExceptionMessages
+    {
+        public const string InvalidCondition = "The promotion condition is invalid.";
 
+    }
 }

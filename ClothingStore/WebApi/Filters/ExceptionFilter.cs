@@ -3,23 +3,24 @@ using Exceptions.LogicExceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace WebApi.Filters;
-
-public class ExceptionFilter : Attribute, IExceptionFilter  
+namespace WebApi.Filters
 {
-    public void OnException(ExceptionContext context)
+    public class ExceptionFilter : Attribute, IExceptionFilter  
     {
-        switch (context.Exception)
+        public void OnException(ExceptionContext context)
         {
-            case InvalidTypeException:
-                context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
-                break;
-            case InvalidConditionArgumentException:
-                context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
-                break;
-            default:
-                context.Result = new ObjectResult(new { Message = "Internal Server Error" }) { StatusCode = 500 };
-                break;
+            switch (context.Exception)
+            {
+                case InvalidTypeException:
+                    context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
+                    break;
+                case InvalidConditionArgumentException:
+                    context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
+                    break;
+                default:
+                    context.Result = new ObjectResult(new { Message = "Internal Server Error" }) { StatusCode = 500 };
+                    break;
+            }
         }
     }
 }

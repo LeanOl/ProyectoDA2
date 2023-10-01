@@ -3,9 +3,9 @@ using System.Linq.Dynamic.Core.Exceptions;
 using System.Linq.Dynamic.Core;
 
 
-namespace Domain;
-
-public class CollectionPromotionCondition : PromotionCondition
+namespace Domain
+{
+    public class CollectionPromotionCondition : PromotionCondition
 {
     public override void SelfValidate()
     {
@@ -45,4 +45,5 @@ public class CollectionPromotionCondition : PromotionCondition
         var groupedProducts = products.SelectMany(ProductPropertyCondition).GroupBy("it");
         return groupedProducts.Any(QuantityCondition);
     }
+}
 }

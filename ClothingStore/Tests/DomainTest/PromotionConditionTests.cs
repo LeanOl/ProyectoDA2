@@ -1,83 +1,86 @@
 ﻿using Domain;
 
-namespace Tests.DomainTest;
-[TestClass]
-public class PromotionConditionTests
+namespace Tests.DomainTest
 {
-    [TestMethod]
-    public void VerifyCartConditionSingularPromotionOk()
+
+    [TestClass]
+    public class PromotionConditionTests
     {
-                // Arrange
-        var cart = new ShoppingCart(new List<Product>
+        [TestMethod]
+        public void VerifyCartConditionSingularPromotionOk()
         {
-            new Product
+                    // Arrange
+            var cart = new ShoppingCart(new List<Product>
             {
-                Name = "Product 1",
-                Price = 10,
-                Category = "Category 1"
-            },
-            new Product
+                new Product
+                {
+                    Name = "Product 1",
+                    Price = 10,
+                    Category = "Category 1"
+                },
+                new Product
+                {
+                    Name = "Product 2",
+                    Price = 20,
+                    Category = "Category 1"
+                },
+                new Product
+                {
+                    Name = "Product 3",
+                    Price = 30,
+                    Category = "Category 2"
+                }
+            }, null);
+            var condition = new SingularPromotionCondition
             {
-                Name = "Product 2",
-                Price = 20,
-                Category = "Category 1"
-            },
-            new Product
-            {
-                Name = "Product 3",
-                Price = 30,
-                Category = "Category 2"
-            }
-        }, null);
-        var condition = new SingularPromotionCondition
-        {
-            ProductPropertyCondition = "Category",
-            QuantityCondition = "Count() >= 2"
-        };
-        // Act
-        var result = condition.VerifyCartCondition(cart);
-        // Assert
-        Assert.IsTrue(result);
+                ProductPropertyCondition = "Category",
+                QuantityCondition = "Count() >= 2"
+            };
+            // Act
+            var result = condition.VerifyCartCondition(cart);
+            // Assert
+            Assert.IsTrue(result);
     
-    }
+        }
 
-    [TestMethod]
-    public void VerifyCartConditionCollectionPromotionOk()
-    {
-        // Arrange
-        var cart = new ShoppingCart(new List<Product>
+        [TestMethod]
+        public void VerifyCartConditionCollectionPromotionOk()
         {
-            new Product
+            // Arrange
+            var cart = new ShoppingCart(new List<Product>
             {
-                Name = "Product 1",
-                Price = 10,
-                Category = "Category 1",
-                Colors= new List<string> {"Red","Blue"}
-            },
-            new Product
-            {
-                Name = "Product 2",
-                Price = 20,
-                Category = "Category 1",
-                Colors = new List<string> {"White","Yellow","Blue"}
+                new Product
+                {
+                    Name = "Product 1",
+                    Price = 10,
+                    Category = "Category 1",
+                    Colors= new List<string> {"Red","Blue"}
+                },
+                new Product
+                {
+                    Name = "Product 2",
+                    Price = 20,
+                    Category = "Category 1",
+                    Colors = new List<string> {"White","Yellow","Blue"}
 
-            },
-            new Product
+                },
+                new Product
+                {
+                    Name = "Product 3",
+                    Price = 30,
+                    Category = "Category 2",
+                    Colors = new List<string> {"Black"}
+                }
+            }, null);
+            var condition = new CollectionPromotionCondition
             {
-                Name = "Product 3",
-                Price = 30,
-                Category = "Category 2",
-                Colors = new List<string> {"Black"}
-            }
-        }, null);
-        var condition = new CollectionPromotionCondition
-        {
-            ProductPropertyCondition = "Colors",
-            QuantityCondition = "Count() >= 2"
-        };
-        // Act
-        var result = condition.VerifyCartCondition(cart);
-        // Assert
-        Assert.IsTrue(result);
+                ProductPropertyCondition = "Colors",
+                QuantityCondition = "Count() >= 2"
+            };
+            // Act
+            var result = condition.VerifyCartCondition(cart);
+            // Assert
+            Assert.IsTrue(result);
+        }
     }
 }

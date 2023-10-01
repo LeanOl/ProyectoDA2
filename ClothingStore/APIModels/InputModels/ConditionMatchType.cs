@@ -1,7 +1,8 @@
-﻿namespace APIModels.InputModels;
-
-public class ConditionMatchType
+﻿namespace APIModels.InputModels
 {
-    public const string Same = "Same";
-    public const string Any = "Any";
+    public class ConditionMatchType
+    {
+        public const string Same = "Same";
+        public const string Any = "Any";
+    }
 }

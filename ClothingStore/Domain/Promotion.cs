@@ -1,50 +1,50 @@
-﻿using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Linq.Dynamic.Core.Exceptions;
+﻿using System.Linq.Dynamic.Core.Exceptions;
 using Exceptions.LogicExceptions;
 
-namespace Domain;
-public abstract class Promotion
+namespace Domain
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public ICollection<PromotionCondition> PromotionConditions;
-    public abstract decimal GetDiscount(ShoppingCart cart);
-
-    public void SelfValidate()
+    public abstract class Promotion
     {
-        ValidateCondition();
-    }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public ICollection<PromotionCondition> PromotionConditions;
+        public abstract decimal GetDiscount(ShoppingCart cart);
 
-    private void ValidateCondition()
-    {
-        try
+        public void SelfValidate()
         {
-            var product = new Product()
-            {
-                Brand = "a",
-                Category = "a",
-                Colors = new List<string> { "a" },
-                Description = "a",
-                Name = "a",
-                Price = 1
-            };
-           
-            var products = new List<Product>
-            {
-                product
-            };
-            
-            foreach (var condition in PromotionConditions)
-            {
-                condition.SelfValidate();
-                
-            }
-            
+            ValidateCondition();
         }
-        catch (ParseException e)
+
+        private void ValidateCondition()
         {
-            throw new InvalidConditionArgumentException(LogicExceptionMessages.InvalidCondition, e);
+            try
+            {
+                var product = new Product()
+                {
+                    Brand = "a",
+                    Category = "a",
+                    Colors = new List<string> { "a" },
+                    Description = "a",
+                    Name = "a",
+                    Price = 1
+                };
+           
+                var products = new List<Product>
+                {
+                    product
+                };
+            
+                foreach (var condition in PromotionConditions)
+                {
+                    condition.SelfValidate();
+                
+                }
+            
+            }
+            catch (ParseException e)
+            {
+                throw new InvalidConditionArgumentException(LogicExceptionMessages.InvalidCondition, e);
+            }
         }
     }
 }

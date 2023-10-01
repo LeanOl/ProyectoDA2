@@ -2,9 +2,10 @@
 using Domain;
 using Logic.Interfaces;
 
-namespace Logic.Concrete;
+namespace Logic.Concrete
+{
 
-public class PromotionLogic : IPromotionLogic
+    public class PromotionLogic : IPromotionLogic
 {
     private readonly IGenericRepository<Promotion> _repository;
     public PromotionLogic(IGenericRepository<Promotion> repository)
@@ -36,4 +37,5 @@ public class PromotionLogic : IPromotionLogic
         promotion.PromotionConditions = updatedPromotion.PromotionConditions;
         return _repository.Update(promotion);
     }
+}
 }

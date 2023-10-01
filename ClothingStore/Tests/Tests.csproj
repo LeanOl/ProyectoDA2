@@ -7,6 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="LogicTests\" />
-    <Folder Include="DataTests\" />
     <Folder Include="WebApiTests\" />
   </ItemGroup>
 

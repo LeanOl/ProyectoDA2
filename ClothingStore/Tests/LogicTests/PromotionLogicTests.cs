@@ -3,9 +3,10 @@ using Domain;
 using Exceptions.LogicExceptions;
 using Logic.Concrete;
 
-namespace Tests.LogicTests;
-[TestClass]
-public class PromotionLogicTests
+namespace Tests.LogicTests
+{
+    [TestClass]
+    public class PromotionLogicTests
 {
     [TestMethod]
     public void CreateNewPromotionOk()
@@ -198,5 +199,6 @@ public class PromotionLogicTests
         // Assert
         mockRepo.VerifyAll();
         Assert.AreEqual(expected, result);
+    }
     }
 }

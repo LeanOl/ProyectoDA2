@@ -1,42 +1,44 @@
 ﻿using Domain;
 using Exceptions.ApiModelExceptions;
 
-namespace APIModels.InputModels;
-
-public class PromotionConditionRequest
+namespace APIModels.InputModels
 {
-    public string ProductPropertyCondition { get; set; }
-    public string QuantityCondition { get; set; }
-    public string ConditionType { get; set; }
 
-    public PromotionCondition ToEntity()
+    public class PromotionConditionRequest
     {
-        switch (ConditionType)
+        public string ProductPropertyCondition { get; set; }
+        public string QuantityCondition { get; set; }
+        public string ConditionType { get; set; }
+
+        public PromotionCondition ToEntity()
         {
-            case "Singular":
-                return ToSingularPromotionCondition();
-            case "Collection":
-                return ToCollectionPromotionCondition();
-            default:
-                throw new InvalidTypeException("Invalid condition type");
+            switch (ConditionType)
+            {
+                case "Singular":
+                    return ToSingularPromotionCondition();
+                case "Collection":
+                    return ToCollectionPromotionCondition();
+                default:
+                    throw new InvalidTypeException("Invalid condition type");
+            }
+       }
+
+        private PromotionCondition ToCollectionPromotionCondition()
+        {
+            return new CollectionPromotionCondition
+            {
+                ProductPropertyCondition = ProductPropertyCondition,
+                QuantityCondition = QuantityCondition
+            };
         }
-   }
 
-    private PromotionCondition ToCollectionPromotionCondition()
-    {
-        return new CollectionPromotionCondition
+        private PromotionCondition ToSingularPromotionCondition()
         {
-            ProductPropertyCondition = ProductPropertyCondition,
-            QuantityCondition = QuantityCondition
-        };
-    }
-
-    private PromotionCondition ToSingularPromotionCondition()
-    {
-        return new SingularPromotionCondition
-        {
-            ProductPropertyCondition = ProductPropertyCondition,
-            QuantityCondition = QuantityCondition
-        };
+            return new SingularPromotionCondition
+            {
+                ProductPropertyCondition = ProductPropertyCondition,
+                QuantityCondition = QuantityCondition
+            };
+        }
     }
 }

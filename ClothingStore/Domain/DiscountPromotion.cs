@@ -1,6 +1,7 @@
-﻿namespace Domain;
+﻿namespace Domain
+{
 
-public class DiscountPromotion : Promotion
+    public class DiscountPromotion : Promotion
 {
     public double DiscountPercentage { get; set; }
 
@@ -32,4 +33,5 @@ public class DiscountPromotion : Promotion
             return 0;
         return mostExpensiveProduct.Price * (decimal)DiscountPercentage / 100;
     }
+}
 }

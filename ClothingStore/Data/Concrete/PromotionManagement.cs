@@ -1,16 +1,16 @@
-﻿using Data.Interfaces;
-using Domain;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Concrete;
-
-public class PromotionManagement : GenericRepository<Promotion>
+namespace Data.Concrete
 {
-    
-    public PromotionManagement(DbContext dbContext) 
+    public class PromotionManagement : GenericRepository<Promotion>
     {
-        Context = dbContext;
-    }
+    
+        public PromotionManagement(DbContext dbContext) 
+        {
+            Context = dbContext;
+        }
 
     
+    }
 }

@@ -1,38 +1,39 @@
 ﻿using System.Collections;
 
-namespace Domain;
-
-public class FreeProductPromotion : Promotion
+namespace Domain
 {
-    public int FreeProductCount { get; set; }
-
-    public override decimal GetDiscount(ShoppingCart cart)
+    public class FreeProductPromotion : Promotion
     {
-        bool isConditionApplicable = true;
-        decimal discount = 0;
-        foreach (var condition in PromotionConditions)
-        {
-            isConditionApplicable= isConditionApplicable && condition.VerifyCartCondition(cart);
+        public int FreeProductCount { get; set; }
 
-        }
-
-        if (isConditionApplicable)
+        public override decimal GetDiscount(ShoppingCart cart)
         {
-            IEnumerable<Product> products = cart.ProductList;
-            var lessValueableProducts = GetLessValueableProducts(products);
-            foreach (var product in lessValueableProducts)
+            bool isConditionApplicable = true;
+            decimal discount = 0;
+            foreach (var condition in PromotionConditions)
             {
-                discount+= product.Price;
+                isConditionApplicable= isConditionApplicable && condition.VerifyCartCondition(cart);
+
             }
+
+            if (isConditionApplicable)
+            {
+                IEnumerable<Product> products = cart.ProductList;
+                var lessValueableProducts = GetLessValueableProducts(products);
+                foreach (var product in lessValueableProducts)
+                {
+                    discount+= product.Price;
+                }
+            }
+
+            return discount;
         }
 
-        return discount;
-    }
-
-    private IEnumerable<Product> GetLessValueableProducts(IEnumerable<Product> products)
-    {
-        return products
-            .OrderBy(x => x.Price)
-            .Take(FreeProductCount);
+        private IEnumerable<Product> GetLessValueableProducts(IEnumerable<Product> products)
+        {
+            return products
+                .OrderBy(x => x.Price)
+                .Take(FreeProductCount);
+        }
     }
 }

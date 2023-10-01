@@ -1,8 +1,9 @@
-﻿namespace Exceptions.ApiModelExceptions;
-
-public class InvalidTypeException : Exception
+﻿namespace Exceptions.ApiModelExceptions
 {
-    public InvalidTypeException(string message) : base(message)
+    public class InvalidTypeException : Exception
     {
+        public InvalidTypeException(string message) : base(message)
+        {
+        }
     }
 }

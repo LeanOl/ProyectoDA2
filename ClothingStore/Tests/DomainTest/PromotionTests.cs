@@ -1,8 +1,9 @@
 ﻿using Domain;
 
-namespace Tests.DomainTest;
-[TestClass]
-public class PromotionTests
+namespace Tests.DomainTest
+{
+    [TestClass]
+    public class PromotionTests
 {
     [TestMethod]
     public void GetDiscountFreeProductPromotionOk()
@@ -99,4 +100,5 @@ public class PromotionTests
         // Assert
         Assert.AreEqual(15,discount);
     }
+}
 }

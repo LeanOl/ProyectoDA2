@@ -1,33 +1,35 @@
 ﻿using Domain;
 
-namespace APIModels.OutputModels;
+namespace APIModels.OutputModels
 
-public class PromotionResponse
 {
-    public Guid Id { get; set; } 
-    public string Name { get; set; }
-    public string PromotionType { get; set; }
-
-    public PromotionResponse(Promotion aPromotion)
+    public class PromotionResponse
     {
-        Id = aPromotion.Id;
-        Name = aPromotion.Name;
-        PromotionType = aPromotion.GetType().Name;
-    }
+        public Guid Id { get; set; } 
+        public string Name { get; set; }
+        public string PromotionType { get; set; }
 
-    public override bool Equals(object? obj)
-    {
-        if (obj is PromotionResponse other)
+        public PromotionResponse(Promotion aPromotion)
         {
-            return Id == other.Id;
+            Id = aPromotion.Id;
+            Name = aPromotion.Name;
+            PromotionType = aPromotion.GetType().Name;
         }
-        return false;
-    }
 
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Id);
-    }
+        public override bool Equals(object? obj)
+        {
+            if (obj is PromotionResponse other)
+            {
+                return Id == other.Id;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
 
    
+    }
 }

@@ -2,9 +2,10 @@
 using System.Linq.Dynamic.Core.Exceptions;
 using Exceptions.LogicExceptions;
 
-namespace Domain;
+namespace Domain
+{
 
-public class SingularPromotionCondition : PromotionCondition
+    public class SingularPromotionCondition : PromotionCondition
 {
     public override void SelfValidate()
     {
@@ -46,4 +47,5 @@ public class SingularPromotionCondition : PromotionCondition
         var groupedProducts = products.GroupBy(ProductPropertyCondition);
         return groupedProducts.Any(QuantityCondition);
     }
+}
 }
