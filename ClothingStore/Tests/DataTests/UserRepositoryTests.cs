@@ -92,5 +92,26 @@ namespace Tests.DataTests
             // Assert
             Assert.AreEqual(address, result.DeliveryAddress);
         }
+
+        [TestMethod]
+        public void DeleteUser()
+        {
+            // Arrange
+            var dbContext = createDbContext("AddUser");
+            var userManagement = new UserManagement(dbContext);
+            var expected = new User(
+                "test@test.com",
+                "ADMIN",
+                "Cuareim 1234"
+            );
+
+            // Act
+            userManagement.Insert(expected);
+            userManagement.Delete(expected);
+
+            var result = userManagement.GetAll<User>();
+            // Assert
+            Assert.AreEqual(0, result.Count());
+        }
     }
 }
