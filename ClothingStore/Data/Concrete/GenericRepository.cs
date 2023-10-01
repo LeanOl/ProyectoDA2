@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Collections.Generic;
 using Data.Interfaces;
 
 namespace Data.Concrete

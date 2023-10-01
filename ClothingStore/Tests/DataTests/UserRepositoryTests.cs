@@ -1,4 +1,5 @@
-﻿using Data.Concrete;
+﻿using System.Linq.Expressions;
+using Data.Concrete;
 using Domain;
 
 namespace Tests.DataTests
@@ -60,7 +61,6 @@ namespace Tests.DataTests
             Func<User, bool> searchCondition = user =>
                 user.GetType().GetProperty("Email")?.GetValue(user)?.ToString() == email;
 
-
             dbContext.Set<User>().Add(expected);
             dbContext.SaveChanges();
             // Act
@@ -97,7 +97,7 @@ namespace Tests.DataTests
         public void DeleteUser()
         {
             // Arrange
-            var dbContext = createDbContext("AddUser");
+            var dbContext = createDbContext("DeleteUser");
             var userManagement = new UserManagement(dbContext);
             var expected = new User(
                 "test@test.com",
@@ -112,6 +112,29 @@ namespace Tests.DataTests
             var result = userManagement.GetAll<User>();
             // Assert
             Assert.AreEqual(0, result.Count());
+        }
+
+        [TestMethod]
+        public void GetUser()
+        {
+            // Arrange
+            var dbContext = createDbContext("GetUser");
+            var userManagement = new UserManagement(dbContext);
+            var email = "test@test.com";
+            var expected = new User(
+                email,
+                "ADMIN",
+                "Cuareim 1234"
+            );
+
+            Expression<Func<User, bool>> searchCondition = user => user.Email == email;
+
+            dbContext.Set<User>().Add(expected);
+            dbContext.SaveChanges();
+            // Act
+            var result = userManagement.Get(searchCondition);
+            // Assert
+            Assert.AreEqual(expected, result);
         }
     }
 }
