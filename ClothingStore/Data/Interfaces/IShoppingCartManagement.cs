@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,13 @@ namespace Data.Interfaces
 {
     internal interface IShoppingCartManagement
     {
+
+        IEnumerable<ShoppingCart> GetAllShoppingCarts();
+        ShoppingCart GetShoppingCartById(Guid cartId);
+        void InsertShoppingCart(ShoppingCart shoppingCart);
+        void UpdateShoppingCart(ShoppingCart shoppingCart);
+        void DeleteShoppingCart(Guid cartId);
+        IEnumerable<Product> GetProductsInCart(Guid cartId);
+
     }
 }

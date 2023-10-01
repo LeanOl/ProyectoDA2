@@ -21,10 +21,41 @@ namespace Data.Concrete
 
         }
 
-        public List<ShoppingCart> GetShoppingCartById(Guid userId) {
-            return Context.Set<ShoppingCart>().Where(sc => sc.IdUsuario == userId).ToList();
+        //retona todo el shopping cart del usuario
+        public ShoppingCart GetShoppingCartById(Guid userId) {
+            return Context.Set<ShoppingCart>()
+                          .Include(s => s.ProductList)
+                          .FirstOrDefault(s => s.IdUsuario == userId);
         }
 
+        public void InsertShoppingCart(ShoppingCart shoppingCart)
+        {
+            Context.Set<ShoppingCart>().Add(shoppingCart);
+            Context.SaveChanges();
+        }
+
+        public void UpdateShoppingCart(ShoppingCart shoppingCart)
+        {
+            Context.Set<ShoppingCart>().Update(shoppingCart);
+            Context.SaveChanges();
+        }
+
+        public void DeleteShoppingCart(Guid cartId)
+        {
+            var shoppingCart = GetShoppingCartById(cartId);
+            if (shoppingCart != null)
+            {
+                Context.Set<ShoppingCart>().Remove(shoppingCart);
+                Context.SaveChanges();
+            }
+        }
+
+        //retorna la lista de productos del usuario
+        public IEnumerable<Product> GetProductsInCart(Guid cartId)
+        {
+            var shoppingCart = GetShoppingCartById(cartId);
+            return shoppingCart?.ProductList;
+        }
 
     }
 }
