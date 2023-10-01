@@ -23,7 +23,7 @@ namespace Data
             modelBuilder.Entity<DiscountPromotion>();
             modelBuilder.Entity<SingularPromotionCondition>();
             modelBuilder.Entity<CollectionPromotionCondition>();
-            //modelBuilder.Entity<User>();
+            modelBuilder.Entity<User>();
 
         }
 

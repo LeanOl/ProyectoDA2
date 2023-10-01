@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using Data.Concrete;
 using Domain;
 
@@ -135,6 +136,26 @@ namespace Tests.DataTests
             var result = userManagement.Get(searchCondition);
             // Assert
             Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void AddUserWithInvalidFormatEmail()
+        {
+            //Este test falla!!! Dejarlo hasta que lo arregle
+            // Arrange
+            var dbContext = createDbContext("AddUserWithInvalidFormatEmail");
+            var userManagement = new UserManagement(dbContext);
+            Assert.ThrowsException<ValidationException>(() =>
+            {
+                var expected = new User(
+                    "test1est-com",  // Este correo es inválido
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
+
+                // Act
+                var result = userManagement.Insert(expected);
+            });
         }
     }
 }
