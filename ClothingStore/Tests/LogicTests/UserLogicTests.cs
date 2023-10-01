@@ -30,6 +30,7 @@ namespace Tests.LogicTests
 
             // Assert
             Assert.AreEqual(expected, result);
+            mockRepo.VerifyAll();
         }
 
         [TestMethod]
@@ -49,6 +50,25 @@ namespace Tests.LogicTests
                 // Act
                 User result = logic.CreateUser(expected);
             });
+        }
+
+        [TestMethod]
+        public void GetAllUsersOk()
+        {
+            var expected = new User(
+                    "test@test.com",
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
+            Mock<IGenericRepository<User>> mockRepo = new Mock<IGenericRepository<User>>();
+            mockRepo.Setup(repo => repo.GetAll<User>()).Returns(new List<User> { expected });
+            IUserLogic logic = new UserLogic(mockRepo.Object);
+
+            // Act
+            IEnumerable<User> result = logic.GetAllUsers();
+            // Assert
+            mockRepo.VerifyAll();
+            Assert.AreEqual(expected, result.First());
         }
     }
 }

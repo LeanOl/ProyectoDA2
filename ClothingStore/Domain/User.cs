@@ -13,23 +13,35 @@ namespace Domain
 
         public User(string email, string role, string deliveryAddress)
         {
-            Validations(email);
+            SelfValidations(email,role);
             Id = Guid.NewGuid();
             Email = email;
             Role = role;
             DeliveryAddress = deliveryAddress;
         }
 
-        private void Validations(string email)
+        public void SelfValidations(string email, string role)
         {
+            if (!IsValidRol(role))
+            {
+                throw new InvalidRolException("El campo 'Rol' no es valido, debe ser ADMIN o USER.");
+            }
+
             if (!IsValidEmail(email))
             {
                 throw new InvalidFormatEmailException("El campo 'Email' no tiene un formato de dirección de correo electrónico válido.");
             }
         }
 
+        private bool IsValidRol(string role)
+        {
+            if (role == null || "".Equals(role.Trim())) return false;
+            return ("ADMIN".Equals(role.ToUpper()) || "USER".Equals(role.ToUpper()));
+        }
+
         private bool IsValidEmail(string email)
         {
+            if (email == null) return false;
             try
             {
                 var address = new System.Net.Mail.MailAddress(email);
