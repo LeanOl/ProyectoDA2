@@ -78,7 +78,7 @@ namespace Tests.WebApiTests
             // Assert
             logic.VerifyAll();
             OkObjectResult resultObject = result as OkObjectResult;
-            IEnumerable<PromotionResponse> resultValue = resultObject.Value as List<PromotionResponse>;
+            IEnumerable<UserResponse> resultValue = resultObject.Value as List<UserResponse>;
             Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
             CollectionAssert.AreEquivalent(expectedMappedResult.ToList(), resultValue.ToList());
         }
