@@ -7,8 +7,8 @@ public class PromotionConditionTests
     [TestMethod]
     public void VerifyCartConditionSingularPromotionOk()
     {
-                // Arrange
-        var cart = new ShoppingCart(new List<Product>
+        // Arrange
+        var cart = new ShoppingCart{ProductList = new List<Product>
         {
             new Product
             {
@@ -28,8 +28,10 @@ public class PromotionConditionTests
                 Price = 30,
                 Category = "Category 2"
             }
-        }, null);
-        var condition = new SingularPromotionCondition
+        }
+    };
+
+    var condition = new SingularPromotionCondition
         {
             ProductPropertyCondition = "Category",
             QuantityCondition = "Count() >= 2"
@@ -45,7 +47,7 @@ public class PromotionConditionTests
     public void VerifyCartConditionCollectionPromotionOk()
     {
         // Arrange
-        var cart = new ShoppingCart(new List<Product>
+        var cart = new ShoppingCart{ProductList = new List<Product>
         {
             new Product
             {
@@ -69,7 +71,7 @@ public class PromotionConditionTests
                 Category = "Category 2",
                 Colors = new List<string> {"Black"}
             }
-        }, null);
+        }};
         var condition = new CollectionPromotionCondition
         {
             ProductPropertyCondition = "Colors",
