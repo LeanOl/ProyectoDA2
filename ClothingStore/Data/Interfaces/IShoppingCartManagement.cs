@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    internal interface IShoppingCartManagement
+    public interface IShoppingCartManagement
     {
+        IEnumerable<ShoppingCart> GetAllShoppingCarts();
+        ShoppingCart GetShoppingCartByUserId(Guid userId);
+        void InsertShoppingCart(ShoppingCart shoppingCart);
+        void UpdateShoppingCart(ShoppingCart shoppingCart);
+        void DeleteShoppingCart(Guid userId);
+        IEnumerable<Product> GetProductsInCartByUserId(Guid userId);
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data.Concrete
 {
-    internal class RoleManagement : GenericRepository<Product>
+    internal class RoleManagement : GenericRepository<Role>
     {
 
         public RoleManagement(DbContext context)

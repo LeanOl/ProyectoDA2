@@ -63,21 +63,23 @@ namespace Data.Migrations
                 });
 
             //tabla de colores porque es una ista de colores dentro de products
+           
             migrationBuilder.CreateTable(
-               name: "Colors",
-               columns: table => new
-               {
-                   Id = table.Column<int>(type: "int", nullable: false)
-                       .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),//revisar el cambio a guid
-                   Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                   ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-               },
-               constraints: table =>
-               {
-                   table.PrimaryKey("PK_Colors", x => x.Id);
-                   table.ForeignKey("FK_Colors_Products", x => x.ProductId, "Products", "Id", onDelete: ReferentialAction.Cascade);
-               });
+                name: "ProductColors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false), // esto no identifica el color solo el la combinacion producto colore
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false) // para poner el codigo de color
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductColors", x => x.Id);
+                    table.ForeignKey("FK_ProductColors_Products", x => x.ProductId, "Products", "Id", onDelete: ReferentialAction.Cascade);
+                });
 
+
+           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
