@@ -40,5 +40,19 @@ namespace WebApi.Controllers
             var result = _userLogic.GetAllUsers();
             return Ok(result);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser([FromRoute] Guid id)
+        {
+            _userLogic.DeleteUser(id);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser([FromRoute] Guid id, [FromBody] UserRequest received)
+        {
+            var result = _userLogic.UpdateUser(id, received);
+            return Ok(result);
+        }
     }
 }

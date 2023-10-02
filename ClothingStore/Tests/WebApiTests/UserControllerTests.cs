@@ -83,5 +83,48 @@ namespace Tests.WebApiTests
             CollectionAssert.AreEquivalent(expectedMappedResult.ToList(), resultValue.ToList());
         }
 
+        [TestMethod]
+        public void DeleteUser()
+        {
+            // Arrange
+            Guid id = Guid.NewGuid();
+            Mock<IUserLogic> logic = new Mock<IUserLogic>(MockBehavior.Strict);
+            logic.Setup(l => l.DeleteUser(id));
+            UserController controller = new UserController(logic.Object);
+            OkResult expectedObjectResult = new OkResult();
+            // Act
+            IActionResult result = controller.DeleteUser(id);
+            // Assert
+            logic.VerifyAll();
+            OkResult resultObject = result as OkResult;
+            Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+        }
+
+        [TestMethod]
+        public void UpdateUserOk()
+        {
+            // Arrange
+            Guid id = Guid.NewGuid();
+            UserRequest received = _receivedUserRequest;
+            User expected = _user;
+            var expectedMappedResult = new UserResponse(expected);
+            Mock<IUserLogic> logic = new Mock<IUserLogic>(MockBehavior.Strict);
+
+            logic.Setup(l => l.UpdateUser(id, It.IsAny<UserRequest>())).Returns(expectedMappedResult);
+
+            UserController controller = new UserController(logic.Object);
+            OkObjectResult expectedObjectResult = new OkObjectResult(expectedMappedResult);
+
+            // Act
+            IActionResult result = controller.UpdateUser(id, received);
+
+            // Assert
+            logic.VerifyAll();
+            OkObjectResult resultObject = result as OkObjectResult;
+            UserResponse resultValue = resultObject.Value as UserResponse;
+            Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+            Assert.AreEqual(expectedMappedResult, resultValue);
+
+        }
     }
 }
