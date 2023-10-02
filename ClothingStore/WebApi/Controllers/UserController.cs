@@ -33,5 +33,12 @@ namespace WebApi.Controllers
             return CreatedAtAction(nameof(CreateUser), new { id = createdUser.Id }, createdUser);
         
         }
+
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            var result = _userLogic.GetAllUsers();
+            return Ok(result);
+        }
     }
 }

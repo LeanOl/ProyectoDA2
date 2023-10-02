@@ -36,7 +36,7 @@ namespace Tests.WebApiTests
         }
 
         [TestMethod]
-        public void CreateFreeProductPromotionOk()
+        public void CreatUserOk()
         {
             // Arrange
             var expectedMappedResult = new UserResponse(_user);
@@ -55,6 +55,32 @@ namespace Tests.WebApiTests
             UserResponse resultValue = resultObject.Value as UserResponse;
             Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
             Assert.AreEqual(expectedMappedResult, resultValue);
+        }
+
+        [TestMethod]
+        public void GetAllUsersOk()
+        {
+            // Arrange
+            ICollection<UserResponse> expected = new List<UserResponse>
+            {
+                new UserResponse(_user)
+            };
+
+            var expectedMappedResult = expected.Select(u => u);
+            Mock<IUserLogic> logic = new Mock<IUserLogic>(MockBehavior.Strict);
+            logic.Setup(l => l.GetAllUsers()).Returns(expected);
+            UserController controller = new UserController(logic.Object);
+            OkObjectResult expectedObjectResult = new OkObjectResult(expectedMappedResult);
+
+            // Act
+            IActionResult result = controller.GetAllUsers();
+
+            // Assert
+            logic.VerifyAll();
+            OkObjectResult resultObject = result as OkObjectResult;
+            IEnumerable<PromotionResponse> resultValue = resultObject.Value as List<PromotionResponse>;
+            Assert.AreEqual(expectedObjectResult.StatusCode, resultObject.StatusCode);
+            CollectionAssert.AreEquivalent(expectedMappedResult.ToList(), resultValue.ToList());
         }
 
     }
