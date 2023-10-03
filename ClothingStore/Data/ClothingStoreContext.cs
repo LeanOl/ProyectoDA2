@@ -15,7 +15,10 @@ namespace Data
 
         public virtual DbSet<User>? Users { get; set; }
         public virtual DbSet<Product>? Products { get; set; }
-        public virtual DbSet<Role>? Roles { get; set; } //el ? le permite ser null 
+        public virtual DbSet<Role>? Roles { get; set; } 
+        public virtual DbSet<ShoppingCart>? ShoppingCarts { get; set; }
+        public virtual DbSet<ShoppingCartProducts>? ShoppingCartProducts { get; set; }
+        public virtual DbSet<ProductColor>? ProductColors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
