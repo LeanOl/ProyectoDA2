@@ -3,7 +3,7 @@ using Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
+
 using System.Threading.Tasks;
 
 using System.Collections.Generic;
@@ -14,50 +14,51 @@ using System.Threading.Tasks;
 
 namespace Data.Concrete
 {
-    public class productColorsManagement : GenericRepository<ProductColors>
+    public class productColorsManagement : GenericRepository<ProductColor>, IProductColorsManagement
     {
 
 
-        public ProductColorsManagement(DbContext context)
+        public productColorsManagement(DbContext context)
         {
             Context = context;
         }
 
-        public IEnumerable<ProductColors> GetAllProductsColors()
+        public IEnumerable<ProductColor> GetAllProductsColors()
         {
-            return Context.Set<ProductColors>().ToList();
+            return Context.Set<ProductColor>().ToList();
         }
 
-        public Product GetProductById(int id)//creo que es inecesario para este sistema pero lo dejo ya que puede serlo
-        {
-            return Context.Set<Product>().Find(id);//resolver
-        }
-
+       
         public IEnumerable<string> GetColorByProductId(Guid productId)
         {
             return Context.Set<ProductColor>().Where(pc => pc.ProductId == productId).Select(pc => pc.Color).ToList();
         }
 
+        public ProductColor GetColorById(Guid id)
+        {
+            return Context.Set<ProductColor>().Find(id);
+        }
+
 
         public void InsertColor(ProductColor color)
         {
-            _context.Set<ProductColor>().Add(color);
-            _context.SaveChanges();
+            Context.Set<ProductColor>().Add(color);
+            Context.SaveChanges();
         }
 
         public void UpdateColor(ProductColor color)
         {
-            _context.Set<ProductColor>().Update(color);
-            _context.SaveChanges();
+            Context.Set<ProductColor>().Update(color);
+            Context.SaveChanges();
         }
 
-        public void DeleteColor(int id)
+        public void DeleteColor(Guid id)
         {
             var color = GetColorById(id);
             if (color != null)
             {
-                _context.Set<ProductColor>().Remove(color);
-                _context.SaveChanges();
+                Context.Set<ProductColor>().Remove(color);
+                Context.SaveChanges();
             }
         }
 

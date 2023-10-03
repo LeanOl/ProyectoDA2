@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Data.Interfaces
 {
@@ -13,6 +14,6 @@ namespace Data.Interfaces
         void InsertShoppingCart(ShoppingCart shoppingCart);
         void UpdateShoppingCart(ShoppingCart shoppingCart);
         void DeleteShoppingCart(Guid userId);
-        IEnumerable<Product> GetProductsInCartByUserId(Guid userId);
+        IEnumerable<ShoppingCartProducts> GetProductsInCartByUserId(Guid userId);
     }
 }

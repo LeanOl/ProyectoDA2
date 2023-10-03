@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    internal interface IProductManagement
+    public interface IProductManagement
     {
-        public interface IProductyManagment
-        {
+       
             IEnumerable<Product> GetAllProducts();
-            Product GetProductById(int id);
-            void InsertProduct(Product product);
-            void UpdateProduct(Product product);
-            void DeleteProduct(int id);
-            List<Product> GetProductByBrand(string brand);
-            List<Product> GetProductByCategory(string category);
-
-        }
+        Product GetProductById(Guid id);
+        void InsertProduct(Product product);
+        void UpdateProduct(Product product);
+        void DeleteProduct(Guid id);
+        List<Product> GetProductByBrand(string brand);
+        List<Product> GetProductByCategory(string category);
+    
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Data.Interfaces;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Data.Concrete
 {
-    internal class RoleManagement : GenericRepository<Role>
+    internal class RoleManagement : GenericRepository<Role>, IRoleManagement
     {
 
         public RoleManagement(DbContext context)

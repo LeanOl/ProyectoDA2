@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Data.Interfaces;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Data.Concrete
 {
-    public class ProductManagement : GenericRepository<Product> //trae de generic repository
+    public class ProductManagement : GenericRepository<Product>, IProductManagement
     {
         
        // private readonly DbContext _context; esto creo que no va
@@ -25,7 +26,7 @@ namespace Data.Concrete
             return Context.Set<Product>().ToList();
         }
 
-        public Product GetProductById(int id)//ahora es guid como se cambia esto ?
+        public Product GetProductById(Guid id)
         {
             return Context.Set<Product>().Find(id);//resolver
         }
@@ -42,7 +43,7 @@ namespace Data.Concrete
             Context.SaveChanges();
         }
 
-        public void DeleteProduct(int id)
+        public void DeleteProduct(Guid id)
         {
             var product = GetProductById(id);
             if (product != null)
@@ -51,12 +52,12 @@ namespace Data.Concrete
                 Context.SaveChanges();
             }
         }
-        public List<Product> GetProductosByBrand(string brand)
+        public List<Product> GetProductByBrand(string brand)
         {
             return Context.Set<Product>().Where(p => p.Brand == brand).ToList();
         }
 
-        public List<Product> GetProductosByCategory(string category)
+        public List<Product> GetProductByCategory(string category)
         {
             return Context.Set<Product>().Where(p => p.Category == category).ToList();
         }

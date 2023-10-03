@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
-using Domain.ShoppingCart;
+
 
 namespace Data.Concrete
 {
-    public class ShoppingCartManagement : GenericRepository<ShoppingCart>
+    public class ShoppingCartManagement : GenericRepository<ShoppingCart>, IShoppingCartManagement
     {
 
         public ShoppingCartManagement(DbContext context) { 
@@ -18,13 +18,13 @@ namespace Data.Concrete
         }
         //revisar necesidad
         public IEnumerable<ShoppingCart> GetAllShoppingCarts() {
-            return Context.Set<ShoppingCart>().Include(s => s.ProductList).ToList();
+            return Context.Set<ShoppingCart>().Include(s => s.ShoppingCartProducts).ToList();
 
         }
 
         public ShoppingCart GetShoppingCartByUserId(Guid userId) {
-            return Context.Set<ShoppingCart>().Where(sc => sc.IdUsuario == userId).ToList();
-            
+            return Context.Set<ShoppingCart>().FirstOrDefault(sc => sc.IdUsuario == userId);
+
         }
 
         public void InsertShoppingCart(ShoppingCart shoppingCart)
@@ -39,9 +39,9 @@ namespace Data.Concrete
             Context.SaveChanges();
         }
 
-        public void DeleteShoppingCart(Guid cartId)
+        public void DeleteShoppingCart(Guid userId)
         {
-            var shoppingCart = GetShoppingCartById(cartId);
+            var shoppingCart = GetShoppingCartByUserId(userId);
             if (shoppingCart != null)
             {
                 Context.Set<ShoppingCart>().Remove(shoppingCart);
@@ -49,10 +49,10 @@ namespace Data.Concrete
             }
         }
 
-        public IEnumerable<Product> GetProductsInCartByUserId(Guid cartId)
+        public IEnumerable<ShoppingCartProducts> GetProductsInCartByUserId(Guid cartId)
         {
-            var shoppingCart = GetProductsInCartByUserId(cartId);
-            return shoppingCart?.ProductList;
+            var shoppingCart = GetShoppingCartByUserId(cartId);
+            return shoppingCart?.ShoppingCartProducts;
         }
 
     }
