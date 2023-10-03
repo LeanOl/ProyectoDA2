@@ -9,31 +9,33 @@ namespace Tests.DomainTest
     public void GetDiscountFreeProductPromotionOk()
     {
         // Arrange
-        var cart = new ShoppingCart(new List<Product>
+        var cart = new ShoppingCart{ProductList = new List<Product>
         {
             new Product
             {
                 Name = "Product 1",
                 Price = 10,
                 Category = "Category 1",
-                Colors= new List<string> {"Red","Blue"}
+                Colors = new List<string> { "Red", "Blue" }
             },
             new Product
             {
                 Name = "Product 2",
                 Price = 20,
                 Category = "Category 1",
-                Colors= new List<string> {"Red","Blue"}
+                Colors = new List<string> { "Red", "Blue" }
             },
             new Product
             {
                 Name = "Product 3",
                 Price = 30,
                 Category = "Category 2",
-                Colors= new List<string> {"Blue","Yellow"}
+                Colors = new List<string> { "Blue", "Yellow" }
             }
-        }, null);
-        var promotion1 = new FreeProductPromotion
+        }
+    };
+
+    var promotion1 = new FreeProductPromotion
         {
             Name = "Test Promotion",
             PromotionConditions = new List<PromotionCondition>()
@@ -58,7 +60,7 @@ namespace Tests.DomainTest
     public void GetDiscountPercentagePromotionOk()
     {
         // Arrange
-        var cart = new ShoppingCart(new List<Product>
+        var cart = new ShoppingCart{ProductList = new List<Product>
         {
             new Product
             {
@@ -81,7 +83,7 @@ namespace Tests.DomainTest
                 Category = "Category 2",
                 Colors= new List<string> {"Blue","Yellow"}
             }
-        }, null);
+        }};
         var promotion1 = new DiscountPromotion()
         {
             Name = "Test Promotion",
