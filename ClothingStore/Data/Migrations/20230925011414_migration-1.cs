@@ -78,8 +78,53 @@ namespace Data.Migrations
                     table.ForeignKey("FK_ProductColors_Products", x => x.ProductId, "Products", "Id", onDelete: ReferentialAction.Cascade);
                 });
 
+            //ShoppingCart
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false) // Assuming IdUsuario refers to the User's Id
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_Users",
+                        column: x => x.IdUsuario,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
-           
+            //ShoppingCartProducts
+            migrationBuilder.CreateTable(
+                name: "ShoppingCartProducts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShoppingCartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    // Add other necessary columns for this table if they exist.
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartProducts_ShoppingCarts",
+                        column: x => x.ShoppingCartId,
+                        principalTable: "ShoppingCarts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartProducts_Products",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -96,7 +141,13 @@ namespace Data.Migrations
             migrationBuilder.DropTable(
                 name: "Products");
 
-            
+            migrationBuilder.DropTable(name:
+                "ShoppingCarts");
+
+            migrationBuilder.DropTable(name:
+                "ShoppingCartProducts");
+           
+
         }
     }
 }
