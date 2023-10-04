@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Data.Concrete;
 using Domain;
 using Exceptions.LogicExceptions;
@@ -17,6 +16,7 @@ namespace Tests.DataTests
             var userManagement = new UserManagement(dbContext);
             var expected = new User(
                 "test@test.com",
+                "123",
                 "ADMIN",
                 "Cuareim 1234"
             );
@@ -36,6 +36,7 @@ namespace Tests.DataTests
             var userManagement = new UserManagement(dbContext);
             var expected = new User(
                 "test@test.com",
+                "123",
                 "ADMIN",
                 "Cuareim 1234"
             );
@@ -56,6 +57,7 @@ namespace Tests.DataTests
             var email = "test@test.com";
             var expected = new User(
                 email,
+                "123",
                 "ADMIN",
                 "Cuareim 1234"
             );
@@ -79,6 +81,7 @@ namespace Tests.DataTests
             var userManagement = new UserManagement(dbContext);
             var expected = new User(
                 "test@test.com",
+                "123",
                 "ADMIN",
                 "Cuareim 1234"
             );
@@ -103,6 +106,7 @@ namespace Tests.DataTests
             var userManagement = new UserManagement(dbContext);
             var expected = new User(
                 "test@test.com",
+                "123",
                 "ADMIN",
                 "Cuareim 1234"
             );
@@ -125,6 +129,7 @@ namespace Tests.DataTests
             var email = "test@test.com";
             var expected = new User(
                 email,
+                "123",
                 "ADMIN",
                 "Cuareim 1234"
             );
@@ -148,7 +153,8 @@ namespace Tests.DataTests
             Assert.ThrowsException<InvalidFormatEmailException>(() =>
             {
                 var expected = new User(
-                    "test1est-com",  // Este correo es inválido
+                    "test1est-com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );

@@ -8,14 +8,16 @@ namespace Domain
         public Guid Id { get; set; }
         [EmailAddress(ErrorMessage = "El campo 'Email' no tiene un formato de dirección de correo electrónico válido.")]
         public string Email { get; set; }
+        public string Password { get; set; }
         public string Role { get; set; }
         public string DeliveryAddress { get; set; }
 
-        public User(string email, string role, string deliveryAddress)
+        public User(string email, string password, string role, string deliveryAddress)
         {
             SelfValidations(email,role);
             Id = Guid.NewGuid();
             Email = email;
+            Password = password;
             Role = role;
             DeliveryAddress = deliveryAddress;
         }
