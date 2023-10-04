@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
     public class Role
     {
-
+        [Key]
         public Guid RoleId { get; set; } //guid
         public string Name { get; set; }
 
+        public Role() {}
         public Role(Guid rolId, string name) {
         
             RoleId = Guid.NewGuid();

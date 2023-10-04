@@ -1,14 +1,23 @@
-﻿namespace Domain;
-public class Promotion
-{
-    public string Name { get; set; }
-    public string CartCondition { get; set; }
-    public decimal Discount { get; set; }
+﻿using System.ComponentModel.DataAnnotations;
 
-    public Promotion(string name, string cartCondition, decimal discount)
+namespace Domain
+{
+    public class Promotion
     {
-        Name = name;
-        CartCondition = cartCondition;
-        Discount = discount;
+        [Key]
+        public string Name { get; set; }
+        public string CartCondition { get; set; }
+        public decimal Discount { get; set; }
+
+        public Promotion()
+        {
+        }
+
+        public Promotion(string name, string cartCondition, decimal discount)
+        {
+            Name = name;
+            CartCondition = cartCondition;
+            Discount = discount;
+        }
     }
 }

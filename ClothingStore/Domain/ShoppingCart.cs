@@ -1,21 +1,26 @@
-﻿namespace Domain;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class ShoppingCart
+namespace Domain
 {
-    public Guid IdCart { get; set; }
-    public Guid IdUsuario { get; set; }
-    public List<ShoppingCartProducts> ShoppingCartProducts { get; set; }
-    public Promotion AppliedPromotion { get; set; }
 
-    public ShoppingCart(Guid idusuario,List<Product> productList, Promotion appliedPromotion)
+    public class ShoppingCart
     {
-        IdCart = Guid.NewGuid();
-        IdUsuario = idusuario;
-        ShoppingCartProducts = ShoppingCartProducts;
-        AppliedPromotion = appliedPromotion;
+        [Key]
+        public Guid IdCart { get; set; }
+        public Guid IdUsuario { get; set; }
+        public List<ShoppingCartProducts> ShoppingCartProducts { get; set; }
+        public Promotion AppliedPromotion { get; set; }
+
+        public ShoppingCart()
+        {
+        }
+
+        public ShoppingCart(Guid idusuario,List<Product> productList, Promotion appliedPromotion)
+        {
+            IdCart = Guid.NewGuid();
+            IdUsuario = idusuario;
+            ShoppingCartProducts = ShoppingCartProducts;
+            AppliedPromotion = appliedPromotion;
+        }
     }
-
-
-
-
 }
