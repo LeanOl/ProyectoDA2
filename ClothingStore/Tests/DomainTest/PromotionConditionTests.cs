@@ -16,7 +16,11 @@ namespace Tests.DomainTest
                 Name = "Product 1",
                 Price = 10,
                 Category = "Category 1",
-                Colors = new List<string> { "Red", "Blue" }
+                Colors = new List<ProductColor>
+                {
+                    new ProductColor { Color = "Red" },
+                    new ProductColor { Color = "Blue" }
+                }
             };
 
             ShoppingCartProducts scp2 = new ShoppingCartProducts();
@@ -25,7 +29,11 @@ namespace Tests.DomainTest
                 Name = "Product 2",
                 Price = 20,
                 Category = "Category 1",
-                Colors = new List<string> { "Red", "Blue" }
+                Colors = new List<ProductColor>
+                {
+                    new ProductColor { Color = "Red" },
+                    new ProductColor { Color = "Blue" }
+                }
             };
             ShoppingCartProducts scp3 = new ShoppingCartProducts();
             scp3.Product = new Product
@@ -33,7 +41,11 @@ namespace Tests.DomainTest
                 Name = "Product 3",
                 Price = 30,
                 Category = "Category 2",
-                Colors = new List<string> { "Blue", "Yellow" }
+                Colors = new List<ProductColor>
+                {
+                    new ProductColor { Color = "Blue" },
+                    new ProductColor { Color = "Yellow" }
+                }
             };
 
 
@@ -67,7 +79,12 @@ namespace Tests.DomainTest
                 Name = "Product 1",
                 Price = 10,
                 Category = "Category 1",
-                Colors = new List<string> { "Red", "Blue" }
+                Colors = new List<ProductColor>
+                {
+                    new ProductColor { Color = "Red" },
+                    new ProductColor { Color = "Blue" }
+                }
+
             };
 
             ShoppingCartProducts scp2 = new ShoppingCartProducts();
@@ -76,7 +93,11 @@ namespace Tests.DomainTest
                 Name = "Product 2",
                 Price = 20,
                 Category = "Category 1",
-                Colors = new List<string> { "Red", "Blue" }
+                Colors = new List<ProductColor>
+                {
+                    new ProductColor { Color = "Red" },
+                    new ProductColor { Color = "Blue" }
+                }
             };
             ShoppingCartProducts scp3 = new ShoppingCartProducts();
             scp3.Product = new Product
@@ -84,7 +105,11 @@ namespace Tests.DomainTest
                 Name = "Product 3",
                 Price = 30,
                 Category = "Category 2",
-                Colors = new List<string> { "Blue", "Yellow" }
+                Colors = new List<ProductColor>
+                {
+                    new ProductColor { Color = "Blue" },
+                    new ProductColor { Color = "Yellow" }
+                }
             };
 
 

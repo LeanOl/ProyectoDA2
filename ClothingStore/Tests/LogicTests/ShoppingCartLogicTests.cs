@@ -46,34 +46,42 @@ namespace Tests.LogicTests
                 testPromotion1,
                 testPromotion2
             };
-            List<Product> products = new List<Product>()
+
+            List<ShoppingCartProducts> cartProducts = new List<ShoppingCartProducts>();
+            ShoppingCartProducts scp1 = new ShoppingCartProducts();
+            scp1.Product = new Product()
             {
-                new Product()
-                {
-                    Id = new Guid(),
-                    Brand = "Nike",
-                    Category = "Shirt",
-                    Price = 150
-                },
-                new Product()
-                {
-                    Id = new Guid(),
-                    Brand = "Nike",
-                    Category = "Shoes",
-                    Price = 100
-                },
-                new Product()
-                {
-                    Id = new Guid(),
-                    Brand = "Nike",
-                    Category = "Shoes",
-                    Price = 50
-                }
+                Id = new Guid(),
+                Brand = "Nike",
+                Category = "Shirt",
+                Price = 150
             };
-            ShoppingCart shoppingCart = new ShoppingCart
+
+            ShoppingCartProducts scp2 = new ShoppingCartProducts();
+            scp2.Product = new Product()
             {
-                ProductList = products
+                Id = new Guid(),
+                Brand = "Nike",
+                Category = "Shoes",
+                Price = 100
             };
+            ShoppingCartProducts scp3 = new ShoppingCartProducts();
+            scp3.Product = new Product()
+            {
+                Id = new Guid(),
+                Brand = "Nike",
+                Category = "Shoes",
+                Price = 50
+            };
+
+
+            cartProducts.Add(scp1);
+            cartProducts.Add(scp2);
+            cartProducts.Add(scp3);
+            // Arrange
+            var shoppingCart = new ShoppingCart();
+            shoppingCart.ShoppingCartProducts = cartProducts;
+
             Mock<IGenericRepository<Promotion>> repo = new Mock<IGenericRepository<Promotion>>(MockBehavior.Strict);
             repo.Setup(x => x.GetAll<Promotion>()).Returns(promotions);
             IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(repo.Object);

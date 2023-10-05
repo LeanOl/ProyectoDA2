@@ -25,7 +25,13 @@ namespace Domain
         {
             Brand = "a",
             Category = "a",
-            Colors = new List<string> { "a" },
+            Colors = new List<ProductColor>
+            {
+                new ProductColor
+                {
+                    Color = "a"
+                }
+            },
             Description = "a",
             Name = "a",
             Price = 1
@@ -42,7 +48,7 @@ namespace Domain
     public override bool VerifyCartCondition(ShoppingCart cart)
     {
         var products = cart.GetProducts().AsQueryable();
-        var groupedProducts = products.SelectMany(ProductPropertyCondition).GroupBy("it");
+        var groupedProducts = products.Select(ProductPropertyCondition).GroupBy("it");
         return groupedProducts.Any(QuantityCondition);
     }
 }

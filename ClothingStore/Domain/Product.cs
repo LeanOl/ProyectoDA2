@@ -11,13 +11,13 @@ namespace Domain
         public string Description { get; set; }
         public string Brand { get; set; }
         public string Category { get; set; }
-        public List<String> Colors { get; set; }
+        public List<ProductColor> Colors { get; set; }
 
         public Product()
         {
         }
 
-        public Product( string name, decimal price, string description, string brand, string category, List<String> colors)
+        public Product( string name, decimal price, string description, string brand, string category, List<ProductColor> colors)
         {
             Id = Guid.NewGuid();
             Name = name;
