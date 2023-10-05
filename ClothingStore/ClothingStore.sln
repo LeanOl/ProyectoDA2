@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33502.453
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34031.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{9ECCFFCA-307A-4AD2-A745-BE88676BADBA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{219C8792-15F4-4C37-A24C-C1105D0C2341}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{349840C0-6B70-4211-B5EC-D6DC9EC06EDA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{61267B58-ACDA-4ED0-B429-AE498B043717}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{514797A4-4F30-4E70-8078-AEC10568E909}"
 EndProject
@@ -21,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesFactory", "Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIModels", "APIModels\APIModels.csproj", "{4600D367-E296-4177-8A67-ABB325ED0C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Exceptions.csproj", "{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{349840C0-6B70-4211-B5EC-D6DC9EC06EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{349840C0-6B70-4211-B5EC-D6DC9EC06EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{349840C0-6B70-4211-B5EC-D6DC9EC06EDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61267B58-ACDA-4ED0-B429-AE498B043717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61267B58-ACDA-4ED0-B429-AE498B043717}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61267B58-ACDA-4ED0-B429-AE498B043717}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61267B58-ACDA-4ED0-B429-AE498B043717}.Release|Any CPU.Build.0 = Release|Any CPU
 		{514797A4-4F30-4E70-8078-AEC10568E909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{514797A4-4F30-4E70-8078-AEC10568E909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{514797A4-4F30-4E70-8078-AEC10568E909}.Release|Any CPU.ActiveCfg = Release|Any CPU

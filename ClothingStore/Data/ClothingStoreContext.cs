@@ -4,6 +4,8 @@ using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System.Data;
+
 namespace Data
 {
 	public class ClothingStoreContext : DbContext
@@ -12,6 +14,11 @@ namespace Data
         public ClothingStoreContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<User>? Users { get; set; }
+        public virtual DbSet<Product>? Products { get; set; }
+        public virtual DbSet<Role>? Roles { get; set; } 
+        public virtual DbSet<ShoppingCart>? ShoppingCarts { get; set; }
+        public virtual DbSet<ShoppingCartProducts>? ShoppingCartProducts { get; set; }
+        public virtual DbSet<ProductColor>? ProductColors { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<PromotionCondition> PromotionConditions { get; set; }
 
@@ -43,7 +50,6 @@ namespace Data
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
-
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using System.Data;
 using Data.Interfaces;
 using Data.Concrete;
 using Domain;
@@ -6,6 +6,7 @@ using Logic.Concrete;
 using Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Data;
 
 namespace ServicesFactory
 {

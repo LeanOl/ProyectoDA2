@@ -9,15 +9,18 @@ namespace APIModels.InputModels
         [EmailAddress(ErrorMessage = "El campo 'Email' no tiene un formato de dirección de correo electrónico válido.")]
         public string Email { get; set; }
 
+        public string Password { get; set; }
+
         [Required(ErrorMessage = "El campo 'Role' es requerido.")]
         public string Role { get; set; }
 
         [Required(ErrorMessage = "El campo 'DeliveryAddress' es requerido.")]
         public string DeliveryAddress { get; set; }
 
-        public UserRequest(string email, string role, string deliveryAddress)
+        public UserRequest(string email, string password, string role, string deliveryAddress)
         {
             Email = email;
+            Password = password;
             Role = role;
             DeliveryAddress = deliveryAddress;
         }
@@ -26,6 +29,7 @@ namespace APIModels.InputModels
             return new User
             (
                 Email = Email,
+                Password = Password,
                 Role = Role,
                 DeliveryAddress = DeliveryAddress
             );

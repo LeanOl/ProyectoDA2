@@ -67,7 +67,7 @@ namespace Data.Concrete
                 .FirstOrDefault();
         }
 
-        private void Save()
+        protected void Save()
         {
             Context.SaveChanges();
         }

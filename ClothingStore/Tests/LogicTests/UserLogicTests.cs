@@ -20,6 +20,7 @@ namespace Tests.LogicTests
         {
             var userMock = new User(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
@@ -29,6 +30,7 @@ namespace Tests.LogicTests
 
             var expected = new UserRequest(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
@@ -50,7 +52,8 @@ namespace Tests.LogicTests
             Assert.ThrowsException<InvalidFormatEmailException>(() =>
             {
                 var expected = new UserRequest(
-                    "test1est-com",  // Este correo es inválido
+                    "test1est-com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
@@ -65,6 +68,7 @@ namespace Tests.LogicTests
         {
             var expected = new User(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
@@ -85,6 +89,7 @@ namespace Tests.LogicTests
             Guid id = Guid.NewGuid();
             var expected = new User(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
@@ -109,6 +114,7 @@ namespace Tests.LogicTests
             Guid id = Guid.NewGuid();
             var userMock = new User(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
@@ -119,6 +125,7 @@ namespace Tests.LogicTests
 
             var expected = new UserRequest(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );

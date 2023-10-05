@@ -18,11 +18,13 @@ namespace Tests.WebApiTests
         {
             _receivedUserRequest = new UserRequest(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
             _user = new User(
                     "test@test.com",
+                    "123",
                     "ADMIN",
                     "Cuareim 1234"
                 );
