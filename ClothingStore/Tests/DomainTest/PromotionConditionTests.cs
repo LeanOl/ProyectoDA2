@@ -122,7 +122,7 @@ namespace Tests.DomainTest
             var condition = new CollectionPromotionCondition
             {
                 ProductPropertyCondition = "Colors",
-                QuantityCondition = "Count() >= 2"
+                QuantityCondition = "Count() >= 3"
             };
             // Act
             var result = condition.VerifyCartCondition(cart);

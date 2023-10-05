@@ -23,6 +23,17 @@ namespace Domain {
             Product = product;
         }
 
+        public override bool Equals(object obj)
+        {
+            var color = obj as ProductColor;
+            return color != null &&
+                   Color == color.Color;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Color);
+        }
 
 
     }

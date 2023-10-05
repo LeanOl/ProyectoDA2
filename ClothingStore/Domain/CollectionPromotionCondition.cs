@@ -48,7 +48,7 @@ namespace Domain
     public override bool VerifyCartCondition(ShoppingCart cart)
     {
         var products = cart.GetProducts().AsQueryable();
-        var groupedProducts = products.Select(ProductPropertyCondition).GroupBy("it");
+        var groupedProducts = products.SelectMany(ProductPropertyCondition).GroupBy("it");
         return groupedProducts.Any(QuantityCondition);
     }
 }
