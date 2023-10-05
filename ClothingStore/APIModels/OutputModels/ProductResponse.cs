@@ -12,7 +12,7 @@ namespace APIModels.OutputModels
         public string Description { get; set; }
         public string Brand { get; set; }
         public string Category { get; set; }
-        public List<String> Colors { get; set; }
+        public List<string> Colors { get; set; }
 
         public ProductResponse(Product product)
         {
@@ -22,7 +22,7 @@ namespace APIModels.OutputModels
             Description = product.Description;
             Brand = product.Brand;
             Category = product.Category;
-            Colors = product.Colors;
+            Colors = product.Colors.Select(pc => pc.Color).ToList();
         }
     }
 }

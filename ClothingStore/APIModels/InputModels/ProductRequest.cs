@@ -23,15 +23,17 @@ namespace APIModels.InputModels
 
         public Product ToEntity()
         {
-            return new Product
-            {
-                Name = Name,
-                Price = Price,
-                Description = Description,
-                Brand = Brand,
-                Category = Category,
-                Colors = Colors
-            };
+           Product productToReturn = new Product
+           {
+               Id = Guid.Empty,
+               Name = Name,
+               Price = Price,
+               Description = Description,
+               Brand = Brand,
+               Category = Category,
+           };
+            productToReturn.Colors = Colors.ConvertAll(color => new ProductColor(productToReturn.Id, color, productToReturn));
+            return productToReturn;
         }
     }
 }
