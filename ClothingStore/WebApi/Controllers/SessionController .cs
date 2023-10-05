@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ExceptionFilter]
+    //[ExceptionFilter]
     public class SessionController : ControllerBase
     {
         private readonly ISessionService _sessionService;
