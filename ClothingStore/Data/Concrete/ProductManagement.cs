@@ -8,7 +8,7 @@ namespace Data.Concrete
     public class ProductManagement : GenericRepository<Product>, IProductManagement
     {
         
-       // private readonly DbContext _context; esto creo que no va
+       
         
         public ProductManagement(DbContext context) 
         {

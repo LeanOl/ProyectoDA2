@@ -13,6 +13,7 @@ namespace Domain {
 
         public ProductColor()
         {
+            ProductId = Guid.NewGuid();
         }
 
         public ProductColor(Guid productId, string color, Product product)
