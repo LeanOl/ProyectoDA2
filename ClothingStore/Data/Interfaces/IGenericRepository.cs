@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Data.Interfaces
 {
@@ -8,9 +6,7 @@ namespace Data.Interfaces
     {
         IEnumerable<U> GetAll<U>() where U : class;
         IEnumerable<U> GetAll<U>(Func<U, bool> predicate, List<string> includes = null) where U : class;
-
         T? Insert(T entity);
-
         T? Update(T entity);
         T Get(Expression<Func<T, bool>> searchCondition, List<string> includes = null);
         void Delete(T entity);

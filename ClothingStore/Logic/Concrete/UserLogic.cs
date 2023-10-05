@@ -1,7 +1,6 @@
 ﻿using Domain;
 using Data.Interfaces;
 using Logic.Interfaces;
-using Exceptions.LogicExceptions;
 using APIModels.OutputModels;
 using APIModels.InputModels;
 

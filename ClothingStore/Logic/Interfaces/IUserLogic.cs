@@ -1,5 +1,4 @@
-﻿using Domain;
-using APIModels.OutputModels;
+﻿using APIModels.OutputModels;
 using APIModels.InputModels;
 
 namespace Logic.Interfaces

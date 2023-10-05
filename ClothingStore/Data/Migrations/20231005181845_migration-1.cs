@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class migration2 : Migration
+    public partial class migration1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,16 +28,18 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Promotion",
+                name: "Promotions",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CartCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiscountPercentage = table.Column<double>(type: "float", nullable: true),
+                    FreeProductCount = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Promotion", x => x.Name);
+                    table.PrimaryKey("PK_Promotions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,6 +52,21 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.RoleId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeliveryAddress = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,21 +89,41 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PromotionConditions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductPropertyCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuantityCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PromotionConditions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PromotionConditions_Promotions_PromotionId",
+                        column: x => x.PromotionId,
+                        principalTable: "Promotions",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ShoppingCarts",
                 columns: table => new
                 {
                     IdCart = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AppliedPromotionName = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AppliedPromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShoppingCarts", x => x.IdCart);
                     table.ForeignKey(
-                        name: "FK_ShoppingCarts_Promotion_AppliedPromotionName",
-                        column: x => x.AppliedPromotionName,
-                        principalTable: "Promotion",
-                        principalColumn: "Name",
+                        name: "FK_ShoppingCarts_Promotions_AppliedPromotionId",
+                        column: x => x.AppliedPromotionId,
+                        principalTable: "Promotions",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -122,6 +159,11 @@ namespace Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PromotionConditions_PromotionId",
+                table: "PromotionConditions",
+                column: "PromotionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCartProducts_ProductId",
                 table: "ShoppingCartProducts",
                 column: "ProductId");
@@ -132,9 +174,9 @@ namespace Data.Migrations
                 column: "ShoppingCartIdCart");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_AppliedPromotionName",
+                name: "IX_ShoppingCarts_AppliedPromotionId",
                 table: "ShoppingCarts",
-                column: "AppliedPromotionName");
+                column: "AppliedPromotionId");
         }
 
         /// <inheritdoc />
@@ -144,10 +186,16 @@ namespace Data.Migrations
                 name: "ProductColors");
 
             migrationBuilder.DropTable(
+                name: "PromotionConditions");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCartProducts");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -156,7 +204,7 @@ namespace Data.Migrations
                 name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
-                name: "Promotion");
+                name: "Promotions");
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Domain;
 using Data.Interfaces;
 
@@ -25,7 +20,7 @@ namespace Data.Concrete
         }
 
         public ShoppingCart GetShoppingCartByUserId(Guid userId) {
-            return Context.Set<ShoppingCart>().FirstOrDefault(sc => sc.IdUsuario == userId);
+            return Context.Set<ShoppingCart>().FirstOrDefault(sc => sc.UserId == userId);
 
         }
 

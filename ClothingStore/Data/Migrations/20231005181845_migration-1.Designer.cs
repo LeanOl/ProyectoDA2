@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ClothingStoreContext))]
-    [Migration("20231004011908_migration-2")]
-    partial class migration2
+    [Migration("20231005181845_migration-1")]
+    partial class migration1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,19 +77,57 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.Promotion", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CartCondition")
+                    b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
-                    b.ToTable("Promotion");
+                    b.ToTable("Promotions");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Promotion");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Domain.PromotionCondition", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductPropertyCondition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("PromotionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("QuantityCondition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionId");
+
+                    b.ToTable("PromotionConditions");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("PromotionCondition");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Domain.Role", b =>
@@ -113,16 +151,15 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppliedPromotionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("AppliedPromotionId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdUsuario")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdCart");
 
-                    b.HasIndex("AppliedPromotionName");
+                    b.HasIndex("AppliedPromotionId");
 
                     b.ToTable("ShoppingCarts");
                 });
@@ -165,12 +202,51 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Role")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Domain.DiscountPromotion", b =>
+                {
+                    b.HasBaseType("Domain.Promotion");
+
+                    b.Property<double>("DiscountPercentage")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("DiscountPromotion");
+                });
+
+            modelBuilder.Entity("Domain.FreeProductPromotion", b =>
+                {
+                    b.HasBaseType("Domain.Promotion");
+
+                    b.Property<int>("FreeProductCount")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("FreeProductPromotion");
+                });
+
+            modelBuilder.Entity("Domain.CollectionPromotionCondition", b =>
+                {
+                    b.HasBaseType("Domain.PromotionCondition");
+
+                    b.HasDiscriminator().HasValue("CollectionPromotionCondition");
+                });
+
+            modelBuilder.Entity("Domain.SingularPromotionCondition", b =>
+                {
+                    b.HasBaseType("Domain.PromotionCondition");
+
+                    b.HasDiscriminator().HasValue("SingularPromotionCondition");
                 });
 
             modelBuilder.Entity("Domain.ProductColor", b =>
@@ -184,11 +260,18 @@ namespace Data.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Domain.PromotionCondition", b =>
+                {
+                    b.HasOne("Domain.Promotion", null)
+                        .WithMany("PromotionConditions")
+                        .HasForeignKey("PromotionId");
+                });
+
             modelBuilder.Entity("Domain.ShoppingCart", b =>
                 {
                     b.HasOne("Domain.Promotion", "AppliedPromotion")
                         .WithMany()
-                        .HasForeignKey("AppliedPromotionName")
+                        .HasForeignKey("AppliedPromotionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -217,6 +300,11 @@ namespace Data.Migrations
             modelBuilder.Entity("Domain.Product", b =>
                 {
                     b.Navigation("Colors");
+                });
+
+            modelBuilder.Entity("Domain.Promotion", b =>
+                {
+                    b.Navigation("PromotionConditions");
                 });
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
