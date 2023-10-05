@@ -1,10 +1,12 @@
 ﻿using System.Linq.Dynamic.Core.Exceptions;
 using Exceptions.LogicExceptions;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
     public abstract class Promotion
     {
+        [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
         public ICollection<PromotionCondition> PromotionConditions;

@@ -1,10 +1,12 @@
 ﻿using Exceptions.LogicExceptions;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
     public class User
     {
+        [Key]
         public Guid Id { get; set; }
         [EmailAddress(ErrorMessage = "El campo 'Email' no tiene un formato de dirección de correo electrónico válido.")]
         public string Email { get; set; }
