@@ -23,203 +23,203 @@ namespace Data.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Brand")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Category")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Products");
-                });
+                b.ToTable("Products");
+            });
 
             modelBuilder.Entity("Domain.ProductColor", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Color")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("ProductId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                b.HasIndex("ProductId");
 
-                    b.ToTable("ProductColors");
-                });
+                b.ToTable("ProductColors");
+            });
 
             modelBuilder.Entity("Domain.Promotion", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CartCondition")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CartCondition")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                b.Property<decimal>("Discount")
+                    .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Name");
+                b.HasKey("Name");
 
-                    b.ToTable("Promotion");
-                });
+                b.ToTable("Promotion");
+            });
 
             modelBuilder.Entity("Domain.Role", b =>
-                {
-                    b.Property<Guid>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("RoleId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RoleId");
+                b.HasKey("RoleId");
 
-                    b.ToTable("Roles");
-                });
+                b.ToTable("Roles");
+            });
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
-                {
-                    b.Property<Guid>("IdCart")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("IdCart")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppliedPromotionName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("AppliedPromotionName")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("IdUsuario")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("IdUsuario")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("IdCart");
+                b.HasKey("IdCart");
 
-                    b.HasIndex("AppliedPromotionName");
+                b.HasIndex("AppliedPromotionName");
 
-                    b.ToTable("ShoppingCarts");
-                });
+                b.ToTable("ShoppingCarts");
+            });
 
             modelBuilder.Entity("Domain.ShoppingCartProducts", b =>
-                {
-                    b.Property<Guid>("ShoppingCartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("ShoppingCartId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("ProductId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                b.Property<int>("Quantity")
+                    .HasColumnType("int");
 
-                    b.Property<Guid>("ShoppingCartIdCart")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("ShoppingCartIdCart")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ShoppingCartId");
+                b.HasKey("ShoppingCartId");
 
-                    b.HasIndex("ProductId");
+                b.HasIndex("ProductId");
 
-                    b.HasIndex("ShoppingCartIdCart");
+                b.HasIndex("ShoppingCartIdCart");
 
-                    b.ToTable("ShoppingCartProducts");
-                });
+                b.ToTable("ShoppingCartProducts");
+            });
 
             modelBuilder.Entity("Domain.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("DeliveryAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("DeliveryAddress")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Role")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("Role")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Users");
-                });
+                b.ToTable("Users");
+            });
 
             modelBuilder.Entity("Domain.ProductColor", b =>
-                {
-                    b.HasOne("Domain.Product", "Product")
-                        .WithMany("Colors")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Domain.Product", "Product")
+                    .WithMany("Colors")
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Product");
-                });
+                b.Navigation("Product");
+            });
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
-                {
-                    b.HasOne("Domain.Promotion", "AppliedPromotion")
-                        .WithMany()
-                        .HasForeignKey("AppliedPromotionName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Domain.Promotion", "AppliedPromotion")
+                    .WithMany()
+                    .HasForeignKey("AppliedPromotionName")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("AppliedPromotion");
-                });
+                b.Navigation("AppliedPromotion");
+            });
 
             modelBuilder.Entity("Domain.ShoppingCartProducts", b =>
-                {
-                    b.HasOne("Domain.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Domain.Product", "Product")
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Domain.ShoppingCart", "ShoppingCart")
-                        .WithMany("ShoppingCartProducts")
-                        .HasForeignKey("ShoppingCartIdCart")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Domain.ShoppingCart", "ShoppingCart")
+                    .WithMany("ShoppingCartProducts")
+                    .HasForeignKey("ShoppingCartIdCart")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Product");
+                b.Navigation("Product");
 
-                    b.Navigation("ShoppingCart");
-                });
+                b.Navigation("ShoppingCart");
+            });
 
             modelBuilder.Entity("Domain.Product", b =>
-                {
-                    b.Navigation("Colors");
-                });
+            {
+                b.Navigation("Colors");
+            });
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
-                {
-                    b.Navigation("ShoppingCartProducts");
-                });
+            {
+                b.Navigation("ShoppingCartProducts");
+            });
 #pragma warning restore 612, 618
         }
     }

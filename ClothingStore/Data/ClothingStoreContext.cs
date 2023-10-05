@@ -31,7 +31,9 @@ namespace Data
             modelBuilder.Entity<SingularPromotionCondition>();
             modelBuilder.Entity<CollectionPromotionCondition>();
             modelBuilder.Entity<User>();
-
+            modelBuilder.Entity<Session>();
+            modelBuilder.Entity<ShoppingCart>();
+            modelBuilder.Entity<ShoppingCartProducts>();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
