@@ -37,6 +37,7 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.CheckConstraint("CHK_ValidEmail", "Email LIKE '%@%.%'");
                 });
 
             //Products
@@ -73,17 +74,45 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Promotion",
+                name: "Promotions",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CartCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiscountPercentage = table.Column<double>(type: "float", nullable: true),
+                    FreeProductCount = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Promotion", x => x.Name);
+                    table.PrimaryKey("PK_Promotions", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "PromotionConditions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductPropertyCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuantityCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PromotionConditions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PromotionConditions_Promotions_PromotionId",
+                        column: x => x.PromotionId,
+                        principalTable: "Promotions",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PromotionConditions_PromotionId",
+                table: "PromotionConditions",
+                column: "PromotionId");
+
             //ShoppingCart
             migrationBuilder.CreateTable(
                  name: "ShoppingCarts",
@@ -99,7 +128,7 @@ namespace Data.Migrations
                      table.ForeignKey(
                          name: "FK_ShoppingCarts_Promotion_AppliedPromotionName",
                          column: x => x.AppliedPromotionName,
-                         principalTable: "Promotion",
+                         principalTable: "Promotions",
                          principalColumn: "Name",
                          onDelete: ReferentialAction.Cascade);
                  });
