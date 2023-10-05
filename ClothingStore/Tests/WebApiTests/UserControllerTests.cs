@@ -12,10 +12,17 @@ namespace Tests.WebApiTests
     {
         private UserRequest _receivedUserRequest;
         private User _user;
+        private CreateUserRequest _receivedCreateUserRequest;
 
         [TestInitialize]
         public void Initialize()
         {
+            _receivedCreateUserRequest = new CreateUserRequest(
+                    "test@test.com",
+                    "123",
+                    "ADMIN",
+                    "Cuareim 1234"
+                );
             _receivedUserRequest = new UserRequest(
                     "test@test.com",
                     "123",
@@ -49,7 +56,7 @@ namespace Tests.WebApiTests
                 new { id = 5 }, expectedMappedResult);
 
             // Act
-            IActionResult result = controller.CreateUser(_receivedUserRequest);
+            IActionResult result = controller.CreateUser(_receivedCreateUserRequest);
 
             // Assert
             logic.VerifyAll();

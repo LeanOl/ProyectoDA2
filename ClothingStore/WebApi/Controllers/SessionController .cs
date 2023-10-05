@@ -5,7 +5,7 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [Route("api/sessions")]
+    [Route("api/[controller]")]
     [ApiController]
     [ExceptionFilter]
     public class SessionController : ControllerBase
@@ -25,7 +25,7 @@ namespace WebApi.Controllers
         }
 
         [ServiceFilter(typeof(AuthenticationFilter))]
-        [AuthorizationFilter(RoleNeeded = "Admin")]
+        [AuthorizationFilter(RoleNeeded = "ADMIN")]
         [HttpDelete]
         public IActionResult Logout([FromHeader] Guid Authorization)
         {

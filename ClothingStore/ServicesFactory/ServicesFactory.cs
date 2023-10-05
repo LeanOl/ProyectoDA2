@@ -22,6 +22,7 @@ namespace ServicesFactory
             serviceCollection.AddScoped<IGenericRepository<Promotion>,PromotionManagement>();
             serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
             serviceCollection.AddScoped<IUserLogic, UserLogic>();
+            serviceCollection.AddScoped<IUserLogic, UserLogic>();
         }
     }
 }

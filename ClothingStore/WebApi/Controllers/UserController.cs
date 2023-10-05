@@ -18,13 +18,13 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateUser([FromBody] UserRequest received)
+        public IActionResult CreateUser([FromBody] CreateUserRequest received)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var createdUser = _userLogic.CreateUser(received);
+            var createdUser = _userLogic.CreateUser(received.ToUserRequest());
 
             return CreatedAtAction(nameof(CreateUser), new { id = createdUser.Id }, createdUser);
         
