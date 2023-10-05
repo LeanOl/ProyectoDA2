@@ -1,7 +1,6 @@
 ﻿using APIModels.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Logic.Interfaces;
-using System.Security.Authentication;
 using WebApi.Filters;
 
 namespace WebApi.Controllers

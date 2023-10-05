@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Data.Interfaces;
+﻿using Data.Interfaces;
 using Data.Concrete;
 using Domain;
 using Logic.Concrete;

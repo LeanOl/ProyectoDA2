@@ -7,7 +7,7 @@ namespace Domain
     {
         [Key]
         public Guid IdCart { get; set; }
-        public Guid IdUsuario { get; set; }
+        public Guid UserId { get; set; }
         public List<ShoppingCartProducts> ShoppingCartProducts { get; set; }
         public Promotion AppliedPromotion { get; set; }
 
@@ -18,7 +18,7 @@ namespace Domain
         public ShoppingCart(Guid idusuario, List<ShoppingCartProducts> productList, Promotion appliedPromotion)
         {
             IdCart = Guid.NewGuid();
-            IdUsuario = idusuario;
+            UserId = idusuario;
             ShoppingCartProducts = productList;
             AppliedPromotion = appliedPromotion;
         }

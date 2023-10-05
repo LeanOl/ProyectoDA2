@@ -2,7 +2,6 @@
 using Domain;
 using Logic.Concrete;
 using Logic.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Tests.LogicTests
 {

@@ -170,6 +170,40 @@ namespace Data.Migrations
                 b.ToTable("Users");
             });
 
+            modelBuilder.Entity("Domain.DiscountPromotion", b =>
+                {
+                    b.HasBaseType("Domain.Promotion");
+
+                    b.Property<double>("DiscountPercentage")
+                        .HasColumnType("float");
+
+                    b.HasDiscriminator().HasValue("DiscountPromotion");
+                });
+
+            modelBuilder.Entity("Domain.FreeProductPromotion", b =>
+                {
+                    b.HasBaseType("Domain.Promotion");
+
+                    b.Property<int>("FreeProductCount")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("FreeProductPromotion");
+                });
+
+            modelBuilder.Entity("Domain.CollectionPromotionCondition", b =>
+                {
+                    b.HasBaseType("Domain.PromotionCondition");
+
+                    b.HasDiscriminator().HasValue("CollectionPromotionCondition");
+                });
+
+            modelBuilder.Entity("Domain.SingularPromotionCondition", b =>
+                {
+                    b.HasBaseType("Domain.PromotionCondition");
+
+                    b.HasDiscriminator().HasValue("SingularPromotionCondition");
+                });
+
             modelBuilder.Entity("Domain.ProductColor", b =>
             {
                 b.HasOne("Domain.Product", "Product")
@@ -180,6 +214,13 @@ namespace Data.Migrations
 
                 b.Navigation("Product");
             });
+
+            modelBuilder.Entity("Domain.PromotionCondition", b =>
+                {
+                    b.HasOne("Domain.Promotion", null)
+                        .WithMany("PromotionConditions")
+                        .HasForeignKey("PromotionId");
+                });
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
             {
@@ -215,6 +256,11 @@ namespace Data.Migrations
             {
                 b.Navigation("Colors");
             });
+
+            modelBuilder.Entity("Domain.Promotion", b =>
+                {
+                    b.Navigation("PromotionConditions");
+                });
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
             {
