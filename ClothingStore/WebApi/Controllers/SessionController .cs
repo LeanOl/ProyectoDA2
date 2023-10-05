@@ -7,7 +7,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[ExceptionFilter]
+    [ExceptionFilter]
     public class SessionController : ControllerBase
     {
         private readonly ISessionService _sessionService;
@@ -24,8 +24,8 @@ namespace WebApi.Controllers
             return Ok(new { token = token });
         }
 
-        //[ServiceFilter(typeof(AuthenticationFilter))]
-        //[AuthorizationFilter(RoleNeeded = "ADMIN")]
+        [ServiceFilter(typeof(AuthenticationFilter))]
+        [AuthorizationFilter(RoleNeeded = "ADMIN")]
         [HttpDelete]
         public IActionResult Logout([FromHeader] Guid Authorization)
         {
