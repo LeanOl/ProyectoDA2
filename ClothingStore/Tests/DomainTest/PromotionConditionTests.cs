@@ -9,30 +9,42 @@ namespace Tests.DomainTest
         public void VerifyCartConditionSingularPromotionOk()
         {
             // Arrange
-            var cart = new ShoppingCart{ProductList = new List<Product>
+            List<ShoppingCartProducts> cartProducts = new List<ShoppingCartProducts>();
+            ShoppingCartProducts scp1 = new ShoppingCartProducts();
+            scp1.Product = new Product
             {
-                new Product
-                {
-                    Name = "Product 1",
-                    Price = 10,
-                    Category = "Category 1"
-                },
-                new Product
-                {
-                    Name = "Product 2",
-                    Price = 20,
-                    Category = "Category 1"
-                },
-                new Product
-                {
-                    Name = "Product 3",
-                    Price = 30,
-                    Category = "Category 2"
-                }
-            }
-        };
+                Name = "Product 1",
+                Price = 10,
+                Category = "Category 1",
+                Colors = new List<string> { "Red", "Blue" }
+            };
 
-        var condition = new SingularPromotionCondition
+            ShoppingCartProducts scp2 = new ShoppingCartProducts();
+            scp2.Product = new Product
+            {
+                Name = "Product 2",
+                Price = 20,
+                Category = "Category 1",
+                Colors = new List<string> { "Red", "Blue" }
+            };
+            ShoppingCartProducts scp3 = new ShoppingCartProducts();
+            scp3.Product = new Product
+            {
+                Name = "Product 3",
+                Price = 30,
+                Category = "Category 2",
+                Colors = new List<string> { "Blue", "Yellow" }
+            };
+
+
+            cartProducts.Add(scp1);
+            cartProducts.Add(scp2);
+            cartProducts.Add(scp3);
+            // Arrange
+            var cart = new ShoppingCart();
+            cart.ShoppingCartProducts = cartProducts;
+
+            var condition = new SingularPromotionCondition
             {
                 ProductPropertyCondition = "Category",
                 QuantityCondition = "Count() >= 2"
@@ -48,31 +60,40 @@ namespace Tests.DomainTest
         public void VerifyCartConditionCollectionPromotionOk()
         {
             // Arrange
-            var cart = new ShoppingCart{ProductList = new List<Product>
+            List<ShoppingCartProducts> cartProducts = new List<ShoppingCartProducts>();
+            ShoppingCartProducts scp1 = new ShoppingCartProducts();
+            scp1.Product = new Product
             {
-                new Product
-                {
-                    Name = "Product 1",
-                    Price = 10,
-                    Category = "Category 1",
-                    Colors= new List<string> {"Red","Blue"}
-                },
-                new Product
-                {
-                    Name = "Product 2",
-                    Price = 20,
-                    Category = "Category 1",
-                    Colors = new List<string> {"White","Yellow","Blue"}
+                Name = "Product 1",
+                Price = 10,
+                Category = "Category 1",
+                Colors = new List<string> { "Red", "Blue" }
+            };
 
-                },
-                new Product
-                {
-                    Name = "Product 3",
-                    Price = 30,
-                    Category = "Category 2",
-                    Colors = new List<string> {"Black"}
-                }
-            }};
+            ShoppingCartProducts scp2 = new ShoppingCartProducts();
+            scp2.Product = new Product
+            {
+                Name = "Product 2",
+                Price = 20,
+                Category = "Category 1",
+                Colors = new List<string> { "Red", "Blue" }
+            };
+            ShoppingCartProducts scp3 = new ShoppingCartProducts();
+            scp3.Product = new Product
+            {
+                Name = "Product 3",
+                Price = 30,
+                Category = "Category 2",
+                Colors = new List<string> { "Blue", "Yellow" }
+            };
+
+
+            cartProducts.Add(scp1);
+            cartProducts.Add(scp2);
+            cartProducts.Add(scp3);
+            // Arrange
+            var cart = new ShoppingCart();
+            cart.ShoppingCartProducts = cartProducts;
             var condition = new CollectionPromotionCondition
             {
                 ProductPropertyCondition = "Colors",
