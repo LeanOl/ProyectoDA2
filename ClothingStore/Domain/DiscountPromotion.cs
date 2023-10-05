@@ -24,8 +24,11 @@
 
     private Product? FindMostExpensiveProduct(ShoppingCart cart)
     {
-        return cart.ProductList.MaxBy(x => x.Price);
-    }
+        return cart.ShoppingCartProducts
+            .OrderByDescending(sp => sp.Product.Price)
+            .Select(sp => sp.Product)
+            .FirstOrDefault();
+        }
 
     private decimal ApplyDiscount(Product? mostExpensiveProduct)
     {

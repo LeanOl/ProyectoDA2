@@ -18,7 +18,7 @@ namespace Domain
 
             if (isConditionApplicable)
             {
-                IEnumerable<Product> products = cart.ProductList;
+                IEnumerable<Product> products = cart.GetProducts();
                 var lessValueableProducts = GetLessValueableProducts(products);
                 foreach (var product in lessValueableProducts)
                 {

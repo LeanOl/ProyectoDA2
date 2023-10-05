@@ -1,14 +1,5 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain
-{
-
-    public class ShoppingCart
-    {
-        public List<Product> ProductList { get; set; }
-        public Promotion AppliedPromotion { get; set; }
-    }
 namespace Domain
 {
 
@@ -24,12 +15,22 @@ namespace Domain
         {
         }
 
-        public ShoppingCart(Guid idusuario,List<Product> productList, Promotion appliedPromotion)
+        public ShoppingCart(Guid idusuario, List<ShoppingCartProducts> productList, Promotion appliedPromotion)
         {
             IdCart = Guid.NewGuid();
             IdUsuario = idusuario;
-            ShoppingCartProducts = ShoppingCartProducts;
+            ShoppingCartProducts = productList;
             AppliedPromotion = appliedPromotion;
+        }
+
+        public List<Product> GetProducts ()
+        {
+            if (ShoppingCartProducts == null || ShoppingCartProducts.Count == 0)
+            {
+                return new List<Product>();
+            }
+            var products = ShoppingCartProducts.Select(sp => sp.Product).ToList();
+            return products;
         }
     }
 }

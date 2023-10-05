@@ -11,28 +11,21 @@ namespace Domain
         public string Description { get; set; }
         public string Brand { get; set; }
         public string Category { get; set; }
-        public List<ProductColor> Colors { get; set; }
+        public List<String> Colors { get; set; }
 
         public Product()
         {
         }
 
-        public Product( string name, decimal price, string description, string brand, string category, List<string> colors)
+        public Product( string name, decimal price, string description, string brand, string category, List<String> colors)
         {
-            Id = Guid.NewGuid();//capaz el guid se va del constructor
+            Id = Guid.NewGuid();
             Name = name;
             Price = price;
             Description = description;
             Brand = brand;
             Category = category;
             Colors = colors;
-        }
-
-        public Product()
-        {
-        }
-
-        
-
+        }        
     }
 }
