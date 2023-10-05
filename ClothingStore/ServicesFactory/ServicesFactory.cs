@@ -23,6 +23,7 @@ namespace ServicesFactory
             serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
             serviceCollection.AddScoped<IUserLogic, UserLogic>();
             serviceCollection.AddScoped<ISessionService, SessionService>();
+            serviceCollection.AddScoped<IGenericRepository<Session>, SessionManagement>();
         }
     }
 }

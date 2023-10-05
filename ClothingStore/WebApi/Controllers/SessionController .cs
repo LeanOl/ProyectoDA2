@@ -18,9 +18,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] UserRequest userCreateModel)
+        public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            var token = _sessionService.Authenticate(userCreateModel.Email, userCreateModel.Password);
+            var token = _sessionService.Authenticate(loginRequest.Email, loginRequest.Password);
             return Ok(new { token = token });
         }
 
