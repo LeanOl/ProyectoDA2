@@ -3,8 +3,10 @@ using APIModels.OutputModels;
 using Logic.Concrete;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Filters;
 
 [Route("api/products")]
+[ExceptionFilter]
 [ApiController]
 public class ProductsController : ControllerBase
 {

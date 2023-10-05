@@ -42,7 +42,7 @@ namespace Data.Concrete
         }
 
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             Context.Set<T>().Remove(entity);
             Save();
