@@ -20,7 +20,7 @@ export class ProductItemComponent {
       description: 'Default product',
       brand: 'Default brand',
       category: 'Default category',
-      colors: 'Default colors',
+      colors: ['Default color'],
       stock: 2,
     };
   }

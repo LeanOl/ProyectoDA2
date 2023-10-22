@@ -6,7 +6,7 @@
       <li class="list-group-item">Brand: {{ product.brand }}</li>
       <li class="list-group-item">Category: {{ product.category }}</li>
       <li class="list-group-item">Colors: {{ product.colors }}</li>
-      <li class="list-group-item">Price: {{ product.price }}</li>
+      <li class="list-group-item">Price: {{ product.price | currency}}</li>
       <li class="list-group-item">Stock: {{ product.stock }}</li>
     </ul>
     <button class="btn btn-primary mt-3" (click)="addToCart()">Add to Cart</button>
