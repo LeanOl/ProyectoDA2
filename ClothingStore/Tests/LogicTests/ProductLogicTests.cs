@@ -29,5 +29,6 @@ public class ProductLogicTests
         // Assert
         CollectionAssert.AreEquivalent(expectedProducts.ToList(), result.ToList());
 
+
     }
 }
