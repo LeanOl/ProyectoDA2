@@ -11,5 +11,6 @@ namespace Logic.Interfaces
         Product GetProductById(Guid id);
         void UpdateProduct(Product product);
         void DeleteProduct(Guid id);
+        IEnumerable<Product> GetFilteredProducts(string filter);
     }
 }

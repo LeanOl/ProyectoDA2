@@ -40,5 +40,10 @@ namespace Logic.Concrete
         {
             _productManagement.DeleteProduct(id);
         }
+
+        public IEnumerable<Product> GetFilteredProducts(string filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -34,4 +34,10 @@ public class ProductsController : ControllerBase
         var products = _productLogic.GetAllProducts();
         return Ok(products.Select(p => new ProductResponse(p)).ToList());
     }
+    [HttpGet]
+    public IActionResult GetFilteredProducts([FromQuery]string filter)
+    {
+        var products = _productLogic.GetFilteredProducts(filter);
+        return Ok(products.Select(p => new ProductResponse(p)).ToList());
+    }
 }
