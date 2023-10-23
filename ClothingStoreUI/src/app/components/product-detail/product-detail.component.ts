@@ -1,19 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { Input } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
-  selector: 'app-product-item',
-  templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css'],
+  selector: 'app-product-detail',
+  templateUrl: './product-detail.component.html',
+  styleUrls: ['./product-detail.component.css'],
 })
-
-export class ProductItemComponent {
-  @Input() product: Product;
-
-  addToCart() {
-    // Add product to cart
-  }
+export class ProductDetailComponent {
+  product: Product;
 
   constructor(private productService: ProductService) {
     this.product = {
@@ -27,7 +23,8 @@ export class ProductItemComponent {
       stock: 2,
     };
   }
-  setActiveProduct() {
-    this.productService.setActiveProduct(this.product);
+
+  ngOnInit(): void {
+    this.product = this.productService.getActiveProduct();
   }
 }
