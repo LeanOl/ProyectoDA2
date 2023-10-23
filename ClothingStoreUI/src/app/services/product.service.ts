@@ -9,8 +9,11 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
 
   constructor(private http:HttpClient) { }
-  private productUrl = 'http://localhost:7297/products';
+  private productUrl = 'https://localhost:7297/api/products';
   getProducts() : Observable<Product[]> {
     return this.http.get<Product[]>(this.productUrl);
+  }
+  getFilteredProducts(filter:string) : Observable<Product[]> {
+    return this.http.get<Product[]>(this.productUrl + '?filter=' + filter);
   }
 }

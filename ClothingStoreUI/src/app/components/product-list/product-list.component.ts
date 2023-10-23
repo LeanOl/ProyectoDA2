@@ -5,16 +5,25 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
   products: Product[] = [];
-  constructor(private productService:ProductService ) { }
+  formInputFilter: string = '';
+  constructor(private productService: ProductService) {}
   getProducts(): void {
-    this.productService.getProducts()
+    this.productService
+      .getProducts()
+      .subscribe((products) => (this.products = products));
+  }
+  getFilteredProducts(): void {
+    this.productService.getFilteredProducts(this.formInputFilter)
     .subscribe(products => this.products = products);
   }
   ngOnInit(): void {
     this.getProducts();
   }
+
+
+
 }

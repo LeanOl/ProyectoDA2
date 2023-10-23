@@ -18,7 +18,7 @@ namespace WebApi.Filters
                     context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
                     break;
                 default:
-                    context.Result = new ObjectResult(new { Message = "Internal Server Error" }) { StatusCode = 500 };
+                    context.Result = new ObjectResult(new { Message = $"Internal Server Error: {context.Exception.Message}" }) { StatusCode = 500 };
                     break;
             }
         }

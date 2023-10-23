@@ -28,5 +28,10 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(CreateProduct), new { id = createdProduct.Id }, new ProductResponse(createdProduct));
     }
 
-    
+    [HttpGet]
+    public IActionResult GetFilteredProducts([FromQuery]string? filter = "")
+    {
+        var products = _productLogic.GetFilteredProducts(filter);
+        return Ok(products.Select(p => new ProductResponse(p)).ToList());
+    }
 }
