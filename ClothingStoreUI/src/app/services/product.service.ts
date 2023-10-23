@@ -13,4 +13,7 @@ export class ProductService {
   getProducts() : Observable<Product[]> {
     return this.http.get<Product[]>(this.productUrl);
   }
+  getFilteredProducts(filter:string) : Observable<Product[]> {
+    return this.http.get<Product[]>(this.productUrl + '?filter=' + filter);
+  }
 }
