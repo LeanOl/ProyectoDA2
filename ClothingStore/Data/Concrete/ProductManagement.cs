@@ -56,5 +56,9 @@ namespace Data.Concrete
             return Context.Set<Product>().Where(p => p.Category == category).ToList();
         }
 
+        public IEnumerable<Product> GetFilteredProducts(string test)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

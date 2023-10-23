@@ -12,7 +12,6 @@ namespace Data.Interfaces
         void DeleteProduct(Guid id);
         List<Product> GetProductByBrand(string brand);
         List<Product> GetProductByCategory(string category);
-    
-        
+        IEnumerable<Product> GetFilteredProducts(string filter);
     }
 }

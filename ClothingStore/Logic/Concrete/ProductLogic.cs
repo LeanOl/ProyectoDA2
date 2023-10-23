@@ -43,7 +43,7 @@ namespace Logic.Concrete
 
         public IEnumerable<Product> GetFilteredProducts(string filter)
         {
-            throw new NotImplementedException();
+            return _productManagement.GetFilteredProducts(filter);
         }
     }
 }
