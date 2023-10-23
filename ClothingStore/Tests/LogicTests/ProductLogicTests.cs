@@ -24,7 +24,7 @@ public class ProductLogicTests
         ProductLogic logic = new(mock.Object);
 
         // Act
-        IEnumerable<Product> result = logic.GetAllProducts();
+        IEnumerable<Product> result = logic.GetFilteredProducts("");
 
         // Assert
         CollectionAssert.AreEquivalent(expectedProducts.ToList(), result.ToList());

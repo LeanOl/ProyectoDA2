@@ -43,6 +43,9 @@ namespace Logic.Concrete
 
         public IEnumerable<Product> GetFilteredProducts(string filter)
         {
+            if (filter == "")
+                return _productManagement.GetAllProducts();
+            
             return _productManagement.GetFilteredProducts(filter);
         }
     }

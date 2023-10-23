@@ -23,12 +23,12 @@ public class ProductControllerTests
         };
         var expectedMappedResult = expectedProducts.Select(p => new ProductResponse(p));
         Mock<IProductLogic> logic = new Mock<IProductLogic>(MockBehavior.Strict);
-        logic.Setup(l => l.GetAllProducts()).Returns(expectedProducts);
+        logic.Setup(l => l.GetFilteredProducts("")).Returns(expectedProducts);
         ProductsController controller = new ProductsController(logic.Object);
         OkObjectResult expected = new OkObjectResult(expectedMappedResult);
 
         // Act
-        IActionResult result = controller.GetAllProducts();
+        IActionResult result = controller.GetFilteredProducts("");
 
         // Assert
         logic.VerifyAll();
