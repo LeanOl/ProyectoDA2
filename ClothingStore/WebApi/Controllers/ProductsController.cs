@@ -28,5 +28,10 @@ public class ProductsController : ControllerBase
         return CreatedAtAction(nameof(CreateProduct), new { id = createdProduct.Id }, new ProductResponse(createdProduct));
     }
 
-    
+    [HttpGet]
+    public IActionResult GetAllProducts()
+    {
+        var products = _productLogic.GetAllProducts();
+        return Ok(products.Select(p => new ProductResponse(p)).ToList());
+    }
 }
