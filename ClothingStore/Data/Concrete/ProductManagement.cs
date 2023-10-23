@@ -58,7 +58,9 @@ namespace Data.Concrete
 
         public IEnumerable<Product> GetFilteredProducts(string filter)
         {
-            return Context.Set<Product>().Where(p => p.Name.Contains(filter) || p.Brand.Equals(filter) || p.Category.Equals(filter)).ToList();
+            return Context.Set<Product>().Where(p => p.Name.Contains(filter) ||
+                                                     p.Brand.Equals(filter) ||
+                                                     p.Category.Equals(filter)).ToList();
         }
     }
 }
