@@ -29,7 +29,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetFilteredProducts([FromQuery]string filter = "")
+    public IActionResult GetFilteredProducts([FromQuery]string? filter = "")
     {
         var products = _productLogic.GetFilteredProducts(filter);
         return Ok(products.Select(p => new ProductResponse(p)).ToList());

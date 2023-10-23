@@ -1,3 +1,7 @@
+<form class="form-inline my-2 my-lg-0 d-flex">
+  <input class="form-control mr-sm-2 flex-row form-control-lg " type="search" placeholder="Search Products" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0 flex-row" type="submit">Search</button>
+</form>
 <ul class="list-group">
   <li *ngFor="let product of products" class="list-group-item">
     <app-product-item [product]="product"></app-product-item>

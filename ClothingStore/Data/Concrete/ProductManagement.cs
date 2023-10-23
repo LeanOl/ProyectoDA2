@@ -17,7 +17,7 @@ namespace Data.Concrete
             
         public IEnumerable<Product> GetAllProducts()
         {
-            return Context.Set<Product>().ToList();
+            return Context.Set<Product>().Include(p => p.Colors);
         }
 
         public Product GetProductById(Guid id)
@@ -58,7 +58,7 @@ namespace Data.Concrete
 
         public IEnumerable<Product> GetFilteredProducts(string filter)
         {
-            return Context.Set<Product>().Where(p => p.Name.Contains(filter) ||
+            return Context.Set<Product>().Include(p => p.Colors).Where(p => p.Name.Contains(filter) ||
                                                      p.Brand.Equals(filter) ||
                                                      p.Category.Equals(filter)).ToList();
         }
