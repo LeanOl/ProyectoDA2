@@ -5,7 +5,7 @@ using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sessions")]
     [ApiController]
     [ExceptionFilter]
     public class SessionController : ControllerBase
@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
             var token = _sessionService.Authenticate(loginRequest.Email, loginRequest.Password);
-            return Ok(new { token = token });
+            return Ok(new { token = token, ok=true});
         }
 
         [ServiceFilter(typeof(AuthenticationFilter))]

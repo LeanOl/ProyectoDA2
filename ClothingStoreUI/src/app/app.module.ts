@@ -10,6 +10,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     LoginFormComponent,
     ProductItemComponent,
     ProductListComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    AdminMenuComponent,
+    MainMenuComponent
   ],
   imports: [
     BrowserModule,
