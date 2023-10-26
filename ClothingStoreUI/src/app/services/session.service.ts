@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, map ,catchError, of} from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/login-response.model';
 
@@ -12,6 +12,38 @@ export class SessionService {
   private sessionUrl = environment.apiUrl + environment.sessionEndpoint;
 
   constructor(private httpClient:HttpClient) { 
+  }
+
+  login(email: string, password: string): Observable<boolean> {
+    return this.postLogin(email, password).pipe(
+      map((response) => {
+        if (response.ok) {
+          this.setSessionUser(response);
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
+  }
+  logout(): void {
+    if (this.isLogged()) {
+      this.postLogout().subscribe((ok) => {
+        if (ok) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('email');
+          localStorage.removeItem('role');
+        }
+      });
+    }
+  }
+
+  isLogged(): boolean {
+    return localStorage.getItem('token') !== null;
+  }
+
+  getRole(): string {
+    return localStorage.getItem('role') || '';
   }
 
   private postLogin(email: string, password: string): Observable<LoginResponse> {
@@ -26,32 +58,38 @@ export class SessionService {
     );
   }
 
-  private setSessionToken(token:string | undefined): void {
-    if (token) {
-      localStorage.setItem('token', token);
+  private setSessionUser(loginResponse:LoginResponse): void {
+    if (loginResponse.token === undefined ||
+       loginResponse.email === undefined ||
+        loginResponse.role === undefined) {
+      return;
     }
+    localStorage.setItem('token', loginResponse.token);
+    localStorage.setItem('email', loginResponse.email);
+    localStorage.setItem('role', loginResponse.role);
   }
 
-  login(email: string, password: string): Observable<boolean> {
-    return this.postLogin(email, password).pipe(
+  private postLogout(): Observable<boolean> {
+    return this.httpClient.delete(this.sessionUrl, { headers: this.getHttpLogoutHeaders(),observe: 'response' }).pipe(
       map((response) => {
-        if (response.ok) {
-          this.setSessionToken(response.token);
-          return true;
-        } else {
-          return false;
-        }
+        return response.status === 200;
+      }),
+      catchError((error) => {
+        return of(false);
       })
     );
   }
 
-  isLogged(): boolean {
-    return localStorage.getItem('token') !== null;
+  private getHttpLogoutHeaders(): HttpHeaders {
+   
+    let token = localStorage.getItem('token') || '';
+    let headers = new HttpHeaders({
+      
+      Authorization:token
+    });
+    return headers;
   }
 
-  getRole(): string {
-    return 'admin';
-  }
 
 
 }

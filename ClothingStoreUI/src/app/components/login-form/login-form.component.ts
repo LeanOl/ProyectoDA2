@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SessionService } from 'src/app/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -10,11 +11,16 @@ export class LoginFormComponent {
   
   formEmail:string = '';
   formPassword:string = '';
-      constructor(private sessionService:SessionService) { }
+  displayError:boolean = false;
+      constructor(private sessionService:SessionService, private router:Router) { }
   
       login():void {
         this.sessionService.login(this.formEmail, this.formPassword).subscribe((result) => {
-          console.log(result);
+          if (result){
+            this.router.navigate(['/']);
+          }else{
+            this.displayError = true;
+          }
         });
       }
 }

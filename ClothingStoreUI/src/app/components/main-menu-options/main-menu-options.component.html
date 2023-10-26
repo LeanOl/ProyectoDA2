@@ -14,7 +14,10 @@
     </ul>
     <ul class="navbar-nav ms-auto my-2 my-lg-0">
       <li class="nav-item">
-        <button class="btn btn-outline-primary btn-lg" type="submit" routerLink="/login"><i class="bi bi-person"></i>Login</button>
+        <button *ngIf="isLoggedIn(); else loginButton" class="btn btn-outline-primary btn-lg" type="button" (click)="logout()"><i class="bi bi-box-arrow-right"></i>Logout</button>
+        <ng-template #loginButton>
+          <button class="btn btn-outline-primary btn-lg" type="submit" routerLink="/login"><i class="bi bi-person"></i>Login</button>
+        </ng-template>
       </li>
     </ul>
   </div>

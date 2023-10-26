@@ -17,6 +17,9 @@
             </div>
             <button type="submit" class="btn btn-primary">LogIn</button>
           </form>
+          <div class="alert alert-danger mt-3" role="alert" *ngIf="displayError">
+            Login failed. Please try again.
+          </div>
         </div>
       </div>
     </div>
