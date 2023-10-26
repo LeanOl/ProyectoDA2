@@ -1,4 +1,5 @@
 ﻿using APIModels.InputModels;
+using APIModels.OutputModels;
 using Microsoft.AspNetCore.Mvc;
 using Logic.Interfaces;
 using WebApi.Filters;
@@ -21,11 +22,12 @@ namespace WebApi.Controllers
         public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
             var token = _sessionService.Authenticate(loginRequest.Email, loginRequest.Password);
-            return Ok(new { token = token, ok=true});
+            var response = new SessionResponse(token);
+            return Ok(response);
         }
 
+
         [ServiceFilter(typeof(AuthenticationFilter))]
-        [AuthorizationFilter(RoleNeeded = "ADMIN")]
         [HttpDelete]
         public IActionResult Logout([FromHeader] Guid Authorization)
         {

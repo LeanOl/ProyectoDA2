@@ -33,7 +33,7 @@ namespace Logic.Concrete
             return _currentUser;
         }
 
-        public Guid Authenticate(string email, string password)
+        public Session Authenticate(string email, string password)
         {
             var user = _userRepository.Get(u => u.Email == email && u.Password == password);
 
@@ -43,7 +43,7 @@ namespace Logic.Concrete
             var session = new Session() { User = user };
             _sessionRepository.Insert(session);
 
-            return session.AuthToken;
+            return session;
         }
 
         public void Logout(Guid authToken)

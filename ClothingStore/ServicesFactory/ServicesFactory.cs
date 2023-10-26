@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Data;
 
+
 namespace ServicesFactory
 {
 	public class ServicesFactory
@@ -27,6 +28,7 @@ namespace ServicesFactory
             serviceCollection.AddScoped<ISessionService, SessionService>();
             serviceCollection.AddScoped<IProductLogic, ProductLogic>();
             serviceCollection.AddScoped<IProductManagement, ProductManagement>();
+            
         }
     }
 }

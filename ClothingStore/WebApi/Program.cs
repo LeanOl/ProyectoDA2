@@ -1,3 +1,5 @@
+using WebApi.Filters;
+
 namespace WebApi
 {
     public class Program
@@ -11,8 +13,10 @@ namespace WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<AuthenticationFilter>();
             var servicesFactory = new ServicesFactory.ServicesFactory();
             servicesFactory.RegistrateServices(builder.Services);
+            
 
             var app = builder.Build();
 
