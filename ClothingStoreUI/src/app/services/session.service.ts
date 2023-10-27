@@ -9,7 +9,7 @@ import { LoginResponse } from '../models/login-response.model';
 })
 export class SessionService {
 
-  private sessionUrl = environment.apiUrl + environment.sessionEndpoint;
+  private sessionUrl = environment.apiUrl + environment.sessionsEndpoint;
 
   constructor(private httpClient:HttpClient) { 
   }

@@ -14,6 +14,8 @@ import { AdminMenuComponent } from './components/menu/admin-menu/admin-menu.comp
 import { MainMenuComponent } from './components/menu/main-menu/main-menu.component';
 import { NotLoggedMenuComponent } from './components/menu/not-logged-menu/not-logged-menu.component';
 import { UserMenuComponent } from './components/menu/user-menu/user-menu.component';
+import { UserItemComponent } from './components/user/user-item/user-item.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { UserMenuComponent } from './components/menu/user-menu/user-menu.compone
     AdminMenuComponent,
     MainMenuComponent,
     NotLoggedMenuComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    UserItemComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
