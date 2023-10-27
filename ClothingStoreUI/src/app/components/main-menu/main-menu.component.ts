@@ -16,4 +16,7 @@ export class MainMenuComponent {
     isRoleAdmin():boolean {
       return this.sessionService.getRole() === 'admin';
     }
+    isRoleUser():boolean {
+      return this.sessionService.getRole() === 'user';
+    }
 }

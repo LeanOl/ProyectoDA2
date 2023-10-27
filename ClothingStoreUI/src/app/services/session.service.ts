@@ -45,6 +45,9 @@ export class SessionService {
   getRole(): string {
     return localStorage.getItem('role') || '';
   }
+  getEmail(): string {
+    return localStorage.getItem('email') || '';
+  }
 
   private postLogin(email: string, password: string): Observable<LoginResponse> {
     return this.httpClient.post<LoginResponse>(this.sessionUrl, { email, password }).pipe(
@@ -66,7 +69,7 @@ export class SessionService {
     }
     localStorage.setItem('token', loginResponse.token);
     localStorage.setItem('email', loginResponse.email);
-    localStorage.setItem('role', loginResponse.role);
+    localStorage.setItem('role', loginResponse.role.toLowerCase());
   }
 
   private postLogout(): Observable<boolean> {

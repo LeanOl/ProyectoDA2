@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { NotLoggedMenuComponent } from './components/not-logged-menu/not-logged-menu.component';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
     ProductListComponent,
     ProductDetailComponent,
     AdminMenuComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    NotLoggedMenuComponent,
+    UserMenuComponent
   ],
   imports: [
     BrowserModule,
