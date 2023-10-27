@@ -5,7 +5,7 @@ using APIModels.InputModels;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ExceptionFilter]
     [ApiController]
     public class UserController : ControllerBase

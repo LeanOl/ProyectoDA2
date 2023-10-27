@@ -5,15 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainMenuOptionsComponent } from './components/main-menu-options/main-menu-options.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { ProductItemComponent } from './components/product-item/product-item.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductItemComponent } from './components/product/product-item/product-item.component';
+import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { NotLoggedMenuComponent } from './components/not-logged-menu/not-logged-menu.component';
-import { UserMenuComponent } from './components/user-menu/user-menu.component';
+import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
+import { AdminMenuComponent } from './components/menu/admin-menu/admin-menu.component';
+import { MainMenuComponent } from './components/menu/main-menu/main-menu.component';
+import { NotLoggedMenuComponent } from './components/menu/not-logged-menu/not-logged-menu.component';
+import { UserMenuComponent } from './components/menu/user-menu/user-menu.component';
 
 @NgModule({
   declarations: [
