@@ -5,6 +5,7 @@ import { ProductListComponent } from './components/product/product-list/product-
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { MainMenuComponent } from './components/menu/main-menu/main-menu.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { UserManagementComponent } from './components/user/user-management/user-management.component';
 
 const routes: Routes = [
   {path: 'login',
@@ -15,6 +16,8 @@ const routes: Routes = [
   component: ProductDetailComponent},
   {path: 'users',
   component: UserListComponent},
+  {path: 'users/manage',
+  component: UserManagementComponent},
   {path: '',
    component: MainMenuComponent},
   

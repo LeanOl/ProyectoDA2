@@ -3,6 +3,6 @@
         <h5 class="card-title">{{ user.email }}</h5>
         <p class="card-text">ID: {{ user.id }}</p>
         <p class="card-text">Role: {{ user.role }}</p>
-        <a routerLink="/" class="btn btn-primary">Manage User</a>
+        <a routerLink="/users/manage" class="btn btn-primary" (click)="setUserToManage()">Manage User</a>
     </div>
 </div>

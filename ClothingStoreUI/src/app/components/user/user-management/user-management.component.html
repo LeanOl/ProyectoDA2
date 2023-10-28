@@ -1,0 +1,70 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">ID: {{ user.id }}</h5>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <div *ngIf="!editingEmail">
+                        <p class="card-text mr-2">Email: {{ user.email }}</p>
+                    </div>
+                    <div *ngIf="editingEmail">
+                        <input type="text" [(ngModel)]="newEmail" class="form-control">
+                    </div>
+                    <div class="input-group-append">
+                        <div *ngIf="!editingEmail">
+                            <button class="btn btn-outline-secondary margin" (click)="startEdit('email')">Edit Email</button>
+                        </div>
+                        <div *ngIf="editingEmail">
+                            <button class="btn btn-danger" (click)="cancelEdit('email')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <div *ngIf="!editingRole">
+                        <p class="card-text">Role: {{ user.role }}</p>
+                    </div>
+                    <div *ngIf="editingRole">
+                        <input type="text" [(ngModel)]="newRole" class="form-control">
+                    </div>
+                    <div class="input-group-append">
+                        <div *ngIf="!editingRole">
+                            <button class="btn btn-outline-secondary margin" (click)="startEdit('role')">Edit Role</button>
+                        </div>
+                        <div *ngIf="editingRole">
+                            <button class="btn btn-danger" (click)="cancelEdit('role')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <div *ngIf="!editingDeliveryAddress">
+                        <p class="card-text">Delivery Address: {{ user.deliveryAddress }}</p>
+                    </div>
+                    <div *ngIf="editingDeliveryAddress">
+                        <input type="text" [(ngModel)]="newDeliveryAddress" class="form-control">
+                    </div>
+                    <div class="input-group-append">
+                        <div *ngIf="!editingDeliveryAddress">
+                            <button class="btn btn-outline-secondary margin" (click)="startEdit('deliveryAddress')">Edit Delivery Address</button>
+                        </div>
+                        <div *ngIf="editingDeliveryAddress">
+                            <button class="btn btn-danger" (click)="cancelEdit('deliveryAddress')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" (click)="updateUser()">Modify User</button>
+        <button class="btn btn-danger" (click)="deleteUser()">Delete User</button>
+        <div *ngIf="message" [ngClass]="{'alert alert-success': messageType === 'success', 'alert alert-danger': messageType === 'error'}">
+            {{ message }}
+        </div>
+    </div>
+</div>

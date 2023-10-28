@@ -16,6 +16,7 @@ import { NotLoggedMenuComponent } from './components/menu/not-logged-menu/not-lo
 import { UserMenuComponent } from './components/menu/user-menu/user-menu.component';
 import { UserItemComponent } from './components/user/user-item/user-item.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { UserManagementComponent } from './components/user/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
     NotLoggedMenuComponent,
     UserMenuComponent,
     UserItemComponent,
-    UserListComponent
+    UserListComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
