@@ -15,11 +15,13 @@ namespace Tests.DomainTest
                 Name = "Product 1",
                 Price = 10,
                 Category = "Category 1",
+
                 Colors = new List<ProductColor>
                 {
                     new ProductColor { Color = "Red" },
                     new ProductColor { Color = "Blue" }
-                }
+                },
+               Stock = 100,
             };
 
             ShoppingCartProducts scp2 = new ShoppingCartProducts();

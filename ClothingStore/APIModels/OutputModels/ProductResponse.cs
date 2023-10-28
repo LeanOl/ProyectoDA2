@@ -1,6 +1,7 @@
 ﻿using Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace APIModels.OutputModels
 {
@@ -13,6 +14,9 @@ namespace APIModels.OutputModels
         public string Brand { get; set; }
         public string Category { get; set; }
         public List<string> Colors { get; set; }
+        public int Stock { get; set; }
+
+
 
         public ProductResponse(Product product)
         {
@@ -23,6 +27,7 @@ namespace APIModels.OutputModels
             Brand = product.Brand;
             Category = product.Category;
             Colors = product.Colors.Select(pc => pc.Color).ToList();
+            Stock = product.Stock;
         }
     }
 }

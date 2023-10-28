@@ -21,17 +21,23 @@ namespace APIModels.InputModels
 
         public List<string> Colors { get; set; }
 
+        [Required(ErrorMessage = "El campo 'Stock' es requerido.")]
+        public int Stock { get; set; }
+
+
+
         public Product ToEntity()
         {
            Product productToReturn = new Product
-           {
-               Id = Guid.Empty,
-               Name = Name,
-               Price = Price,
-               Description = Description,
-               Brand = Brand,
-               Category = Category,
-           };
+           (
+               Name,
+                Price,
+                Description,
+                Brand,
+                Category,
+                null,  
+                Stock
+           );
             productToReturn.Colors = Colors.ConvertAll(color => new ProductColor(productToReturn.Id, color, productToReturn));
             return productToReturn;
         }

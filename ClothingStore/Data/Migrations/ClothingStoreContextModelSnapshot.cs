@@ -47,9 +47,13 @@ namespace Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Stock");
+                   
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                   
                 });
 
             modelBuilder.Entity("Domain.ProductColor", b =>

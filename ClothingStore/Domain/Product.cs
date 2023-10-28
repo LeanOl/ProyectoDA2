@@ -12,12 +12,14 @@ namespace Domain
         public string Brand { get; set; }
         public string Category { get; set; }
         public List<ProductColor> Colors { get; set; }
+        public int Stock { get; set; }
 
         public Product()
         {
+            Id = Guid.NewGuid();
         }
 
-        public Product( string name, decimal price, string description, string brand, string category, List<ProductColor> colors)
+        public Product( string name, decimal price, string description, string brand, string category, List<ProductColor> colors, int stock)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -26,6 +28,7 @@ namespace Domain
             Brand = brand;
             Category = category;
             Colors = colors;
+            Stock = stock;
         }        
     }
 }

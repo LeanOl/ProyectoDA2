@@ -34,7 +34,8 @@ namespace Domain
                     },
                     Description = "a",
                     Name = "a",
-                    Price = 1
+                    Price = 1,
+                    Stock = 1,
                 };
            
                 var products = new List<Product>
