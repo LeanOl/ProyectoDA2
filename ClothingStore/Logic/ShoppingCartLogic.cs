@@ -58,46 +58,5 @@ namespace Logic
             return _promotionLogic.GetPromotions();
         }
 
-        public decimal prueba()
-        {
-            List<ShoppingCartProducts> cartProducts = new List<ShoppingCartProducts>();
-            ShoppingCartProducts scp1 = new ShoppingCartProducts();
-            scp1.Product = new Product()
-            {
-                Id = new Guid(),
-                Brand = "Nike",
-                Category = "Shoes",
-                Price = 150
-            };
-
-            ShoppingCartProducts scp2 = new ShoppingCartProducts();
-            scp2.Product = new Product()
-            {
-                Id = new Guid(),
-                Brand = "Nike",
-                Category = "Shoes",
-                Price = 100
-            };
-            ShoppingCartProducts scp3 = new ShoppingCartProducts();
-            scp3.Product = new Product()
-            {
-                Id = new Guid(),
-                Brand = "Nike",
-                Category = "Shoes",
-                Price = 50
-            };
-
-
-            cartProducts.Add(scp1);
-            cartProducts.Add(scp2);
-            cartProducts.Add(scp3);
-
-            var shoppingCart = new ShoppingCart();
-            shoppingCart.ShoppingCartProducts = cartProducts;
-
-            IEnumerable<IPromotion> promotions = GetPromotions();
-            FindBestPromotion(shoppingCart, promotions);
-            return shoppingCart.Discount;
-        }
     }
 }
