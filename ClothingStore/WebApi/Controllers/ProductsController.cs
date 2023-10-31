@@ -1,7 +1,7 @@
 ﻿using APIModels.InputModels;
 using APIModels.OutputModels;
-using Logic.Concrete;
-using Logic.Interfaces;
+using ILogic;
+using Logic;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Filters;
 

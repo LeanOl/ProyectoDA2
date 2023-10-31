@@ -1,8 +1,8 @@
-﻿using Data.Interfaces;
-using Domain;
-using Logic.Interfaces;
+﻿using Domain;
+using IData;
+using ILogic;
 
-namespace Logic.Concrete
+namespace Logic
 {
 
     public class PromotionLogic : IPromotionLogic

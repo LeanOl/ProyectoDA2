@@ -1,8 +1,6 @@
 ﻿using Domain;
-using System;
-using System.Collections.Generic;
 
-namespace Logic.Interfaces
+namespace ILogic
 {
     public interface IProductLogic
     {

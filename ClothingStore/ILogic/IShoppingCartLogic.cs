@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Logic.Interfaces
+namespace ILogic
 {
 
     public interface IShoppingCartLogic

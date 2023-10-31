@@ -1,19 +1,19 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Concrete
+namespace Data
 {
     public class PromotionManagement : GenericRepository<Promotion>
     {
-    
-        public PromotionManagement(DbContext dbContext) 
+
+        public PromotionManagement(DbContext dbContext)
         {
             Context = dbContext;
         }
 
         public override void Delete(Promotion entity)
         {
-            if(entity.PromotionConditions != null)
+            if (entity.PromotionConditions != null)
             {
                 foreach (var condition in entity.PromotionConditions.ToList())
                 {

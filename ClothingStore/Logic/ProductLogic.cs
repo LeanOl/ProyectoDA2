@@ -1,10 +1,11 @@
 ﻿using Domain;
-using Logic.Interfaces;
-using Data.Interfaces;
+using Logic;
+using IData;
 using System;
 using System.Collections.Generic;
+using ILogic;
 
-namespace Logic.Concrete
+namespace Logic
 {
     public class ProductLogic : IProductLogic
     {
@@ -45,7 +46,7 @@ namespace Logic.Concrete
         {
             if (filter == "")
                 return _productManagement.GetAllProducts();
-            
+
             return _productManagement.GetFilteredProducts(filter);
         }
     }

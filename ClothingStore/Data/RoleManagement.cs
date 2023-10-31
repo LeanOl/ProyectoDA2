@@ -1,9 +1,9 @@
-﻿using Data.Interfaces;
-using Domain;
+﻿using Domain;
+using IData;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Data.Concrete
+namespace Data
 {
     internal class RoleManagement : GenericRepository<Role>, IRoleManagement
     {

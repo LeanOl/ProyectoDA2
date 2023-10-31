@@ -1,9 +1,9 @@
 using Domain;
-using Data.Interfaces;
+using IData;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Data.Concrete
+namespace Data
 {
     public class productColorsManagement : GenericRepository<ProductColor>, IProductColorsManagement
     {
@@ -19,7 +19,7 @@ namespace Data.Concrete
             return Context.Set<ProductColor>().ToList();
         }
 
-       
+
         public IEnumerable<string> GetColorByProductId(Guid productId)
         {
             return Context.Set<ProductColor>().Where(pc => pc.ProductId == productId).Select(pc => pc.Color).ToList();

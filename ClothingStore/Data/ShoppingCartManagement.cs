@@ -1,25 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain;
-using Data.Interfaces;
+using IData;
 
 
-
-namespace Data.Concrete
+namespace Data
 {
     public class ShoppingCartManagement : GenericRepository<ShoppingCart>, IShoppingCartManagement
     {
 
-        public ShoppingCartManagement(DbContext context) { 
-        
+        public ShoppingCartManagement(DbContext context)
+        {
+
             Context = context;
         }
         //revisar necesidad
-        public IEnumerable<ShoppingCart> GetAllShoppingCarts() {
+        public IEnumerable<ShoppingCart> GetAllShoppingCarts()
+        {
             return Context.Set<ShoppingCart>().Include(s => s.ShoppingCartProducts).ToList();
 
         }
 
-        public ShoppingCart GetShoppingCartByUserId(Guid userId) {
+        public ShoppingCart GetShoppingCartByUserId(Guid userId)
+        {
             return Context.Set<ShoppingCart>().FirstOrDefault(sc => sc.UserId == userId);
 
         }
