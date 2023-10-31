@@ -1,9 +1,9 @@
 ﻿using System.Security.Authentication;
 using Domain;
-using Logic.Interfaces;
 using IData;
+using ILogic;
 
-namespace Logic.Concrete
+namespace Logic
 {
     public class SessionService : ISessionService
     {

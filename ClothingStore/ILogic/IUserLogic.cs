@@ -1,7 +1,7 @@
-﻿using APIModels.OutputModels;
-using APIModels.InputModels;
+﻿using APIModels.InputModels;
+using APIModels.OutputModels;
 
-namespace Logic.Interfaces
+namespace ILogic
 {
     public interface IUserLogic
     {

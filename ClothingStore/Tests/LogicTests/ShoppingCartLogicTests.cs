@@ -1,7 +1,7 @@
 ﻿using IData;
 using Domain;
-using Logic.Concrete;
-using Logic.Interfaces;
+using ILogic;
+using Logic;
 
 namespace Tests.LogicTests
 {

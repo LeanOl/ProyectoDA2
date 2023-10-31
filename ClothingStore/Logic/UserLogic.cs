@@ -1,10 +1,10 @@
 ﻿using Domain;
-using Logic.Interfaces;
 using APIModels.OutputModels;
 using APIModels.InputModels;
 using IData;
+using ILogic;
 
-namespace Logic.Concrete
+namespace Logic
 {
     public class UserLogic : IUserLogic
     {
@@ -16,7 +16,7 @@ namespace Logic.Concrete
 
         public UserResponse CreateUser(UserRequest userRequest)
         {
-            return new UserResponse (_repository.Insert(userRequest.ToEntity()));
+            return new UserResponse(_repository.Insert(userRequest.ToEntity()));
         }
 
         public IEnumerable<UserResponse> GetAllUsers()
@@ -35,7 +35,7 @@ namespace Logic.Concrete
         public UserResponse UpdateUser(Guid id, UserRequest updatedUser)
         {
             User user = _repository.Get(x => x.Id == id);
-            if(user.Email != null || !"".Equals(updatedUser.Email.Trim()))
+            if (user.Email != null || !"".Equals(updatedUser.Email.Trim()))
             {
                 user.Email = updatedUser.Email;
             }

@@ -1,6 +1,6 @@
 ﻿using APIModels.OutputModels;
 using Domain;
-using Logic.Interfaces;
+using ILogic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Tests.WebApiTests;

@@ -3,16 +3,16 @@ using IData;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Data.Concrete
+namespace Data
 {
     public class ProductManagement : GenericRepository<Product>, IProductManagement
     {
-        
-        public ProductManagement(DbContext context) 
+
+        public ProductManagement(DbContext context)
         {
             Context = context;
         }
-            
+
         public IEnumerable<Product> GetAllProducts()
         {
             return Context.Set<Product>().Include(p => p.Colors);

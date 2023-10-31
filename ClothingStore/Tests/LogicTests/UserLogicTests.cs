@@ -1,10 +1,10 @@
 ﻿using Domain;
 using IData;
-using Logic.Interfaces;
-using Logic.Concrete;
 using Exceptions.LogicExceptions;
 using APIModels.InputModels;
 using APIModels.OutputModels;
+using ILogic;
+using Logic;
 
 namespace Tests.LogicTests
 {

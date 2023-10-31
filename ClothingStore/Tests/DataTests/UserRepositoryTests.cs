@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using Data.Concrete;
+using Data;
 using Domain;
 using Exceptions.LogicExceptions;
 

@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using IData;
 
-namespace Data.Concrete
+namespace Data
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -29,7 +29,7 @@ namespace Data.Concrete
 
         public virtual T Insert(T entity)
         {
-            var result=Context.Set<T>().Add(entity);
+            var result = Context.Set<T>().Add(entity);
             Save();
             return result.Entity;
         }

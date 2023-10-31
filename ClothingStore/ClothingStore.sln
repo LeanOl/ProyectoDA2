@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IData", "IData\IData.csproj", "{74BB1C1A-F882-4F54-B85A-A9579DF725DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILogic", "ILogic\ILogic.csproj", "{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{74BB1C1A-F882-4F54-B85A-A9579DF725DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74BB1C1A-F882-4F54-B85A-A9579DF725DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74BB1C1A-F882-4F54-B85A-A9579DF725DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

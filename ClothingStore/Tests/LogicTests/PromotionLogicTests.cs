@@ -1,7 +1,7 @@
 ﻿using IData;
 using Domain;
 using Exceptions.LogicExceptions;
-using Logic.Concrete;
+using Logic;
 
 namespace Tests.LogicTests
 {

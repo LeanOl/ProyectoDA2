@@ -1,16 +1,14 @@
 ﻿using IData;
-using Data.Concrete;
 using Domain;
-using Logic.Concrete;
-using Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Data;
-
+using ILogic;
+using Logic;
 
 namespace ServicesFactory
 {
-	public class ServicesFactory
+    public class ServicesFactory
 	{
 		public ServicesFactory()
 		{

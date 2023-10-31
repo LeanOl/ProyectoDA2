@@ -2,7 +2,7 @@
 using Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Concrete
+namespace Data
 {
     public class ShoppingCartProductManagement : GenericRepository<ShoppingCartProducts>, IShoppingCartProductsManagement
     {

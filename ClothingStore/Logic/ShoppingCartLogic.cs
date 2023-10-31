@@ -1,8 +1,8 @@
 ﻿using IData;
 using Domain;
-using Logic.Interfaces;
+using ILogic;
 
-namespace Logic.Concrete
+namespace Logic
 {
 
     public class ShoppingCartLogic : IShoppingCartLogic

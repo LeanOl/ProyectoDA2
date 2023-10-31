@@ -3,7 +3,7 @@ using IData;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Data.Concrete
+namespace Data
 {
     internal class RoleManagement : GenericRepository<Role>, IRoleManagement
     {
