@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
@@ -21,11 +21,15 @@ export class UserService {
   }
 
   getAllUsers() : Observable<User[]> { 
-    return this.httpClient.get<User[]>(this.userUrl);
+    return this.httpClient.get<User[]>(this.userUrl,{headers: this.getHttpAuthorizationHeaders()});
   }
 
   updateUser(user: User) : Observable<User> {
     return this.httpClient.put<User>(this.userUrl + '/' + user.id, user);
+  }
+
+  deleteUser(id: string) : Observable<{}> {
+    return this.httpClient.delete(this.userUrl + '/' + id);
   }
 
   setUserToManage(user: User) : void {
@@ -35,6 +39,12 @@ export class UserService {
   getUserToManage() : User {
     return this.userToManage;
   }
-
-
+  private getHttpAuthorizationHeaders(): HttpHeaders {
+   
+    let token = localStorage.getItem('token') || '';
+    let headers = new HttpHeaders({
+      Authorization:token
+    });
+    return headers;
+  }
 }

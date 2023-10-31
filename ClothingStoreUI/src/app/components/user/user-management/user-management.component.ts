@@ -15,6 +15,7 @@ export class UserManagementComponent {
     editingEmail: boolean = false;
     editingDeliveryAddress: boolean = false;
     editingRole: boolean = false;
+    showUser: boolean = true;
     newEmail: string= '';
     newDeliveryAddress: string = '';
     newRole: string= '';
@@ -52,6 +53,20 @@ export class UserManagementComponent {
       );
     }
     deleteUser() : void {
+      if(confirm('Are you sure you want to delete this user?')){
+        this.userService.deleteUser(this.user.id).subscribe({
+          next:() => {
+            this.showMessage('User deleted successfully', 'success');
+            this.showUser = false;
+  
+          },
+          error:(error) => {
+            console.error(error);
+            this.showMessage('Error deleting user', 'error');
+          }
+        }
+        );
+      }
     }
 
     showMessage(message: string, type: string): void {
