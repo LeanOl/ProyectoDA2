@@ -16,6 +16,5 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\ILogic\ILogic.csproj" />
     <ProjectReference Include="..\IPromotionProject\IPromotionProject.csproj" />
-    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 </Project>

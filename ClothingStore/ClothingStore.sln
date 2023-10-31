@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPromotionProject", "IPromo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promotions", "Promotions\Promotions.csproj", "{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{2F0CAF6D-4D56-4883-AB1C-BD5C447E26EB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,10 +81,6 @@ Global
 		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F0CAF6D-4D56-4883-AB1C-BD5C447E26EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F0CAF6D-4D56-4883-AB1C-BD5C447E26EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F0CAF6D-4D56-4883-AB1C-BD5C447E26EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F0CAF6D-4D56-4883-AB1C-BD5C447E26EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

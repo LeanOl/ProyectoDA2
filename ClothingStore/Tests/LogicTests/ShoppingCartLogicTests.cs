@@ -4,7 +4,6 @@ using ILogic;
 using IPromotionProject;
 using Logic;
 using Promotions;
-using Utilities;
 
 namespace Tests.LogicTests
 {
@@ -61,7 +60,7 @@ namespace Tests.LogicTests
             var shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartProducts = cartProducts;
 
-            Mock<IPromotionHelper> helper = new Mock<IPromotionHelper>(MockBehavior.Strict);
+            Mock<IPromotionLogic> helper = new Mock<IPromotionLogic>(MockBehavior.Strict);
             helper.Setup(h => h.GetPromotions()).Returns(promotions);
             IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(helper.Object);
 
