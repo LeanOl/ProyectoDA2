@@ -1,11 +1,12 @@
 ﻿using APIModels.InputModels;
+using APIModels.OutputModels;
+using ILogic;
 using Microsoft.AspNetCore.Mvc;
-using Logic.Interfaces;
 using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sessions")]
     [ApiController]
     [ExceptionFilter]
     public class SessionController : ControllerBase
@@ -21,11 +22,12 @@ namespace WebApi.Controllers
         public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
             var token = _sessionService.Authenticate(loginRequest.Email, loginRequest.Password);
-            return Ok(new { token = token });
+            var response = new SessionResponse(token);
+            return Ok(response);
         }
 
+
         [ServiceFilter(typeof(AuthenticationFilter))]
-        [AuthorizationFilter(RoleNeeded = "ADMIN")]
         [HttpDelete]
         public IActionResult Logout([FromHeader] Guid Authorization)
         {

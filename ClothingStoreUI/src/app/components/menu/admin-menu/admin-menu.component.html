@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="my-4">
+        <h1>Admin Dashboard</h1>
+        <p >Welcome <b>{{getEmail()}}</b>to the admin dashboard. From here, you can manage users, purchases, and products.</p>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View Users</h5>
+                    <p class="card-text">View a list of all registered users.</p>
+                    <a routerLink="/users" class="btn btn-primary">Go to Users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View User Purchases</h5>
+                    <p class="card-text">View a list of all user purchases.</p>
+                    <a href="#" class="btn btn-primary">Go to Purchases</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Administrate Products</h5>
+                    <p class="card-text">Add, edit, or delete products.</p>
+                    <a href="#" class="btn btn-primary">Go to Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

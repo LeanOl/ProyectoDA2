@@ -1,0 +1,11 @@
+<ng-container *ngIf="isLogged(); else notLogged">
+    <ng-container *ngIf="isRoleAdmin()">
+        <app-admin-menu></app-admin-menu>
+    </ng-container>
+    <ng-container *ngIf="isRoleUser()">
+        <app-user-menu></app-user-menu>
+    </ng-container>
+</ng-container>
+<ng-template #notLogged>
+    <app-not-logged-menu></app-not-logged-menu>
+</ng-template>

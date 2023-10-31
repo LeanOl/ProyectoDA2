@@ -14,5 +14,6 @@
     <ProjectReference Include="..\APIModels\APIModels.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\ILogic\ILogic.csproj" />
   </ItemGroup>
 </Project>

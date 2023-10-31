@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Logic.Interfaces;
 using WebApi.Filters;
 using APIModels.InputModels;
+using ILogic;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ExceptionFilter]
     [ApiController]
     public class UserController : ControllerBase
@@ -20,6 +20,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult CreateUser([FromBody] CreateUserRequest received)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -31,6 +32,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [AuthorizationFilter(RoleNeeded = "ADMIN")]
         public IActionResult GetAllUsers()
         {
             var result = _userLogic.GetAllUsers();
@@ -38,6 +40,7 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [AuthorizationFilter(RoleNeeded = "ADMIN")]
         public IActionResult DeleteUser([FromRoute] Guid id)
         {
             _userLogic.DeleteUser(id);

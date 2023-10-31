@@ -1,4 +1,4 @@
-﻿using Data.Concrete;
+﻿using Data;
 using Domain;
 
 namespace Tests.DataTests

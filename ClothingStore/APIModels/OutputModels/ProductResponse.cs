@@ -24,5 +24,21 @@ namespace APIModels.OutputModels
             Category = product.Category;
             Colors = product.Colors.Select(pc => pc.Color).ToList();
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is ProductResponse other)
+            {
+                return Id == other.Id;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
+        
+        
     }
 }
