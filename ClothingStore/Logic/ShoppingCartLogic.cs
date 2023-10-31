@@ -1,32 +1,38 @@
 ﻿using IData;
 using Domain;
 using ILogic;
+using IPromotionProject;
+using Microsoft.IdentityModel.Tokens;
+using Utilities;
 
 namespace Logic
 {
 
     public class ShoppingCartLogic : IShoppingCartLogic
     {
-        private readonly IGenericRepository<Promotion> _promotionRepo;
-        public ShoppingCartLogic(IGenericRepository<Promotion> promotionRepo)
+        private IPromotionHelper _helper;
+        
+        public ShoppingCartLogic(IPromotionHelper helper)
         {
-            _promotionRepo = promotionRepo;
+            _helper = helper;
         }
 
         public void ApplyBestPromotion(ShoppingCart shoppingCart)
         {
-            List<Promotion> promotions = _promotionRepo.GetAll<Promotion>().ToList();
-            var bestPromotion = FindBestPromotion(shoppingCart, promotions);
-            shoppingCart.AppliedPromotion = bestPromotion;
+            IEnumerable<IPromotion> promotions = GetPromotions();
+            FindBestPromotion(shoppingCart, promotions);
+           
+
         }
 
-        private Promotion? FindBestPromotion(ShoppingCart shoppingCart, List<Promotion> promotions)
+        private void FindBestPromotion(ShoppingCart shoppingCart, IEnumerable<IPromotion> promotions)
         {
-            Promotion bestPromotion = null;
+            IPromotion bestPromotion = null;
             decimal bestDiscount = 0;
+            List<ProductDto> productsDto = ConvertToProductsDto(shoppingCart).ToList();
             foreach (var promotion in promotions)
             {
-                decimal discount = promotion.GetDiscount(shoppingCart);
+                decimal discount = promotion.GetDiscount(productsDto);
                 if (discount > bestDiscount)
                 {
                     bestDiscount = discount;
@@ -34,7 +40,23 @@ namespace Logic
                 }
             }
 
-            return bestPromotion;
+            if (bestPromotion != null)
+            {
+                shoppingCart.PromotionName = bestPromotion.Name;
+                shoppingCart.Discount = bestDiscount;
+            }
+        }
+
+        private static IEnumerable<ProductDto> ConvertToProductsDto(ShoppingCart shoppingCart)
+        {
+            IEnumerable<Product> products = shoppingCart.GetProducts();
+            IEnumerable<ProductDto> productsDto = products.Select(p => new ProductDto(p));
+            return productsDto;
+        }
+
+        public IEnumerable<IPromotion> GetPromotions()
+        {
+            return _helper.GetPromotions();
         }
     }
 }

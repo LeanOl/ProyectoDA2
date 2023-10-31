@@ -1,7 +1,10 @@
 ﻿using IData;
 using Domain;
 using ILogic;
+using IPromotionProject;
 using Logic;
+using Promotions;
+using Utilities;
 
 namespace Tests.LogicTests
 {
@@ -9,41 +12,18 @@ namespace Tests.LogicTests
     public class ShoppingCartLogicTests
     {
         [TestMethod]
-        public void ApplyBestPromotionOk()
+        public void ApplyPromotionOk()
         {
             // Arrange
-            Promotion testPromotion1 = new DiscountPromotion
+            IPromotion testPromotion1 = new ThreeProductsOneFree()
             {
                 Id = new Guid(),
-                PromotionConditions = new List<PromotionCondition>
-                {
-                    new SingularPromotionCondition()
-                    {
-                        Id = new Guid(),
-                        ProductPropertyCondition = "Brand",
-                        QuantityCondition = "Count() >= 3"
-                    }
-                },
-                DiscountPercentage = 20
+                Name = "Test Promotion 1"
             };
-            Promotion testPromotion2 = new FreeProductPromotion()
-            {
-                Id = new Guid(),
-                PromotionConditions = new List<PromotionCondition>
-                {
-                    new SingularPromotionCondition()
-                    {
-                        Id = new Guid(),
-                        ProductPropertyCondition = "Brand",
-                        QuantityCondition = "Count() >= 2"
-                    }
-                },
-                FreeProductCount = 1
-            };
-            List<Promotion> promotions = new List<Promotion>()
+            
+            List<IPromotion> promotions = new List<IPromotion>()
             {
                 testPromotion1,
-                testPromotion2
             };
 
             List<ShoppingCartProducts> cartProducts = new List<ShoppingCartProducts>();
@@ -52,7 +32,7 @@ namespace Tests.LogicTests
             {
                 Id = new Guid(),
                 Brand = "Nike",
-                Category = "Shirt",
+                Category = "Shoes",
                 Price = 150
             };
 
@@ -77,19 +57,20 @@ namespace Tests.LogicTests
             cartProducts.Add(scp1);
             cartProducts.Add(scp2);
             cartProducts.Add(scp3);
-            // Arrange
+     
             var shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartProducts = cartProducts;
 
-            Mock<IGenericRepository<Promotion>> repo = new Mock<IGenericRepository<Promotion>>(MockBehavior.Strict);
-            repo.Setup(x => x.GetAll<Promotion>()).Returns(promotions);
-            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(repo.Object);
+            Mock<IPromotionHelper> helper = new Mock<IPromotionHelper>(MockBehavior.Strict);
+            helper.Setup(h => h.GetPromotions()).Returns(promotions);
+            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(helper.Object);
 
             // Act
             shoppingCartLogic.ApplyBestPromotion(shoppingCart);
 
             // Assert
-            Assert.AreEqual(testPromotion2, shoppingCart.AppliedPromotion);
+            Assert.AreEqual(testPromotion1.Name, shoppingCart.PromotionName);
+            Assert.AreEqual(50, shoppingCart.Discount);
         }
     }
 }
