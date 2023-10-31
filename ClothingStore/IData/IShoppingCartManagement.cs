@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Data.Interfaces
+namespace IData
 {
     public interface IShoppingCartManagement
     {

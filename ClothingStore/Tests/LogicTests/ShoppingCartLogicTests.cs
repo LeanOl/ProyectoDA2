@@ -1,4 +1,4 @@
-﻿using Data.Interfaces;
+﻿using IData;
 using Domain;
 using Logic.Concrete;
 using Logic.Interfaces;

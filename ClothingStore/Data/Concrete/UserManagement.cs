@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain;
-using Data.Interfaces;
+using IData;
 
 namespace Data.Concrete
 {

@@ -1,5 +1,5 @@
 ﻿using Domain;
-using Data.Interfaces;
+using IData;
 using Logic.Interfaces;
 using Logic.Concrete;
 using Exceptions.LogicExceptions;

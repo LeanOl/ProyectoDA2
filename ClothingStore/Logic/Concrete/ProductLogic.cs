@@ -1,6 +1,6 @@
 ﻿using Domain;
 using Logic.Interfaces;
-using Data.Interfaces;
+using IData;
 using System;
 using System.Collections.Generic;
 

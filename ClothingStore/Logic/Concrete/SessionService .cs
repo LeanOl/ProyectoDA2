@@ -1,7 +1,7 @@
 ﻿using System.Security.Authentication;
 using Domain;
 using Logic.Interfaces;
-using Data.Interfaces;
+using IData;
 
 namespace Logic.Concrete
 {

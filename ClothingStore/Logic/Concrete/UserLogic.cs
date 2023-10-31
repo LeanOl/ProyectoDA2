@@ -1,8 +1,8 @@
 ﻿using Domain;
-using Data.Interfaces;
 using Logic.Interfaces;
 using APIModels.OutputModels;
 using APIModels.InputModels;
+using IData;
 
 namespace Logic.Concrete
 {

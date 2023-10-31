@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Data.Interfaces;
+using IData;
 
 namespace Data.Concrete
 {

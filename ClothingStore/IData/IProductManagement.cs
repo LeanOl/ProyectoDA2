@@ -1,10 +1,10 @@
 ﻿using Domain;
 
-namespace Data.Interfaces
+namespace IData
 {
     public interface IProductManagement : IGenericRepository<Product>
     {
-       
+
         IEnumerable<Product> GetAllProducts();
         Product GetProductById(Guid id);
         void InsertProduct(Product product);

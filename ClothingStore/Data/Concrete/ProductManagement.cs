@@ -1,5 +1,5 @@
-﻿using Data.Interfaces;
-using Domain;
+﻿using Domain;
+using IData;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -7,8 +7,6 @@ namespace Data.Concrete
 {
     public class ProductManagement : GenericRepository<Product>, IProductManagement
     {
-        
-       
         
         public ProductManagement(DbContext context) 
         {

@@ -1,5 +1,5 @@
-﻿using Data.Interfaces;
-using Domain;
+﻿using Domain;
+using IData;
 using Logic.Interfaces;
 
 namespace Logic.Concrete
