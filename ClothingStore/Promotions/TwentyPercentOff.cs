@@ -7,9 +7,7 @@ public class TwentyPercentOff {
 
     public decimal GetDiscount(IEnumerable<ProductDto> products)
     {
-        decimal discount = 0;
-
-        discount = FindDiscount(products);
+        decimal discount = FindDiscount(products);
         return discount;
     }
 

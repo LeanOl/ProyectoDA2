@@ -108,7 +108,40 @@ namespace Tests.DomainTest
 
             // Assert
             Assert.AreEqual(expectedDiscount, result);
-        }   
-        
+        }
+
+        [TestMethod]
+        public void ThreeProductFidelity_ApplyDiscountOk()
+        {
+            // Arrange
+            ThreeProductFidelity promotion = new ThreeProductFidelity();
+            List<ProductDto> products = new List<ProductDto>
+            {
+                new ProductDto()
+                {
+                    Brand = "Brand 1",
+                    Price = 10
+                },
+                new ProductDto()
+                {
+                    Brand = "Brand 1",
+                    Price = 20
+                },
+                new ProductDto()
+                {
+                    Brand = "Brand 1",
+                    Price = 30
+                }
+            };
+            decimal expectedDiscount = 30;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }
     }
+    
+    
 }

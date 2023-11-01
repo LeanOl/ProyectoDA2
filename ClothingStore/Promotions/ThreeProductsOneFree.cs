@@ -8,10 +8,9 @@ namespace Promotions
         public string Name { get; set; } = "3x1";
         public decimal GetDiscount(IEnumerable<ProductDto> products )
         {
-            decimal discount = 0;
             var productsByCategory = products.GroupBy(p => p.Category);
 
-            discount = FindDiscount(productsByCategory);
+            decimal discount = FindDiscount(productsByCategory);
             return discount;
         }
 
