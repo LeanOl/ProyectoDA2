@@ -11,6 +11,12 @@ namespace Promotions
             decimal discount = 0;
             var productsByCategory = products.GroupBy(p => p.Category);
 
+            discount = FindDiscount(productsByCategory, discount);
+            return discount;
+        }
+
+        private decimal FindDiscount(IEnumerable<IGrouping<string, ProductDto>> productsByCategory, decimal discount)
+        {
             foreach (var categoryGroup in productsByCategory)
             {
                 if (categoryGroup.Count() == 3)
@@ -20,7 +26,8 @@ namespace Promotions
                     break;
                 }
             }
+
             return discount;
-        }        
+        }
     }
 }
