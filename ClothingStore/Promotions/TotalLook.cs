@@ -12,14 +12,15 @@ public class TotalLook : IPromotion
         var flattenedColors = productList.SelectMany(p => p.Colors);
         var groupedColors = flattenedColors.GroupBy(c => c);
 
-        discount = FindDiscount(groupedColors, productList, discount);
+        discount = FindDiscount(groupedColors, productList);
 
         return discount;
 
     }
 
-    private decimal FindDiscount(IEnumerable<IGrouping<string, string>> groupedColors, List<ProductDto> productList, decimal discount)
+    private decimal FindDiscount(IEnumerable<IGrouping<string, string>> groupedColors, List<ProductDto> productList)
     {
+        decimal discount = 0;
         foreach (var colorGroup in groupedColors)
         {
             if (colorGroup.Count() == 3)

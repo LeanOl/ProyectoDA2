@@ -81,6 +81,34 @@ namespace Tests.DomainTest
             // Assert
             Assert.AreEqual(expectedDiscount, result);
         }
+
+
+        [TestMethod]
+        public void TwentyPercentOff_ApplyDiscountOk()
+        {
+            // Arrange
+            TwentyPercentOff promotion = new TwentyPercentOff();
+            List<ProductDto> products = new List<ProductDto>
+            {
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 10
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 20
+                },
+            };
+            decimal expectedDiscount = 4;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }   
         
     }
 }
