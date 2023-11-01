@@ -5,8 +5,7 @@ namespace Promotions
 {
     public class ThreeProductsOneFree : IPromotion
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "3x1";
         public decimal GetDiscount(IEnumerable<ProductDto> products )
         {
             decimal discount = 0;

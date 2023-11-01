@@ -40,5 +40,47 @@ namespace Tests.DomainTest
 
 
         }
+
+        [TestMethod]
+        public void TotalLook_ApplyDiscountOk()
+        {
+            // Arrange
+            TotalLook promotion = new TotalLook();
+            List<ProductDto> products = new List<ProductDto>
+            {
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 10,
+                    Colors = new List<string> { "Red", "Blue" }
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 20,
+                    Colors = new List<string> { "Red", "Blue" }
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 30,
+                    Colors = new List<string> { "Green", "Red" }
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 40,
+                    Colors = new List<string> { "Green", "Orange" }
+                },
+            };
+            decimal expectedDiscount = 15;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }
+        
     }
 }

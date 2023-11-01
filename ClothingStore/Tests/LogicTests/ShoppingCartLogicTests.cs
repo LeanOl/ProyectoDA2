@@ -16,7 +16,6 @@ namespace Tests.LogicTests
             // Arrange
             IPromotion testPromotion1 = new ThreeProductsOneFree()
             {
-                Id = new Guid(),
                 Name = "Test Promotion 1"
             };
             
