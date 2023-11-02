@@ -10,19 +10,20 @@ namespace Logic
 
     public class ShoppingCartLogic : IShoppingCartLogic
     {
-        private IPromotionLogic _promotionLogic;
+        private readonly IPromotionLogic _promotionLogic;
+        private readonly IShoppingCartManagement _shoppingCartManagement;
+
         
-        public ShoppingCartLogic(IPromotionLogic logic)
+        public ShoppingCartLogic(IPromotionLogic logic,IShoppingCartManagement shoppingCartManagement)
         {
             _promotionLogic = logic;
+            _shoppingCartManagement = shoppingCartManagement;
         }
 
         public void ApplyBestPromotion(ShoppingCart shoppingCart)
         {
             IEnumerable<IPromotion> promotions = GetPromotions();
             FindBestPromotion(shoppingCart, promotions);
-           
-
         }
 
         private void FindBestPromotion(ShoppingCart shoppingCart, IEnumerable<IPromotion> promotions)
@@ -59,9 +60,9 @@ namespace Logic
             return _promotionLogic.GetPromotions();
         }
 
-        public ShoppingCart UpdateShoppingCart(ShoppingCartRequest received)
+        public ShoppingCart UpdateShoppingCart(ShoppingCart received)
         {
-            throw new NotImplementedException();
+            return _shoppingCartManagement.UpdateShoppingCart(received);
         }
     }
 }

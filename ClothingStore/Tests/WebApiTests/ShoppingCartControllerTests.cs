@@ -56,7 +56,7 @@ public class ShoppingCartControllerTests
         ShoppingCart expected = _expectedShoppingCart;
         var expectedMappedResult = new ShoppingCartResponse(expected);
         var shoppingCartLogic = new Mock<IShoppingCartLogic>(MockBehavior.Strict);
-        shoppingCartLogic.Setup(m => m.UpdateShoppingCart(received)).Returns(expected);
+        shoppingCartLogic.Setup(m => m.UpdateShoppingCart(It.IsAny<ShoppingCart>())).Returns(expected);
         OkObjectResult expectedActionResult = new OkObjectResult(expectedMappedResult);
         var controller = new ShoppingCartController(shoppingCartLogic.Object);
         // Act

@@ -32,10 +32,11 @@ namespace Data
             Context.SaveChanges();
         }
 
-        public void UpdateShoppingCart(ShoppingCart shoppingCart)
+        public ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart)
         {
             Context.Set<ShoppingCart>().Update(shoppingCart);
             Context.SaveChanges();
+            return shoppingCart;
         }
 
         public void DeleteShoppingCart(Guid userId)

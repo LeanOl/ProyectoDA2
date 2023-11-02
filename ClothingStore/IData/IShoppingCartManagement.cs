@@ -7,7 +7,7 @@ namespace IData
         IEnumerable<ShoppingCart> GetAllShoppingCarts();
         ShoppingCart GetShoppingCartByUserId(Guid userId);
         void InsertShoppingCart(ShoppingCart shoppingCart);
-        void UpdateShoppingCart(ShoppingCart shoppingCart);
+        ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart);
         void DeleteShoppingCart(Guid userId);
         IEnumerable<ShoppingCartProducts> GetProductsInCartByUserId(Guid userId);
     }

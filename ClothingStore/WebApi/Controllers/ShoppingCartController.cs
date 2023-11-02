@@ -18,7 +18,7 @@ namespace WebApi.Controllers
         [HttpPut]
         public IActionResult UpdateShoppingCart([FromBody]ShoppingCartRequest received)
         {
-            var createdShoppingCart = _shoppingCartLogic.UpdateShoppingCart(received);
+            var createdShoppingCart = _shoppingCartLogic.UpdateShoppingCart(received.ToEntity());
             ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse(createdShoppingCart);
             return Ok(shoppingCartResponse);
         }

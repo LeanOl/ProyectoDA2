@@ -59,9 +59,10 @@ namespace Tests.LogicTests
             var shoppingCart = new ShoppingCart();
             shoppingCart.ShoppingCartProducts = cartProducts;
 
-            Mock<IPromotionLogic> helper = new Mock<IPromotionLogic>(MockBehavior.Strict);
-            helper.Setup(h => h.GetPromotions()).Returns(promotions);
-            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(helper.Object);
+            Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+            promotionLogic.Setup(h => h.GetPromotions()).Returns(promotions);
+            Mock<IShoppingCartManagement> shoppingCartRepository = new Mock<IShoppingCartManagement>(MockBehavior.Strict);
+            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(promotionLogic.Object,shoppingCartRepository.Object);
 
             // Act
             shoppingCartLogic.ApplyBestPromotion(shoppingCart);
@@ -70,5 +71,24 @@ namespace Tests.LogicTests
             Assert.AreEqual(testPromotion1.Name, shoppingCart.PromotionName);
             Assert.AreEqual(50, shoppingCart.Discount);
         }
+
+        [TestMethod]
+        public void UpdateShoppingCart_Ok()
+        {
+            // Arrange
+            ShoppingCart expectedShoppingCart = new ShoppingCart();
+            Mock<IShoppingCartManagement> shoppingCartRepository = new Mock<IShoppingCartManagement>(MockBehavior.Strict);
+            shoppingCartRepository.Setup(m => m.UpdateShoppingCart(It.IsAny<ShoppingCart>())).Returns(expectedShoppingCart);
+            Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(promotionLogic.Object ,shoppingCartRepository.Object);
+
+            // Act
+            ShoppingCart result = shoppingCartLogic.UpdateShoppingCart(expectedShoppingCart);
+
+            // Assert
+            Assert.AreEqual(expectedShoppingCart, result);
+        }
     }
+
+    
 }
