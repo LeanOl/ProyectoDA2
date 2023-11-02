@@ -18,7 +18,6 @@ namespace ServicesFactory
         {
             serviceCollection.AddDbContext<DbContext, ClothingStoreContext>();
             serviceCollection.AddScoped<IGenericRepository<User>, UserManagement>();
-            serviceCollection.AddScoped<IGenericRepository<Promotion>,PromotionManagement>();
             serviceCollection.AddScoped<IGenericRepository<Session>, SessionManagement>();
             serviceCollection.AddScoped<IGenericRepository<Product>, ProductManagement>();
             serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
@@ -26,7 +25,10 @@ namespace ServicesFactory
             serviceCollection.AddScoped<ISessionService, SessionService>();
             serviceCollection.AddScoped<IProductLogic, ProductLogic>();
             serviceCollection.AddScoped<IProductManagement, ProductManagement>();
-            
+            serviceCollection.AddScoped<IShoppingCartLogic, ShoppingCartLogic>();
+            serviceCollection.AddScoped<IShoppingCartManagement, ShoppingCartManagement>();
+
+
         }
     }
 }

@@ -28,21 +28,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Promotions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiscountPercentage = table.Column<double>(type: "float", nullable: true),
-                    FreeProductCount = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Promotions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -89,45 +74,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PromotionConditions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductPropertyCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuantityCondition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PromotionConditions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PromotionConditions_Promotions_PromotionId",
-                        column: x => x.PromotionId,
-                        principalTable: "Promotions",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    IdCart = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AppliedPromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.IdCart);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_Promotions_AppliedPromotionId",
-                        column: x => x.AppliedPromotionId,
-                        principalTable: "Promotions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Session",
                 columns: table => new
                 {
@@ -141,6 +87,28 @@ namespace Data.Migrations
                     table.PrimaryKey("PK_Session", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Session_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShoppingCarts",
+                columns: table => new
+                {
+                    IdCart = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    FinalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PromotionName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.IdCart);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCarts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -179,11 +147,6 @@ namespace Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PromotionConditions_PromotionId",
-                table: "PromotionConditions",
-                column: "PromotionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Session_UserId",
                 table: "Session",
                 column: "UserId");
@@ -199,9 +162,10 @@ namespace Data.Migrations
                 column: "ShoppingCartIdCart");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_AppliedPromotionId",
+                name: "IX_ShoppingCarts_UserId",
                 table: "ShoppingCarts",
-                column: "AppliedPromotionId");
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -209,9 +173,6 @@ namespace Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ProductColors");
-
-            migrationBuilder.DropTable(
-                name: "PromotionConditions");
 
             migrationBuilder.DropTable(
                 name: "Roles");
@@ -223,16 +184,13 @@ namespace Data.Migrations
                 name: "ShoppingCartProducts");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
                 name: "ShoppingCarts");
 
             migrationBuilder.DropTable(
-                name: "Promotions");
+                name: "Users");
         }
     }
 }

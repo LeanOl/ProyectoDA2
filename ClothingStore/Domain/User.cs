@@ -12,6 +12,7 @@ namespace Domain
         public string Password { get; set; }
         public string Role { get; set; }
         public string DeliveryAddress { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
 
         public User(string email, string password, string role, string deliveryAddress)
         {
@@ -21,6 +22,12 @@ namespace Domain
             Password = password;
             Role = role;
             DeliveryAddress = deliveryAddress;
+            ShoppingCart = new ShoppingCart()
+            {
+                UserId = Id,
+                IdCart = Guid.NewGuid(),
+                ShoppingCartProducts = new List<ShoppingCartProducts>()
+            };
         }
 
         public void SelfValidations(string email, string role)

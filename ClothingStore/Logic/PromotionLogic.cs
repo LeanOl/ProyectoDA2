@@ -1,41 +1,29 @@
-﻿using Domain;
-using IData;
+﻿using System.Reflection;
 using ILogic;
+using IPromotionProject;
 
-namespace Logic
+namespace Logic;
+
+public class PromotionLogic : IPromotionLogic
 {
+    private string dllPath = @"../PromotionAssemblies";
 
-    public class PromotionLogic : IPromotionLogic
+    public IEnumerable<IPromotion> GetPromotions()
     {
-        private readonly IGenericRepository<Promotion> _repository;
-        public PromotionLogic(IGenericRepository<Promotion> repository)
+        var dlls = System.IO.Directory.GetFiles(dllPath, "*.dll");
+        List<Assembly> assemblies = new List<Assembly>();
+        foreach (var dll in dlls)
         {
-            _repository = repository;
+            var assembly = Assembly.LoadFile(dll);
+            assemblies.Add(assembly);
         }
 
-        public Promotion CreatePromotion(Promotion aPromotion)
-        {
-            aPromotion.SelfValidate();
-            return _repository.Insert(aPromotion);
-        }
+        List<Type> types = assemblies.SelectMany(a => a.GetTypes()).ToList();
 
-        public IEnumerable<Promotion> GetAllPromotions()
-        {
-            return _repository.GetAll<Promotion>();
-        }
+        List<Type> promotionTypes = types.Where(t => t.GetInterfaces().Contains(typeof(IPromotion))).ToList();
 
-        public void DeletePromotion(Guid id)
-        {
-            Promotion promotion = _repository.Get(x => x.Id == id);
-            _repository.Delete(promotion);
-        }
+        List<IPromotion> promotions = promotionTypes.Select(t => (IPromotion)Activator.CreateInstance(t)).ToList();
 
-        public Promotion UpdatePromotion(Guid id, Promotion updatedPromotion)
-        {
-            Promotion promotion = _repository.Get(x => x.Id == id);
-            promotion.Name = updatedPromotion.Name;
-            promotion.PromotionConditions = updatedPromotion.PromotionConditions;
-            return _repository.Update(promotion);
-        }
+        return promotions;
     }
 }

@@ -19,9 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIModels", "APIModels\APIM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "Exceptions\Exceptions.csproj", "{8B9CF060-DA4A-4843-BB47-A9B0CEC74300}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IData", "IData\IData.csproj", "{74BB1C1A-F882-4F54-B85A-A9579DF725DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IData", "IData\IData.csproj", "{74BB1C1A-F882-4F54-B85A-A9579DF725DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILogic", "ILogic\ILogic.csproj", "{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILogic", "ILogic\ILogic.csproj", "{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPromotionProject", "IPromotionProject\IPromotionProject.csproj", "{8B537E53-379C-4D3A-ABB8-D0F4A8B1D346}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Promotions", "Promotions\Promotions.csproj", "{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PromotionAsseblies", "PromotionAsseblies", "{2932DD48-22B6-489F-B1A4-0305869D14AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +75,14 @@ Global
 		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6531F1C-A2D8-4655-B6ED-9D4C346A8EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B537E53-379C-4D3A-ABB8-D0F4A8B1D346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B537E53-379C-4D3A-ABB8-D0F4A8B1D346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B537E53-379C-4D3A-ABB8-D0F4A8B1D346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B537E53-379C-4D3A-ABB8-D0F4A8B1D346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA9DD8BA-FAEA-4B02-AF98-F8AA14B41738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

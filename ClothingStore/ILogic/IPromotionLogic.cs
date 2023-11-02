@@ -1,13 +1,11 @@
-﻿using Domain;
+﻿using System.Reflection;
+using IPromotionProject;
 
-namespace ILogic
+namespace ILogic;
+
+public interface IPromotionLogic
 {
+    public IEnumerable<IPromotion> GetPromotions();
 
-    public interface IPromotionLogic
-    {
-        Promotion CreatePromotion(Promotion aPromotion);
-        IEnumerable<Promotion> GetAllPromotions();
-        void DeletePromotion(Guid id);
-        Promotion UpdatePromotion(Guid id, Promotion isAny);
-    }
+
 }

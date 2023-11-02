@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using APIModels.InputModels;
+using Domain;
 
 namespace ILogic
 {
@@ -6,5 +7,6 @@ namespace ILogic
     public interface IShoppingCartLogic
     {
         void ApplyBestPromotion(ShoppingCart shoppingCart);
+        ShoppingCart UpdateShoppingCart(ShoppingCart received);
     }
 }
