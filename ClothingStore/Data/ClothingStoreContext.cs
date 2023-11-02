@@ -14,7 +14,6 @@ namespace Data
         public virtual DbSet<ShoppingCart>? ShoppingCarts { get; set; }
         public virtual DbSet<ShoppingCartProducts>? ShoppingCartProducts { get; set; }
         public virtual DbSet<ProductColor>? ProductColors { get; set; }
-     
         public virtual DbSet<Product>? Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

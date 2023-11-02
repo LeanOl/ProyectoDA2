@@ -7,6 +7,6 @@ namespace ILogic
     public interface IShoppingCartLogic
     {
         void ApplyBestPromotion(ShoppingCart shoppingCart);
-        ShoppingCart CreateShoppingCart(ShoppingCartRequest received);
+        ShoppingCart UpdateShoppingCart(ShoppingCartRequest received);
     }
 }

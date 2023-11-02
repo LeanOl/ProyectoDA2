@@ -7,9 +7,9 @@ public class ShoppingCartResponse
     public Guid IdCart { get; set; }
     public Guid UserId { get; set; }
     public List<ShoppingCartProductResponse> ShoppingCartProducts { get; set; }
-    public decimal TotalPrice { get; set; }
-    public decimal Discount { get; set; }
-    public decimal FinalPrice { get; set; }
+    public decimal? TotalPrice { get; set; }
+    public decimal? Discount { get; set; }
+    public decimal? FinalPrice { get; set; }
 
     public ShoppingCartResponse(ShoppingCart shoppingCart)
     {

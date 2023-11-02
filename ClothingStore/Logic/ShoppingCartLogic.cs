@@ -59,7 +59,7 @@ namespace Logic
             return _promotionLogic.GetPromotions();
         }
 
-        public ShoppingCart CreateShoppingCart(ShoppingCartRequest received)
+        public ShoppingCart UpdateShoppingCart(ShoppingCartRequest received)
         {
             throw new NotImplementedException();
         }

@@ -15,12 +15,12 @@ namespace WebApi.Controllers
             _shoppingCartLogic = shoppingCartLogic;
         }
 
-
-        public IActionResult CreateShoppingCart(ShoppingCartRequest received)
+        [HttpPut]
+        public IActionResult UpdateShoppingCart([FromBody]ShoppingCartRequest received)
         {
-            var createdShoppingCart = _shoppingCartLogic.CreateShoppingCart(received);
+            var createdShoppingCart = _shoppingCartLogic.UpdateShoppingCart(received);
             ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse(createdShoppingCart);
-            return CreatedAtAction(nameof(CreateShoppingCart), new{id = shoppingCartResponse.IdCart},shoppingCartResponse);
+            return Ok(shoppingCartResponse);
         }
     }
 

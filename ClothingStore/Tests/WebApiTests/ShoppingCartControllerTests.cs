@@ -49,21 +49,21 @@ public class ShoppingCartControllerTests
     }
 
     [TestMethod]
-    public void CreateShoppingCart_Ok()
+    public void UpdateShoppingCart_Ok()
     {
         // Arrange
         ShoppingCartRequest received = _receivedShoppingCartRequest;
         ShoppingCart expected = _expectedShoppingCart;
         var expectedMappedResult = new ShoppingCartResponse(expected);
         var shoppingCartLogic = new Mock<IShoppingCartLogic>(MockBehavior.Strict);
-        shoppingCartLogic.Setup(m => m.CreateShoppingCart(received)).Returns(expected);
-        CreatedAtActionResult expectedActionResult = new CreatedAtActionResult("GetShoppingCart", "ShoppingCart", expectedMappedResult.IdCart, expectedMappedResult);
+        shoppingCartLogic.Setup(m => m.UpdateShoppingCart(received)).Returns(expected);
+        OkObjectResult expectedActionResult = new OkObjectResult(expectedMappedResult);
         var controller = new ShoppingCartController(shoppingCartLogic.Object);
         // Act
-        IActionResult result = controller.CreateShoppingCart(received);
+        IActionResult result = controller.UpdateShoppingCart(received);
         // Assert
         shoppingCartLogic.VerifyAll();
-        CreatedAtActionResult resultObject = result as CreatedAtActionResult;
+        OkObjectResult resultObject = result as OkObjectResult;
         ShoppingCartResponse resultValue = resultObject.Value as ShoppingCartResponse;
         Assert.AreEqual(expectedActionResult.StatusCode, resultObject.StatusCode);
         Assert.AreEqual(expectedMappedResult.IdCart, resultValue.IdCart);

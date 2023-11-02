@@ -9,10 +9,10 @@ namespace Domain
         public Guid IdCart { get; set; }
         public Guid UserId { get; set; }
         public List<ShoppingCartProducts> ShoppingCartProducts { get; set; }
-        public decimal TotalPrice { get; set; }
-        public decimal FinalPrice { get; set; }
-        public decimal Discount { get; set; }
-        public string PromotionName { get; set; }
+        public decimal? TotalPrice { get; set; }
+        public decimal? FinalPrice { get; set; }
+        public decimal? Discount { get; set; }
+        public string? PromotionName { get; set; }
 
         public ShoppingCart()
         {
@@ -23,7 +23,6 @@ namespace Domain
             IdCart = Guid.NewGuid();
             UserId = idusuario;
             ShoppingCartProducts = productList;
-            
         }
 
         public List<Product> GetProducts ()
