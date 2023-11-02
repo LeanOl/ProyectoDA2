@@ -1,4 +1,5 @@
-﻿using IData;
+﻿using APIModels.InputModels;
+using IData;
 using Domain;
 using ILogic;
 using IPromotionProject;
@@ -58,5 +59,9 @@ namespace Logic
             return _promotionLogic.GetPromotions();
         }
 
+        public ShoppingCart CreateShoppingCart(ShoppingCartRequest received)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
