@@ -23,18 +23,30 @@ public class ShoppingCartControllerTests
         {
             new ShoppingCartProductRequest
             {
-                ProductId = Guid.NewGuid(),
+                Product = new ProductRequest
+                {
+                    Brand = "Nike",
+                    Category = "Shoes",
+                    Price = 150,
+                    Colors = new List<string>()
+                },
                 Quantity = 1
             },
             new ShoppingCartProductRequest
             {
-                ProductId = Guid.NewGuid(),
+                Product = new ProductRequest
+                {
+                    Brand = "Nike",
+                    Category = "Shoes",
+                    Price = 100,
+                    Colors = new List<string>()
+                },
                 Quantity = 2
             }
         };
         _receivedShoppingCartRequest = new ShoppingCartRequest
         {
-            CartProducts = _receivedShoppingCartProductRequest,
+            Products = _receivedShoppingCartProductRequest,
             UserId = Guid.NewGuid()
         };
         _expectedShoppingCart = new ShoppingCart
@@ -42,7 +54,17 @@ public class ShoppingCartControllerTests
             UserId = _receivedShoppingCartRequest.UserId,
             IdCart = idCart,
             ShoppingCartProducts = _receivedShoppingCartProductRequest.ConvertAll(product =>
-                               new ShoppingCartProducts(idCart, product.ProductId, product.Quantity))
+                               new ShoppingCartProducts()
+                               {
+                                   Product = new Product
+                                   {
+                                       Brand = "Nike",
+                                       Category = "Shoes",
+                                       Price = 150,
+                                       Colors = new List<ProductColor>()
+                                   },
+                                   Quantity = product.Quantity
+                               })
         };
 
 
@@ -66,7 +88,7 @@ public class ShoppingCartControllerTests
         OkObjectResult resultObject = result as OkObjectResult;
         ShoppingCartResponse resultValue = resultObject.Value as ShoppingCartResponse;
         Assert.AreEqual(expectedActionResult.StatusCode, resultObject.StatusCode);
-        Assert.AreEqual(expectedMappedResult.IdCart, resultValue.IdCart);
+        Assert.AreEqual(expectedMappedResult.Id, resultValue.Id);
 
     }
 }

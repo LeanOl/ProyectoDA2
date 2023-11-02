@@ -50,6 +50,9 @@ namespace Tests.LogicTests
                 Category = "Shoes",
                 Price = 50
             };
+            scp1.Quantity = 1;
+            scp2.Quantity = 1;
+            scp3.Quantity = 1;
 
 
             cartProducts.Add(scp1);
@@ -76,7 +79,10 @@ namespace Tests.LogicTests
         public void UpdateShoppingCart_Ok()
         {
             // Arrange
-            ShoppingCart expectedShoppingCart = new ShoppingCart();
+            ShoppingCart expectedShoppingCart = new ShoppingCart()
+            {
+                ShoppingCartProducts = new List<ShoppingCartProducts>(),
+            };
             Mock<IShoppingCartManagement> shoppingCartRepository = new Mock<IShoppingCartManagement>(MockBehavior.Strict);
             shoppingCartRepository.Setup(m => m.UpdateShoppingCart(It.IsAny<ShoppingCart>())).Returns(expectedShoppingCart);
             Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);

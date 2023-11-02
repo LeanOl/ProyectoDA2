@@ -4,19 +4,18 @@ namespace APIModels.InputModels;
 
 public class ShoppingCartRequest
 {
-    public List<ShoppingCartProductRequest> CartProducts { get; set; }
+    public List<ShoppingCartProductRequest> Products { get; set; }
+    public Guid Id { get; set; }
     public Guid UserId { get; set; }
 
     public ShoppingCart ToEntity()
     {
-        Guid cartId = Guid.NewGuid();
         return new ShoppingCart
         {
+            IdCart = Id,
             UserId = UserId,
-            IdCart = cartId,
-            ShoppingCartProducts = CartProducts.ConvertAll(product =>
-                new ShoppingCartProducts(cartId, product.ProductId, product.Quantity))
-
+            ShoppingCartProducts = Products.ConvertAll(product =>
+                new ShoppingCartProducts(Id, product.Product.ToEntity(product.Product.Id), product.Quantity))
         };
     }
 }

@@ -34,7 +34,8 @@ namespace Data
 
         public ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart)
         {
-            Context.Set<ShoppingCart>().Update(shoppingCart);
+            Context.Entry(shoppingCart).State = EntityState.Modified;
+            
             Context.SaveChanges();
             return shoppingCart;
         }

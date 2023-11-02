@@ -14,6 +14,10 @@ namespace Domain
         public string DeliveryAddress { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
 
+        public User()
+        {
+
+        }
         public User(string email, string password, string role, string deliveryAddress)
         {
             SelfValidations(email,role);

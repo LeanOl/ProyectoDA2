@@ -12,12 +12,14 @@ namespace Logic
     {
         private readonly IPromotionLogic _promotionLogic;
         private readonly IShoppingCartManagement _shoppingCartManagement;
+        private readonly IShoppingCartProductsManagement _shoppingCartProductsManagement;
 
         
         public ShoppingCartLogic(IPromotionLogic logic,IShoppingCartManagement shoppingCartManagement)
         {
             _promotionLogic = logic;
             _shoppingCartManagement = shoppingCartManagement;
+            _shoppingCartProductsManagement = shoppingCartProductsManagement;
         }
 
         public void ApplyBestPromotion(ShoppingCart shoppingCart)
@@ -63,7 +65,9 @@ namespace Logic
         public ShoppingCart UpdateShoppingCart(ShoppingCart received)
         {
             ApplyBestPromotion(received);
-            return _shoppingCartManagement.UpdateShoppingCart(received);
+            received.UpdatePrices();
+            ShoppingCart shoppingCart = _shoppingCartManagement.UpdateShoppingCart(received);
+            return;
         }
     }
 }

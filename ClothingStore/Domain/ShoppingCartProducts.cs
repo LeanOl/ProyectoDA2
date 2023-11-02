@@ -14,11 +14,11 @@ namespace Domain
         public ShoppingCartProducts()
         {
         }
-        public ShoppingCartProducts(Guid shoppingCartId, Guid productId, int quantity)
+        public ShoppingCartProducts(Guid shoppingCartId, Product product, int quantity)
         {
             ShoppingCartId = Guid.NewGuid();
             ShoppingCartId = shoppingCartId;
-            ProductId = productId;
+            Product = product;
             Quantity = quantity;
         }
 

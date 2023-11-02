@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Route("api/productCart")]
+    [Route("api/carts")]
     public class ShoppingCartController : ControllerBase
     {
         private readonly IShoppingCartLogic _shoppingCartLogic;

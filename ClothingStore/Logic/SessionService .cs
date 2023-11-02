@@ -10,11 +10,13 @@ namespace Logic
         private User? _currentUser;
         private IGenericRepository<Session> _sessionRepository;
         private IGenericRepository<User> _userRepository;
+        private IShoppingCartManagement _shoppingCartRepository;
 
-        public SessionService(IGenericRepository<Session> sessionRepository, IGenericRepository<User> userRepository)
+        public SessionService(IGenericRepository<Session> sessionRepository, IGenericRepository<User> userRepository, IShoppingCartManagement shoppingCartRepository)
         {
             _sessionRepository = sessionRepository;
             _userRepository = userRepository;
+            _shoppingCartRepository = shoppingCartRepository;
         }
 
         public User? GetCurrentUser(Guid? authToken = null)
@@ -40,6 +42,7 @@ namespace Logic
             if (user == null)
                 throw new InvalidCredentialException("Invalid credentials");
 
+            user.ShoppingCart = _shoppingCartRepository.GetShoppingCartByUserId(user.Id);
             var session = new Session() { User = user };
             _sessionRepository.Insert(session);
 

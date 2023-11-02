@@ -11,21 +11,21 @@ export class SessionService {
 
   private sessionUrl = environment.apiUrl + environment.sessionsEndpoint;
 
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient:HttpClient) {
   }
 
   login(email: string, password: string): Observable<boolean> {
     return this.postLogin(email, password).pipe(
-      map((response) => {
-        if (response.ok) {
-          this.setSessionUser(response);
-          return true;
-        } else {
-          return false;
-        }
+      map((loginResponse) => {
+        this.setSessionUser(loginResponse);
+        return true;
+      }),
+      catchError((error) => {
+        return of(false);
       })
     );
   }
+
   logout(): void {
     if (this.isLogged()) {
       this.postLogout().subscribe((ok) => {
@@ -50,15 +50,7 @@ export class SessionService {
   }
 
   private postLogin(email: string, password: string): Observable<LoginResponse> {
-    return this.httpClient.post<LoginResponse>(this.sessionUrl, { email, password }).pipe(
-      catchError((error) => {
-        const loginResponse: LoginResponse = {
-          ok: false,
-          token: undefined
-        };
-        return of(loginResponse);
-      })
-    );
+    return this.httpClient.post<LoginResponse>(this.sessionUrl, { email, password });
   }
 
   private setSessionUser(loginResponse:LoginResponse): void {
@@ -70,6 +62,7 @@ export class SessionService {
     localStorage.setItem('token', loginResponse.token);
     localStorage.setItem('email', loginResponse.email);
     localStorage.setItem('role', loginResponse.role.toLowerCase());
+    localStorage.setItem('cart', JSON.stringify(loginResponse.cart));
   }
 
   private postLogout(): Observable<boolean> {
@@ -84,10 +77,10 @@ export class SessionService {
   }
 
   private getHttpLogoutHeaders(): HttpHeaders {
-   
+
     let token = localStorage.getItem('token') || '';
     let headers = new HttpHeaders({
-      
+
       Authorization:token
     });
     return headers;
