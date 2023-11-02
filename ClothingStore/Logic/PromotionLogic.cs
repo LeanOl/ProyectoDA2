@@ -6,7 +6,7 @@ namespace Logic;
 
 public class PromotionLogic : IPromotionLogic
 {
-    private string dllPath = @"C:\Users\olmed\Desktop\ReflectionMainEjercicio";
+    private string dllPath = @"../PromotionAssemblies";
 
     public IEnumerable<IPromotion> GetPromotions()
     {

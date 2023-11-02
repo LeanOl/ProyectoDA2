@@ -62,6 +62,7 @@ namespace Logic
 
         public ShoppingCart UpdateShoppingCart(ShoppingCart received)
         {
+            ApplyBestPromotion(received);
             return _shoppingCartManagement.UpdateShoppingCart(received);
         }
     }
