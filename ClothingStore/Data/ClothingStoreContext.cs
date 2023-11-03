@@ -22,7 +22,7 @@ namespace Data
             modelBuilder.Entity<User>();
             modelBuilder.Entity<Session>();
             modelBuilder.Entity<ShoppingCart>();
-            modelBuilder.Entity<ShoppingCartProducts>();
+            modelBuilder.Entity<ShoppingCartProducts>().HasKey(sp => new{ sp.ProductId, sp.ShoppingCartId});
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

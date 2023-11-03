@@ -14,7 +14,7 @@ public class ShoppingCartRepositoryTests : ContextInMemory
         ShoppingCart expected = new ShoppingCart()
         {
             UserId = Guid.NewGuid(),
-            IdCart = Guid.NewGuid(),
+            Id = Guid.NewGuid(),
             ShoppingCartProducts = new List<ShoppingCartProducts>()
             {
                 new ShoppingCartProducts()

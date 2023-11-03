@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(ClothingStoreContext))]
-    [Migration("20231102034857_migration1")]
+    [Migration("20231102235218_migration1")]
     partial class migration1
     {
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.ShoppingCart", b =>
                 {
-                    b.Property<Guid>("IdCart")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -132,7 +132,7 @@ namespace Data.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("IdCart");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -142,24 +142,18 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Domain.ShoppingCartProducts", b =>
                 {
-                    b.Property<Guid>("ShoppingCartId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("ShoppingCartId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ShoppingCartIdCart")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("ProductId", "ShoppingCartId");
 
-                    b.HasKey("ShoppingCartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("ShoppingCartIdCart");
+                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("ShoppingCartProducts");
                 });
@@ -230,15 +224,13 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.ShoppingCart", "ShoppingCart")
+                    b.HasOne("Domain.ShoppingCart", null)
                         .WithMany("ShoppingCartProducts")
-                        .HasForeignKey("ShoppingCartIdCart")
+                        .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
-
-                    b.Navigation("ShoppingCart");
                 });
 
             modelBuilder.Entity("Domain.Product", b =>

@@ -29,7 +29,7 @@ namespace Domain
             ShoppingCart = new ShoppingCart()
             {
                 UserId = Id,
-                IdCart = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 ShoppingCartProducts = new List<ShoppingCartProducts>()
             };
         }

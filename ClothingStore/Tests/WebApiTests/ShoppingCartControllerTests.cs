@@ -52,7 +52,7 @@ public class ShoppingCartControllerTests
         _expectedShoppingCart = new ShoppingCart
         {
             UserId = _receivedShoppingCartRequest.UserId,
-            IdCart = idCart,
+            Id = idCart,
             ShoppingCartProducts = _receivedShoppingCartProductRequest.ConvertAll(product =>
                                new ShoppingCartProducts()
                                {

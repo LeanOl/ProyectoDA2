@@ -97,7 +97,7 @@ namespace Data.Migrations
                 name: "ShoppingCarts",
                 columns: table => new
                 {
-                    IdCart = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FinalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -106,7 +106,7 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.IdCart);
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ShoppingCarts_Users_UserId",
                         column: x => x.UserId,
@@ -120,13 +120,12 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     ShoppingCartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ShoppingCartIdCart = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShoppingCartProducts", x => x.ShoppingCartId);
+                    table.PrimaryKey("PK_ShoppingCartProducts", x => new { x.ProductId, x.ShoppingCartId });
                     table.ForeignKey(
                         name: "FK_ShoppingCartProducts_Products_ProductId",
                         column: x => x.ProductId,
@@ -134,10 +133,10 @@ namespace Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ShoppingCartProducts_ShoppingCarts_ShoppingCartIdCart",
-                        column: x => x.ShoppingCartIdCart,
+                        name: "FK_ShoppingCartProducts_ShoppingCarts_ShoppingCartId",
+                        column: x => x.ShoppingCartId,
                         principalTable: "ShoppingCarts",
-                        principalColumn: "IdCart",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -152,14 +151,9 @@ namespace Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartProducts_ProductId",
+                name: "IX_ShoppingCartProducts_ShoppingCartId",
                 table: "ShoppingCartProducts",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCartProducts_ShoppingCartIdCart",
-                table: "ShoppingCartProducts",
-                column: "ShoppingCartIdCart");
+                column: "ShoppingCartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_UserId",

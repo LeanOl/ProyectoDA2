@@ -44,10 +44,10 @@ namespace Data
             }
         }
 
-        public IEnumerable<ShoppingCartProducts> GetCartProductsByCartId(Guid cartId)
-        {
-            return Context.Set<ShoppingCartProducts>().Where(scp => scp.ShoppingCartId == cartId).ToList();
-        }
+        //public IEnumerable<ShoppingCartProducts> GetCartProductsByCartId(Guid cartId)
+        //{
+           // return Context.Set<ShoppingCartProducts>().Where(scp => scp.Id == cartId).ToList();
+        //}
 
     }
 }

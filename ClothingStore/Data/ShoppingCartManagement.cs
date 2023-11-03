@@ -35,7 +35,20 @@ namespace Data
         public ShoppingCart UpdateShoppingCart(ShoppingCart shoppingCart)
         {
             Context.Entry(shoppingCart).State = EntityState.Modified;
-            
+            List<ShoppingCartProducts> shoppingCartProducts = shoppingCart.ShoppingCartProducts;
+            foreach (var shoppingCartProduct in shoppingCartProducts)
+            {
+                if (Context.Set<ShoppingCartProducts>().Any(sp => sp.ProductId.Equals(shoppingCartProduct.ProductId) 
+                                                                  && sp.ShoppingCartId.Equals(shoppingCartProduct.ShoppingCartId)))
+                {
+                    Context.Entry(shoppingCartProduct).State = EntityState.Modified;
+                }
+                else
+                {
+                    Context.Attach(shoppingCartProduct.Product);
+                    Context.Set<ShoppingCartProducts>().Add(shoppingCartProduct);
+                }
+            }
             Context.SaveChanges();
             return shoppingCart;
         }

@@ -9,6 +9,6 @@ namespace IData
         void InsertCartProduct(ShoppingCartProducts cartProduct);
         void UpdateCartProduct(ShoppingCartProducts cartProduct);
         void DeleteCartProduct(Guid id);
-        IEnumerable<ShoppingCartProducts> GetCartProductsByCartId(Guid cartId);
+        //IEnumerable<ShoppingCartProducts> GetCartProductsByCartId(Guid cartId);
     }
 }

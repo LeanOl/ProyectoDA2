@@ -6,7 +6,7 @@ namespace Domain
     public class ShoppingCart
     {
         [Key]
-        public Guid IdCart { get; set; }
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public List<ShoppingCartProducts>? ShoppingCartProducts { get; set; }
         public decimal? TotalPrice { get; set; }
@@ -20,7 +20,7 @@ namespace Domain
 
         public ShoppingCart(Guid idusuario, List<ShoppingCartProducts> productList)
         {
-            IdCart = Guid.NewGuid();
+            Id = Guid.NewGuid();
             UserId = idusuario;
             ShoppingCartProducts = productList;
         }

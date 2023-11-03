@@ -12,7 +12,7 @@ public class ShoppingCartRequest
     {
         return new ShoppingCart
         {
-            IdCart = Id,
+            Id = Id,
             UserId = UserId,
             ShoppingCartProducts = Products.ConvertAll(product =>
                 new ShoppingCartProducts(Id, product.Product.ToEntity(product.Product.Id), product.Quantity))

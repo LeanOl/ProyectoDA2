@@ -14,7 +14,7 @@ public class ShoppingCartResponse
 
     public ShoppingCartResponse(ShoppingCart shoppingCart)
     {
-        Id = shoppingCart.IdCart;
+        Id = shoppingCart.Id;
         UserId = shoppingCart.UserId;
         if (shoppingCart.ShoppingCartProducts != null)
         {
