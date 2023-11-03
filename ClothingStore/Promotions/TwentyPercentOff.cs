@@ -2,7 +2,7 @@
 
 namespace Promotions;
 
-public class TwentyPercentOff {
+public class TwentyPercentOff : IPromotion {
     public string Name { get; set; } = "20% OFF";
 
     public decimal GetDiscount(IEnumerable<ProductDto> products)

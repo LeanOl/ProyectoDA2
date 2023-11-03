@@ -20,7 +20,7 @@ public class ThreeProductFidelity : IPromotion
         decimal discount = 0;
         foreach (var categoryGroup in productsByCategory)
         {
-            if (categoryGroup.Count() == 3)
+            if (categoryGroup.Count() >= 3)
             {
                 IEnumerable<ProductDto> cheapestTwoProducts = categoryGroup.OrderBy(p => p.Price).Take(2);
                 discount = cheapestTwoProducts.Sum(p => p.Price);

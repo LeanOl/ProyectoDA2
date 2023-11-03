@@ -22,7 +22,19 @@ namespace Data
 
         public ShoppingCart GetShoppingCartByUserId(Guid userId)
         {
-            return Context.Set<ShoppingCart>().FirstOrDefault(sc => sc.UserId == userId);
+            var shoppingCart = Context.Set<ShoppingCart>().
+                Include(s => s.ShoppingCartProducts).
+                FirstOrDefault(s => s.UserId.Equals(userId));
+            if (shoppingCart != null)
+            {
+                foreach (var shoppingCartProduct in shoppingCart.ShoppingCartProducts)
+                {
+                    Context.Entry(shoppingCartProduct).Reference(scp => scp.Product).Load();
+                    Context.Entry(shoppingCartProduct.Product).Collection(p => p.Colors).Load();
+                }
+            }
+
+            return shoppingCart;
 
         }
 
@@ -38,15 +50,15 @@ namespace Data
             List<ShoppingCartProducts> shoppingCartProducts = shoppingCart.ShoppingCartProducts;
             foreach (var shoppingCartProduct in shoppingCartProducts)
             {
-                if (Context.Set<ShoppingCartProducts>().Any(sp => sp.ProductId.Equals(shoppingCartProduct.ProductId) 
+                if (!Context.Set<ShoppingCartProducts>().Any(sp => sp.ProductId.Equals(shoppingCartProduct.ProductId) 
                                                                   && sp.ShoppingCartId.Equals(shoppingCartProduct.ShoppingCartId)))
-                {
-                    Context.Entry(shoppingCartProduct).State = EntityState.Modified;
-                }
-                else
                 {
                     Context.Attach(shoppingCartProduct.Product);
                     Context.Set<ShoppingCartProducts>().Add(shoppingCartProduct);
+                }
+                else
+                {
+                    Context.Entry(shoppingCartProduct).State = EntityState.Modified;
                 }
             }
             Context.SaveChanges();

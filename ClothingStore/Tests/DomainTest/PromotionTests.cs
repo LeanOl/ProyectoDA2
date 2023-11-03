@@ -93,7 +93,7 @@ namespace Tests.DomainTest
                 new ProductDto()
                 {
                     Category = "Test Category 1",
-                    Price = 10
+                    Price = 10,
                 },
                 new ProductDto()
                 {

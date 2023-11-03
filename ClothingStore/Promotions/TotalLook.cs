@@ -23,7 +23,7 @@ public class TotalLook : IPromotion
         decimal discount = 0;
         foreach (var colorGroup in groupedColors)
         {
-            if (colorGroup.Count() == 3)
+            if (colorGroup.Count() >= 3)
             {
                 var productsWithColor = productList.Where(p => p.Colors.Contains(colorGroup.Key));
                 var mostExpensiveProduct = productsWithColor.OrderByDescending(p => p.Price).First();

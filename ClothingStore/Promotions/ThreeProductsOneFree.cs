@@ -19,7 +19,7 @@ namespace Promotions
             decimal discount = 0;
             foreach (var categoryGroup in productsByCategory)
             {
-                if (categoryGroup.Count() == 3)
+                if (categoryGroup.Count() >= 3)
                 {
                     var cheapestProduct = categoryGroup.OrderBy(p => p.Price).First();
                     discount = cheapestProduct.Price;

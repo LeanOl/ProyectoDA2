@@ -14,7 +14,8 @@ public class PromotionLogic : IPromotionLogic
         List<Assembly> assemblies = new List<Assembly>();
         foreach (var dll in dlls)
         {
-            var assembly = Assembly.LoadFile(dll);
+            string fullPath = System.IO.Path.GetFullPath(dll);
+            var assembly = Assembly.LoadFile(fullPath);
             assemblies.Add(assembly);
         }
 
