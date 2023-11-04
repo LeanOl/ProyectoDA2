@@ -23,6 +23,9 @@ namespace APIModels.InputModels
 
         [Required(ErrorMessage = "El campo 'Stock' es requerido.")]
         public int Stock { get; set; }
+        
+        [Required(ErrorMessage = "El campo 'Exluido' es requerido.")]
+        public bool Excluded { get; set; }
 
 
 
@@ -36,7 +39,8 @@ namespace APIModels.InputModels
                 Brand,
                 Category,
                 null,  
-                Stock
+                Stock,
+                Excluded
            );
             productToReturn.Colors = Colors.ConvertAll(color => new ProductColor(productToReturn.Id, color, productToReturn));
             return productToReturn;

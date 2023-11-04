@@ -21,7 +21,8 @@ namespace Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Stock = table.Column<int>(type:"int", nullable: false)
+                    Stock = table.Column<int>(type:"int", nullable: false),
+                    Excluded = table.Column<bool>(type:"bit",false)
                 },
                 constraints: table =>
                 {

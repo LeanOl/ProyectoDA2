@@ -5,14 +5,15 @@ namespace Data.Interfaces
     public interface IProductManagement
     {
        
-            IEnumerable<Product> GetAllProducts();
+        IEnumerable<Product> GetAllProducts();
         Product GetProductById(Guid id);
         void InsertProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(Guid id);
         List<Product> GetProductByBrand(string brand);
         List<Product> GetProductByCategory(string category);
-    
-        
+        List<Product> GetProductByPriceRange(decimal min, decimal max);
+
+
     }
 }

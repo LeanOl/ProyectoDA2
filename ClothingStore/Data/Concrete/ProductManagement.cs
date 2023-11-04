@@ -22,7 +22,7 @@ namespace Data.Concrete
 
         public Product GetProductById(Guid id)
         {
-            return Context.Set<Product>().Find(id);//resolver
+            return Context.Set<Product>().Find(id);
         }
 
         public void InsertProduct(Product product)
@@ -54,6 +54,9 @@ namespace Data.Concrete
         public List<Product> GetProductByCategory(string category)
         {
             return Context.Set<Product>().Where(p => p.Category == category).ToList();
+        }
+        public List<Product> GetProductByPriceRange(decimal min, decimal max) {
+            return Context.Set<Product>().Where(p => p.Price >= min && p.Price <= max).ToList();
         }
 
     }

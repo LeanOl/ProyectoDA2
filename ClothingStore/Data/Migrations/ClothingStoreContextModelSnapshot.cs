@@ -47,7 +47,11 @@ namespace Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Stock");
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Excluded")
+                        .HasColumnType("bit");
                    
                     b.HasKey("Id");
 

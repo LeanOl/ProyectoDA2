@@ -15,7 +15,7 @@ namespace APIModels.OutputModels
         public string Category { get; set; }
         public List<string> Colors { get; set; }
         public int Stock { get; set; }
-
+        public bool Excluded { get; set; }
 
 
         public ProductResponse(Product product)
@@ -28,6 +28,7 @@ namespace APIModels.OutputModels
             Category = product.Category;
             Colors = product.Colors.Select(pc => pc.Color).ToList();
             Stock = product.Stock;
+            Excluded = product.Excluded;
         }
     }
 }

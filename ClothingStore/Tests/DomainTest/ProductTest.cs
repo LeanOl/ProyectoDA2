@@ -35,8 +35,9 @@ namespace Tests.DomainTest
                 new ProductColor { Color = "Blue" }
             };
             int stock = 100;
+            bool excluded = false;
 
-            Product product = new Product(name, price, description, brand, category, colors, stock);
+            Product product = new Product(name, price, description, brand, category, colors, stock, excluded);
 
             Assert.AreNotEqual(Guid.Empty, product.Id);
             Assert.AreEqual(name, product.Name);
@@ -46,6 +47,7 @@ namespace Tests.DomainTest
             Assert.AreEqual(category, product.Category);
             Assert.AreEqual(colors, product.Colors);
             Assert.AreEqual(stock, product.Stock);
+            Assert.AreEqual(excluded, product.Excluded);
 
         }
 
