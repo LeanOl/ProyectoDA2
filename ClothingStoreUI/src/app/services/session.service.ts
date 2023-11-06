@@ -33,6 +33,7 @@ export class SessionService {
           localStorage.removeItem('token');
           localStorage.removeItem('email');
           localStorage.removeItem('role');
+          localStorage.removeItem('cart');
         }
       });
     }

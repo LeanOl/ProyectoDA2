@@ -1,0 +1,8 @@
+<div class="cart-menu">
+  <h2>Your Cart</h2>
+  <ul>
+    <li *ngFor="let item of cart.products">
+      <app-cart-item [item]="item"></app-cart-item>
+    </li>
+  </ul>
+</div>

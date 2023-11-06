@@ -3,7 +3,8 @@ import { Cart } from '../models/cart.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product.model';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
+import { CartProduct } from '../models/cart-product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,4 +38,50 @@ export class CartService {
       tap(updatedCart => this.setCart(updatedCart))
     );
   }
+
+  decreaseQuantity(product: CartProduct): Observable<boolean> {
+    let cartItem = localStorage.getItem('cart');
+    let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
+    let productInCart = cart.products.find(p => p.productId === product.productId);
+    if (productInCart) {
+      productInCart.quantity--;
+      if (productInCart.quantity === 0) {
+        cart.products = cart.products.filter(p => p.productId !== product.productId);
+      }
+      this.updateCart(cart).pipe(
+        map(() => true)),
+        catchError(() => of(false)
+      );
+    }
+    return of(false);
+  }
+
+  increaseQuantity(product: CartProduct): Observable<boolean> {
+    let cartItem = localStorage.getItem('cart');
+    let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
+    let productInCart = cart.products.find(p => p.productId === product.productId);
+    if (productInCart) {
+      productInCart.quantity++;
+      this.updateCart(cart).pipe(
+        map(() => true)),
+        catchError(() => of(false)
+      );
+    }
+    return of(false);
+  }
+
+  removeFromCart(product: CartProduct): Observable<boolean> {
+    let cartItem = localStorage.getItem('cart');
+    let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
+    cart.products = cart.products.filter(p => p.productId !== product.productId);
+    return this.updateCart(cart).pipe(
+      map(() => true),
+      catchError(() => of(false)
+    ));
+  }
+
+  getCart(): Cart {
+    return JSON.parse(localStorage.getItem('cart') || '{ products: [] }');
+  }
+
 }
