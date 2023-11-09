@@ -9,9 +9,9 @@ namespace Domain
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public List<ShoppingCartProducts>? ShoppingCartProducts { get; set; }
-        public decimal? TotalPrice { get; set; }
-        public decimal? FinalPrice { get; set; }
-        public decimal? Discount { get; set; }
+        public decimal TotalPrice { get; set; } = 0;
+        public decimal FinalPrice { get; set; } =0;
+        public decimal Discount { get; set; }=0;
         public string? PromotionName { get; set; }
 
         public ShoppingCart()
@@ -61,11 +61,7 @@ namespace Domain
 
         private decimal GetFinalPrice()
         {
-            if (Discount == null)
-            {
-                return TotalPrice ?? 0;
-            }
-            var finalPrice = (TotalPrice ?? 0) - (Discount ?? 0);
+            decimal finalPrice = TotalPrice  - Discount;
             return finalPrice ;
         }
     }

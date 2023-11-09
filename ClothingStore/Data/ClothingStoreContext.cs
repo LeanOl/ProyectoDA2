@@ -15,6 +15,8 @@ namespace Data
         public virtual DbSet<ShoppingCartProducts>? ShoppingCartProducts { get; set; }
         public virtual DbSet<ProductColor>? ProductColors { get; set; }
         public virtual DbSet<Product>? Products { get; set; }
+        public virtual DbSet<Purchase>? Purchases { get; set; }
+        public virtual DbSet<PurchaseProduct>? PurchaseProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +25,7 @@ namespace Data
             modelBuilder.Entity<Session>();
             modelBuilder.Entity<ShoppingCart>();
             modelBuilder.Entity<ShoppingCartProducts>().HasKey(sp => new{ sp.ProductId, sp.ShoppingCartId});
+            modelBuilder.Entity<PurchaseProduct>().HasKey(pp => new { pp.ProductId, pp.PurchaseId });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

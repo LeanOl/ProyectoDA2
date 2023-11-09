@@ -38,8 +38,36 @@ public class ShoppingCartRepositoryTests : ContextInMemory
 
         // Assert
         CollectionAssert.AreEquivalent(expected.ShoppingCartProducts,result.ShoppingCartProducts);
-
-
-
     }
+
+    [TestMethod]
+    public void ClearShoppingCart_Ok()
+    {
+                // Arrange
+        var dbContext = createDbContext("ClearShoppingCart");
+        var shoppingCartManagement = new ShoppingCartManagement(dbContext);
+        ShoppingCart expected = new ShoppingCart()
+        {
+            UserId = Guid.NewGuid(),
+            Id = Guid.NewGuid(),
+            ShoppingCartProducts = new List<ShoppingCartProducts>()
+            {
+                new ShoppingCartProducts()
+                {
+                    ProductId = Guid.NewGuid(),
+                    Quantity = 1
+                }
+            }
+        };
+        dbContext.Set<ShoppingCart>().Add(expected);
+        dbContext.SaveChanges();
+
+        // Act
+        shoppingCartManagement.ClearShoppingCart(expected);
+        var result = shoppingCartManagement.GetShoppingCartByUserId(expected.UserId);
+
+        // Assert
+        Assert.AreEqual(0,result.ShoppingCartProducts.Count);
+    }
+    
 }

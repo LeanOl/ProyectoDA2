@@ -14,9 +14,6 @@ namespace WebApi.Filters
                 case InvalidTypeException:
                     context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
                     break;
-                case InvalidConditionArgumentException:
-                    context.Result = new ObjectResult(new { Message = context.Exception.Message }) { StatusCode = 400 };
-                    break;
                 default:
                     context.Result = new ObjectResult(new { Message = $"Internal Server Error: {context.Exception.Message}" }) { StatusCode = 500 };
                     break;

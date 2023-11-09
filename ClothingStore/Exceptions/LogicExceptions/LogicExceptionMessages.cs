@@ -2,7 +2,7 @@
 {
     public static class LogicExceptionMessages
     {
-        public const string InvalidCondition = "The promotion condition is invalid.";
+        public const string EmptyCartMessage = "Shopping cart is empty.";
 
     }
 }

@@ -81,5 +81,16 @@ namespace Data
             return shoppingCart?.ShoppingCartProducts;
         }
 
+        public void ClearShoppingCart(ShoppingCart shoppingCart)
+        {
+            Context.Attach(shoppingCart);
+            shoppingCart.ShoppingCartProducts.Clear();
+            shoppingCart.TotalPrice = 0;
+            shoppingCart.FinalPrice = 0;
+            shoppingCart.Discount = 0;
+            shoppingCart.PromotionName = null;
+            Context.SaveChanges();
+        }
+
     }
 }
