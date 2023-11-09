@@ -2,7 +2,7 @@
 
 namespace IData;
 
-public interface IPurchaseManagement
+public interface IPurchaseManagement 
 {
     Purchase AddPurchase(Purchase purchase);
 }
