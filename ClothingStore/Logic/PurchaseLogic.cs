@@ -1,5 +1,6 @@
 ﻿using APIModels.InputModels;
 using Domain;
+using Exceptions.LogicExceptions;
 using IData;
 using ILogic;
 
@@ -18,7 +19,11 @@ public class PurchaseLogic : IPurchaseLogic
     {
         Guid userId = purchaseRequest.UserId;
         ShoppingCart shoppingCart = _shoppingCartManagement.GetShoppingCartByUserId(userId);
-        List<ShoppingCartProducts> shoppingCartProducts = shoppingCart.ShoppingCartProducts;
+        List<ShoppingCartProducts>? shoppingCartProducts = shoppingCart.ShoppingCartProducts;
+        if (shoppingCartProducts == null)
+        {
+            throw new EmptyProductsPurchaseException(LogicExceptionMessages.EmptyCartMessage);
+        }
         List<PurchaseProduct> purchaseProducts = shoppingCartProducts.ConvertAll(product =>
                        new PurchaseProduct{ProductId = product.ProductId,Product = product.Product,Quantity = product.Quantity});
         Purchase purchase = new Purchase
@@ -33,8 +38,10 @@ public class PurchaseLogic : IPurchaseLogic
             Date = DateTime.Now,
             PaymentMethod = purchaseRequest.PaymentMethod
         };
+        Purchase createdPurchase = _purchaseManagement.AddPurchase(purchase);
+        _shoppingCartManagement.ClearShoppingCart(shoppingCart);
 
-        return _purchaseManagement.AddPurchase(purchase);
+        return createdPurchase;
     }
 
 }

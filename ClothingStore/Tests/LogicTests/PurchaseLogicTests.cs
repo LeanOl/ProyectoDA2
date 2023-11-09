@@ -1,5 +1,6 @@
 ﻿using APIModels.InputModels;
 using Domain;
+using Exceptions.LogicExceptions;
 using IData;
 using Logic;
 
@@ -44,6 +45,7 @@ public class PurchaseLogicTests
             PromotionName = null,
         };
 
+
         _expectedPurchaseProducts = new List<PurchaseProduct>()
         {
             new PurchaseProduct()
@@ -77,6 +79,7 @@ public class PurchaseLogicTests
         Mock<IPurchaseManagement> mockPurchaseManagement = new Mock<IPurchaseManagement>(MockBehavior.Strict);
         Mock<IShoppingCartManagement> mockShoppingCartManagement = new Mock<IShoppingCartManagement>();
         mockShoppingCartManagement.Setup(x => x.GetShoppingCartByUserId(It.IsAny<Guid>())).Returns(_userShoppingCart);
+        mockShoppingCartManagement.Setup(x => x.ClearShoppingCart(It.IsAny<ShoppingCart>()));
         mockPurchaseManagement.Setup(x => x.AddPurchase(It.IsAny<Purchase>())).Returns(_expectedPurchase);
         PurchaseLogic purchaseLogic = new PurchaseLogic(mockPurchaseManagement.Object, mockShoppingCartManagement.Object);
         
@@ -89,4 +92,19 @@ public class PurchaseLogicTests
         Assert.AreEqual(_expectedPurchase, result);
 
     }
+
+    [TestMethod]
+    public void CreatePurchase_EmptyCart_ThrowException()
+    {
+        // Arrange
+        Mock<IPurchaseManagement> mockPurchaseManagement = new Mock<IPurchaseManagement>(MockBehavior.Strict);
+        Mock<IShoppingCartManagement> mockShoppingCartManagement = new Mock<IShoppingCartManagement>();
+        mockShoppingCartManagement.Setup(x => x.GetShoppingCartByUserId(It.IsAny<Guid>())).Returns(new ShoppingCart());
+        PurchaseLogic purchaseLogic = new PurchaseLogic(mockPurchaseManagement.Object, mockShoppingCartManagement.Object);
+
+        // Act
+        // Assert
+        Assert.ThrowsException<EmptyProductsPurchaseException>(() => purchaseLogic.CreatePurchase(new PurchaseRequest() { UserId = _expectedPurchase.UserId }));
+    }
+    
 }
