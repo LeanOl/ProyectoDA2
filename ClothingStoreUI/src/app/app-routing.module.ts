@@ -6,6 +6,7 @@ import { ProductDetailComponent } from './components/product/product-detail/prod
 import { MainMenuComponent } from './components/menu/main-menu/main-menu.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserManagementComponent } from './components/user/user-management/user-management.component';
+import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.component';
 
 const routes: Routes = [
   {path: 'login',
@@ -18,9 +19,11 @@ const routes: Routes = [
   component: UserListComponent},
   {path: 'users/manage',
   component: UserManagementComponent},
+  {path: 'cart',
+   component: CartMenuComponent},
   {path: '',
    component: MainMenuComponent},
-  
+
 ];
 
 @NgModule({

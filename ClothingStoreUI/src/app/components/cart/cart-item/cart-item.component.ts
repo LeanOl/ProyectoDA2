@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { CartProduct } from 'src/app/models/cart-product.model';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -11,6 +11,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartItemComponent {
 
   @Input() item: CartProduct;
+  @Output() itemUpdated = new EventEmitter<boolean>();
 
   constructor(private cartService: CartService) {
     this.item = {
@@ -29,15 +30,24 @@ export class CartItemComponent {
     };
   }
 
-  decreaseQuantity(item:CartProduct): Observable<boolean> {
-    return this.cartService.decreaseQuantity(item)
+  decreaseQuantity(item:CartProduct): void {
+    this.cartService
+      .decreaseQuantity(item)
+      .pipe(tap((success) => this.itemUpdated.emit(success)))
+      .subscribe();
   }
 
-  increaseQuantity(item:CartProduct): Observable<boolean> {
-    return this.cartService.increaseQuantity(item)
+  increaseQuantity(item:CartProduct): void {
+    this.cartService
+      .increaseQuantity(item)
+      .pipe(tap((success) => this.itemUpdated.emit(success)))
+      .subscribe();
   }
 
-  removeFromCart(item:CartProduct): Observable<boolean> {
-    return this.cartService.removeFromCart(item)
+  removeFromCart(item:CartProduct): void {
+    this.cartService
+      .removeFromCart(item)
+      .pipe(tap((success) => this.itemUpdated.emit(success)))
+      .subscribe();
   }
 }

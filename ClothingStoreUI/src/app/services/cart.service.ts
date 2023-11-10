@@ -48,9 +48,12 @@ export class CartService {
       if (productInCart.quantity === 0) {
         cart.products = cart.products.filter(p => p.productId !== product.productId);
       }
-      this.updateCart(cart).pipe(
-        map(() => true)),
-        catchError(() => of(false)
+      return this.updateCart(cart).pipe(
+        map(() => true),
+        catchError(error => {
+          console.error(error);
+          return of(false);
+        })
       );
     }
     return of(false);
@@ -62,9 +65,12 @@ export class CartService {
     let productInCart = cart.products.find(p => p.productId === product.productId);
     if (productInCart) {
       productInCart.quantity++;
-      this.updateCart(cart).pipe(
-        map(() => true)),
-        catchError(() => of(false)
+      return this.updateCart(cart).pipe(
+        map(() => true),
+        catchError(error => {
+          console.error(error);
+          return of(false);
+        })
       );
     }
     return of(false);
@@ -76,8 +82,11 @@ export class CartService {
     cart.products = cart.products.filter(p => p.productId !== product.productId);
     return this.updateCart(cart).pipe(
       map(() => true),
-      catchError(() => of(false)
-    ));
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
   }
 
   getCart(): Cart {

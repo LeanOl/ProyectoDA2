@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -12,6 +13,14 @@ export class CartMenuComponent {
 
   constructor(private cartService: CartService) { }
 
-
+  onItemUpdated(success: boolean): void {
+    if (success) {
+      this.cart = this.cartService.getCart();
+      alert("Success");
+    }else
+    {
+      alert("Error");
+    }
+  }
 
 }
