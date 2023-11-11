@@ -69,5 +69,48 @@ public class ShoppingCartRepositoryTests : ContextInMemory
         // Assert
         Assert.AreEqual(0,result.ShoppingCartProducts.Count);
     }
+
+    [TestMethod]
+    public void DeleteCartProduct_Ok()
+    {
+        //Arrange
+        var dbContext = createDbContext("DeleteCartProduct");
+        var shoppingCartManagement = new ShoppingCartManagement(dbContext);
+        Guid cartId = Guid.NewGuid();
+        Guid productId = Guid.NewGuid();
+        ShoppingCart cart = new ShoppingCart()
+        {
+            UserId = cartId,
+            Id = cartId,
+            ShoppingCartProducts = new List<ShoppingCartProducts>()
+            {
+                new ShoppingCartProducts()
+                {
+                    ProductId = productId,
+                    Product = new Product()
+                    {
+                        Id = productId,
+                        Name = "Air Force 1",
+                        Description = "Nike Air Force 1",
+                        Brand = "Nike",
+                        Category = "Shoes",
+                        Price = 150,
+                        Colors = new List<ProductColor>()
+                    },
+                    Quantity = 1
+                }
+            }
+        };
+
+        dbContext.Set<ShoppingCart>().Add(cart);
+        dbContext.SaveChanges();
+
+        //Act
+        shoppingCartManagement.DeleteProduct(cartId, productId);
+
+        //Assert
+        Assert.AreEqual(0, cart.ShoppingCartProducts.Count);
+
+    }
     
 }

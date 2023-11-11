@@ -94,7 +94,13 @@ namespace Data
 
         public void DeleteProduct(Guid cartId, Guid productId)
         {
-            throw new NotImplementedException();
+            ShoppingCartProducts shoppingCartProduct = Context.Set<ShoppingCartProducts>().FirstOrDefault(scp => scp.ProductId.Equals(productId)
+                && scp.ShoppingCartId.Equals(cartId));
+            if (shoppingCartProduct != null)
+            {
+                Context.Set<ShoppingCartProducts>().Remove(shoppingCartProduct);
+                Context.SaveChanges();
+            }
         }
 
     }
