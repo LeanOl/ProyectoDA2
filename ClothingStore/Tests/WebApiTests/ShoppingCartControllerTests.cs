@@ -91,4 +91,24 @@ public class ShoppingCartControllerTests
         Assert.AreEqual(expectedMappedResult.Id, resultValue.Id);
 
     }
+
+    [TestMethod]
+    public void DeleteCartProduct_Ok()
+    {
+        // Arrange
+        Guid cartId = Guid.NewGuid();
+        Guid productId = Guid.NewGuid();
+        var shoppingCartLogic = new Mock<IShoppingCartLogic>(MockBehavior.Strict);
+        shoppingCartLogic.Setup(m => m.DeleteProduct(It.IsAny<Guid>(), It.IsAny<Guid>()));
+        OkResult expectedActionResult = new OkResult();
+        var controller = new ShoppingCartController(shoppingCartLogic.Object);
+
+        // Act
+        IActionResult result = controller.DeleteCartProduct(cartId, productId);
+
+        //Assert
+        shoppingCartLogic.VerifyAll();
+        OkResult resultObject = result as OkResult;
+        Assert.AreEqual(expectedActionResult.StatusCode, resultObject.StatusCode);
+    }
 }
