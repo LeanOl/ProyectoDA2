@@ -95,6 +95,27 @@ namespace Tests.LogicTests
             // Assert
             Assert.AreEqual(expectedShoppingCart, result);
         }
+
+        [TestMethod]
+        public void DeleteProductFromCart_Ok()
+        {
+            // Arrange
+            ShoppingCart expectedShoppingCart = new ShoppingCart()
+            {
+                ShoppingCartProducts = new List<ShoppingCartProducts>(),
+            };
+            Mock<IShoppingCartManagement> shoppingCartRepository = new Mock<IShoppingCartManagement>(MockBehavior.Strict);
+            shoppingCartRepository.Setup(m => m.DeleteProduct(It.IsAny<Guid>(),It.IsAny<Guid>()));
+            Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(promotionLogic.Object ,shoppingCartRepository.Object);
+
+            // Act
+            shoppingCartLogic.DeleteProduct(Guid.NewGuid(),Guid.NewGuid());
+
+            // Assert
+            Mock.VerifyAll(shoppingCartRepository);
+            Mock.VerifyAll(promotionLogic);
+        }
     }
 
     

@@ -92,5 +92,10 @@ namespace Data
             Context.SaveChanges();
         }
 
+        public void DeleteProduct(Guid cartId, Guid productId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

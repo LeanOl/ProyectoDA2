@@ -68,5 +68,10 @@ namespace Logic
             ShoppingCart shoppingCart = _shoppingCartManagement.UpdateShoppingCart(received);
             return shoppingCart;
         }
+
+        public void DeleteProduct(Guid cartId,Guid productId)
+        {
+            _shoppingCartManagement.DeleteProduct(cartId,productId);
+        }
     }
 }
