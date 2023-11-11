@@ -8,6 +8,6 @@ namespace ILogic
     {
         void ApplyBestPromotion(ShoppingCart shoppingCart);
         ShoppingCart UpdateShoppingCart(ShoppingCart received);
-        void DeleteProduct(Guid cartId,Guid productId);
+        ShoppingCart DeleteProduct(ShoppingCart cart,Guid productId);
     }
 }

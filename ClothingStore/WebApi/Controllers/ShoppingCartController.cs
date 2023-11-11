@@ -23,10 +23,11 @@ namespace WebApi.Controllers
             return Ok(shoppingCartResponse);
         }
         [HttpDelete]
-        public IActionResult DeleteCartProduct([FromBody]Guid cartId, Guid productId)
+        public IActionResult DeleteCartProduct([FromBody]DeleteShoppingCartProductRequest received)
         {
-            _shoppingCartLogic.DeleteProduct(cartId, productId);
-            return Ok();
+            var result= _shoppingCartLogic.DeleteProduct(received.Cart.ToEntity(), received.ProductId);
+            ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse(result);
+            return Ok(shoppingCartResponse);
         }
     }
 

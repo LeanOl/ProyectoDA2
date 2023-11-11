@@ -105,12 +105,13 @@ namespace Tests.LogicTests
                 ShoppingCartProducts = new List<ShoppingCartProducts>(),
             };
             Mock<IShoppingCartManagement> shoppingCartRepository = new Mock<IShoppingCartManagement>(MockBehavior.Strict);
-            shoppingCartRepository.Setup(m => m.DeleteProduct(It.IsAny<Guid>(),It.IsAny<Guid>()));
+            shoppingCartRepository.Setup(m => m.DeleteProduct(It.IsAny<ShoppingCart>(),It.IsAny<Guid>())).Returns(expectedShoppingCart);
+            shoppingCartRepository.Setup(m => m.UpdateShoppingCart(It.IsAny<ShoppingCart>())).Returns(expectedShoppingCart);
             Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);
             IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(promotionLogic.Object ,shoppingCartRepository.Object);
 
             // Act
-            shoppingCartLogic.DeleteProduct(Guid.NewGuid(),Guid.NewGuid());
+            shoppingCartLogic.DeleteProduct(new ShoppingCart(),Guid.NewGuid());
 
             // Assert
             Mock.VerifyAll(shoppingCartRepository);

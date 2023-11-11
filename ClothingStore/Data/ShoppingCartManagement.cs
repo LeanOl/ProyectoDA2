@@ -92,15 +92,16 @@ namespace Data
             Context.SaveChanges();
         }
 
-        public void DeleteProduct(Guid cartId, Guid productId)
+        public ShoppingCart DeleteProduct(ShoppingCart cart, Guid productId)
         {
             ShoppingCartProducts shoppingCartProduct = Context.Set<ShoppingCartProducts>().FirstOrDefault(scp => scp.ProductId.Equals(productId)
-                && scp.ShoppingCartId.Equals(cartId));
+                && scp.ShoppingCartId.Equals(cart.Id));
             if (shoppingCartProduct != null)
             {
                 Context.Set<ShoppingCartProducts>().Remove(shoppingCartProduct);
                 Context.SaveChanges();
             }
+            return cart;
         }
 
     }

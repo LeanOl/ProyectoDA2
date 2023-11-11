@@ -96,19 +96,28 @@ public class ShoppingCartControllerTests
     public void DeleteCartProduct_Ok()
     {
         // Arrange
-        Guid cartId = Guid.NewGuid();
         Guid productId = Guid.NewGuid();
+        DeleteShoppingCartProductRequest request = new DeleteShoppingCartProductRequest()
+        {
+            Cart = _receivedShoppingCartRequest,
+            ProductId = productId
+        };
+        ShoppingCart expected = _expectedShoppingCart;
+        var expectedMappedResult = new ShoppingCartResponse(expected);
         var shoppingCartLogic = new Mock<IShoppingCartLogic>(MockBehavior.Strict);
-        shoppingCartLogic.Setup(m => m.DeleteProduct(It.IsAny<Guid>(), It.IsAny<Guid>()));
-        OkResult expectedActionResult = new OkResult();
+        shoppingCartLogic.Setup(m => m.DeleteProduct(It.IsAny<ShoppingCart>(), It.IsAny<Guid>())).Returns(expected);
+
+        OkObjectResult expectedActionResult = new OkObjectResult(expectedMappedResult);
         var controller = new ShoppingCartController(shoppingCartLogic.Object);
 
         // Act
-        IActionResult result = controller.DeleteCartProduct(cartId, productId);
+        IActionResult result = controller.DeleteCartProduct(request);
 
         //Assert
         shoppingCartLogic.VerifyAll();
-        OkResult resultObject = result as OkResult;
+        OkObjectResult resultObject = result as OkObjectResult;
+        ShoppingCartResponse resultValue = resultObject.Value as ShoppingCartResponse;
         Assert.AreEqual(expectedActionResult.StatusCode, resultObject.StatusCode);
+        Assert.AreEqual(resultValue.Id, resultValue.Id);
     }
 }

@@ -11,6 +11,6 @@ namespace IData
         void ClearShoppingCart(ShoppingCart shoppingCart);
         void DeleteShoppingCart(Guid userId);
         IEnumerable<ShoppingCartProducts> GetProductsInCartByUserId(Guid userId);
-        void DeleteProduct(Guid cartId, Guid productId);
+        ShoppingCart DeleteProduct(ShoppingCart cart, Guid productId);
     }
 }

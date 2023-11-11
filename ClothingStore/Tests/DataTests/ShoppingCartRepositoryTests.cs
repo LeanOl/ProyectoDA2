@@ -106,7 +106,7 @@ public class ShoppingCartRepositoryTests : ContextInMemory
         dbContext.SaveChanges();
 
         //Act
-        shoppingCartManagement.DeleteProduct(cartId, productId);
+        shoppingCartManagement.DeleteProduct(cart, productId);
 
         //Assert
         Assert.AreEqual(0, cart.ShoppingCartProducts.Count);

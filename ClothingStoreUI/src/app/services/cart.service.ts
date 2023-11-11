@@ -46,7 +46,7 @@ export class CartService {
     if (productInCart) {
       productInCart.quantity--;
       if (productInCart.quantity === 0) {
-        cart.products = cart.products.filter(p => p.productId !== product.productId);
+        return this.deleteProduct(product);
       }
       return this.updateCart(cart).pipe(
         map(() => true),
@@ -77,10 +77,24 @@ export class CartService {
   }
 
   removeFromCart(product: CartProduct): Observable<boolean> {
+    return this.deleteProduct(product);
+  }
+  deleteProduct(product: CartProduct): Observable<boolean> {
+    let productId = product.productId;
     let cartItem = localStorage.getItem('cart');
     let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
+    console.log(cart);
     cart.products = cart.products.filter(p => p.productId !== product.productId);
-    return this.updateCart(cart).pipe(
+    const options ={
+      body: {
+        cart: cart,
+        productId: productId,
+      }
+    };
+    return this.httpClient.delete<Cart>(this.cartUrl,options).pipe(
+      tap((updatedCart) => {
+        this.setCart(updatedCart);
+      }),
       map(() => true),
       catchError(error => {
         console.error(error);
