@@ -8,7 +8,7 @@
                         <p class="card-text mr-2">Email: {{ user.email }}</p>
                     </div>
                     <div *ngIf="editingEmail">
-                        <input type="text" [(ngModel)]="newEmail" class="form-control">
+                        <input type="text" [(ngModel)]="newEmail" class="form-control" placeholder="Mail">
                     </div>
                     <div class="input-group-append">
                         <div *ngIf="!editingEmail">
@@ -28,7 +28,7 @@
                         <p class="card-text">Role: {{ user.role }}</p>
                     </div>
                     <div *ngIf="editingRole">
-                        <input type="text" [(ngModel)]="newRole" class="form-control">
+                        <input type="text" [(ngModel)]="newRole" class="form-control" placeholder="Role">
                     </div>
                     <div class="input-group-append">
                         <div *ngIf="!editingRole">
@@ -48,7 +48,7 @@
                         <p class="card-text">Delivery Address: {{ user.deliveryAddress }}</p>
                     </div>
                     <div *ngIf="editingDeliveryAddress">
-                        <input type="text" [(ngModel)]="newDeliveryAddress" class="form-control">
+                        <input type="text" [(ngModel)]="newDeliveryAddress" class="form-control" placeholder="Address">
                     </div>
                     <div class="input-group-append">
                         <div *ngIf="!editingDeliveryAddress">

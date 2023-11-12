@@ -27,6 +27,9 @@ namespace ServicesFactory
             serviceCollection.AddScoped<IProductManagement, ProductManagement>();
             serviceCollection.AddScoped<IShoppingCartLogic, ShoppingCartLogic>();
             serviceCollection.AddScoped<IShoppingCartManagement, ShoppingCartManagement>();
+            serviceCollection.AddScoped<IPurchaseLogic, PurchaseLogic>();
+            serviceCollection.AddScoped<IPurchaseManagement, PurchaseManagement>();
+
 
 
         }

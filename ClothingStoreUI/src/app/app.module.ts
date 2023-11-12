@@ -19,6 +19,7 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { UserManagementComponent } from './components/user/user-management/user-management.component';
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.component';
+import { CartInfoComponent } from './components/cart/cart-info/cart-info.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.compone
     UserListComponent,
     UserManagementComponent,
     CartItemComponent,
-    CartMenuComponent
+    CartMenuComponent,
+    CartInfoComponent
   ],
   imports: [
     BrowserModule,

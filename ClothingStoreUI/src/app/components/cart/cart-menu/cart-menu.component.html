@@ -1,8 +1,16 @@
-<div class="cart-menu">
+<div class="container">
   <h2>Your Cart</h2>
-  <ul>
-    <li *ngFor="let item of cart.products">
-      <app-cart-item [item]="item" (itemUpdated)="onItemUpdated($event)"></app-cart-item>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-md-8">
+      <ul>
+        <li *ngFor="let item of cart.products">
+          <app-cart-item [item]="item" (itemUpdated)="onItemUpdated($event)"></app-cart-item>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <hr class="d-md-none">
+      <app-cart-info></app-cart-info>
+    </div>
+  </div>
 </div>

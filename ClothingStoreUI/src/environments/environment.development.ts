@@ -4,4 +4,5 @@ export const environment = {
     sessionsEndpoint: '/sessions',
     usersEndpoint: '/users',
     cartEndpoint: '/carts',
+    purchaseEndpoint: '/purchases',
 };

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
+    [Route("api/purchases")]
     public class PurchaseController : ControllerBase
     {
         IPurchaseLogic _purchaseLogic;

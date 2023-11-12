@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Product } from '../models/product.model';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { CartProduct } from '../models/cart-product.model';
+import { PurchaseRes } from '../models/purchase-res.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { CartProduct } from '../models/cart-product.model';
 export class CartService {
 
   cartUrl = environment.apiUrl + environment.cartEndpoint;
+  purchaseUrl = environment.apiUrl + environment.purchaseEndpoint;
   constructor(private httpClient:HttpClient) { }
 
   setCart(cart: Cart): void {
@@ -106,5 +108,24 @@ export class CartService {
   getCart(): Cart {
     return JSON.parse(localStorage.getItem('cart') || '{ products: [] }');
   }
+  clearLocalCartProducts(): void {
+    let cart =localStorage.getItem('cart');
+    if(cart){
+      let cartObj:Cart = JSON.parse(cart);
+      cartObj.products = [];
+      cartObj.totalPrice = 0;
+      cartObj.discount = 0;
+      cartObj.finalPrice = 0;
+      cartObj.promotionName = "";
+      this.setCart(cartObj);
+    }
+  }
 
+  makePurchase(paymentMethod:string): Observable<PurchaseRes> {
+    const purchaseReq = {
+      userId: this.getCart().userId,
+      paymentMethod: paymentMethod
+    }
+    return this.httpClient.post<PurchaseRes>(this.purchaseUrl, purchaseReq)
+  }
 }

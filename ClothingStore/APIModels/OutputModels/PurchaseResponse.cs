@@ -9,7 +9,7 @@ public class PurchaseResponse
     public List<PurchaseProductResponse> Products { get; set; }
     public decimal TotalPrice { get; set; }
     public decimal TotalDiscount { get; set; }
-    public decimal TotalPriceWithDiscount { get; set; }
+    public decimal FinalPrice { get; set; }
     public DateTime Date { get; set; }
    
 
@@ -20,7 +20,7 @@ public class PurchaseResponse
         Products = purchase.Products.Select(p => new PurchaseProductResponse(p)).ToList();
         TotalPrice = purchase.TotalPrice;
         TotalDiscount = purchase.Discount;
-        TotalPriceWithDiscount = purchase.FinalPrice;
+        FinalPrice = purchase.FinalPrice;
         Date = purchase.Date;
     }
 }
