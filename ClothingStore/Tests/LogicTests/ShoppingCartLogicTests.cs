@@ -118,6 +118,29 @@ namespace Tests.LogicTests
             Mock.VerifyAll(shoppingCartRepository);
             Mock.VerifyAll(promotionLogic);
         }
+
+        [TestMethod]
+        public void GetCartByUserId_Ok()
+        {
+            // Arrange
+            ShoppingCart expectedShoppingCart = new ShoppingCart()
+            {
+                ShoppingCartProducts = new List<ShoppingCartProducts>(),
+            };
+            Mock<IShoppingCartManagement> shoppingCartRepository = new Mock<IShoppingCartManagement>(MockBehavior.Strict);
+            shoppingCartRepository.Setup(m => m.GetShoppingCartByUserId(It.IsAny<Guid>())).Returns(expectedShoppingCart);
+            Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+            IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(promotionLogic.Object ,shoppingCartRepository.Object);
+
+            // Act
+            ShoppingCart actualCart=shoppingCartLogic.GetShoppingCartByUserId(Guid.NewGuid());
+
+            // Assert
+            Mock.VerifyAll(shoppingCartRepository);
+            Mock.VerifyAll(promotionLogic);
+            Assert.AreEqual(expectedShoppingCart,actualCart);
+        }
+        
     }
 
     
