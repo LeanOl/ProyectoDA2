@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -8,8 +8,10 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart-info.component.css']
 })
 export class CartInfoComponent {
+  @Output() purchaseSuccessful = new EventEmitter<boolean>();
   cart : Cart = {} as Cart ;
-  paymentMethod: string = "cash";
+  paymentMethod: string = "visa";
+  showErrorMessage: boolean = false;
 
   constructor(private cartService: CartService) { }
 
@@ -22,9 +24,13 @@ export class CartInfoComponent {
       {
         next: (res) => {
           this.cartService.clearLocalCartProducts();
+          this.purchaseSuccessful.emit(true);
         },
         error: (err) => {
-          console.error(err);
+          this.showErrorMessage = true;
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 3000);
         }
       }
     );

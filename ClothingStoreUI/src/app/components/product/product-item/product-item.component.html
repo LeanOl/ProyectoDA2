@@ -11,4 +11,11 @@
       <button class="btn btn-primary mt-3" routerLink="/viewproduct" (click)="setActiveProduct()">View product page</button>
     </div>
   </div>
+  <div class="alert alert-success" role="alert" *ngIf="showAlert">
+    Product added to cart!
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="showErrorAlert">
+    There was an error adding the product to the cart. Please try again later.
+  </div>
 </div>
+

@@ -20,7 +20,7 @@ public class PurchaseLogic : IPurchaseLogic
         Guid userId = purchaseRequest.UserId;
         ShoppingCart shoppingCart = _shoppingCartManagement.GetShoppingCartByUserId(userId);
         List<ShoppingCartProducts>? shoppingCartProducts = shoppingCart.ShoppingCartProducts;
-        if (shoppingCartProducts == null)
+        if (shoppingCartProducts == null || shoppingCartProducts.Count == 0)
         {
             throw new EmptyProductsPurchaseException(LogicExceptionMessages.EmptyCartMessage);
         }

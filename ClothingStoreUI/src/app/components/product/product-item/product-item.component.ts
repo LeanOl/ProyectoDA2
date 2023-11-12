@@ -8,15 +8,33 @@ import { CartService } from 'src/app/services/cart.service';
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.css'],
 })
-
 export class ProductItemComponent {
   @Input() product: Product;
+  showAlert: boolean = false;
+  showErrorAlert: boolean = false;
+
 
   addToCart() {
-    this.cartService.addToCart(this.product).subscribe();
+    this.cartService.addToCart(this.product).subscribe({
+      next: (cart) => {
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 3000);
+      },
+      error: (err) => {
+        this.showErrorAlert = true;
+        setTimeout(() => {
+          this.showErrorAlert = false;
+        }, 3000);
+      },
+    });
   }
 
-  constructor(private productService: ProductService, private cartService: CartService) {
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {
     this.product = {
       id: 'abcd',
       name: 'Default',

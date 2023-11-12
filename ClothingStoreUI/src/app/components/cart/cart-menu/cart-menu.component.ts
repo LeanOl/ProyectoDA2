@@ -10,17 +10,33 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartMenuComponent {
 
   cart = this.cartService.getCart();
+  successfulPurchase: boolean = false;
+  showCartUpdate: boolean = false;
+  cartUpdatedCorrectly: boolean = false;
 
   constructor(private cartService: CartService) { }
 
   onItemUpdated(success: boolean): void {
     if (success) {
       this.cart = this.cartService.getCart();
-      alert("Success");
+      this.cartUpdatedCorrectly = true;
+      this.showCartUpdate = true;
+      setTimeout(() => {
+        this.showCartUpdate = false;
+      }, 3000);
     }else
     {
-      alert("Error");
+      this.cartUpdatedCorrectly = false;
+      this.showCartUpdate = true;
+      setTimeout(() => {
+        this.showCartUpdate = false;
+      }, 3000);
     }
   }
 
+  onPurchase(succcess:boolean): void {
+    if (succcess) {
+      this.successfulPurchase = true;
+    }
+  }
 }

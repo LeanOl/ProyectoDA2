@@ -1,16 +1,48 @@
 <div class="container">
-  <h2>Your Cart</h2>
-  <div class="row">
-    <div class="col-md-8">
-      <ul>
-        <li *ngFor="let item of cart.products">
-          <app-cart-item [item]="item" (itemUpdated)="onItemUpdated($event)"></app-cart-item>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-4">
-      <hr class="d-md-none">
-      <app-cart-info></app-cart-info>
+  <div *ngIf="!successfulPurchase; else successfulPurchaseAlert">
+    <h2>Your Cart</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <div *ngIf="cart.products.length === 0" class="alert" role="alert">
+          <p>Your cart is currently empty!</p>
+          <p>Go to the products page to add some products to your cart.</p>
+          <a routerLink="/products" class="btn btn-primary">Go to products</a>
+        </div>
+        <div *ngIf="showCartUpdate">
+          <div
+            *ngIf="cartUpdatedCorrectly; else incorrectCartUpdate"
+            class="alert alert-success"
+            role="alert"
+          >
+            Cart updated successfully!
+          </div>
+          <ng-template #incorrectCartUpdate>
+            <div class="alert alert-danger" role="alert">
+              There was an error updating the cart. Please try again later.
+            </div>
+          </ng-template>
+        </div>
+        <ul>
+          <li *ngFor="let item of cart.products">
+            <app-cart-item
+              [item]="item"
+              (itemUpdated)="onItemUpdated($event)"
+            ></app-cart-item>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <hr class="d-md-none" />
+        <app-cart-info
+          (purchaseSuccessful)="onPurchase($event)"
+        ></app-cart-info>
+      </div>
     </div>
   </div>
+  <ng-template #successfulPurchaseAlert>
+    <div class="alert alert-success mt-4" role="alert">
+      Purchase successful!
+      <a routerLink="" class="btn btn-light ml-2">Go back to start</a>
+    </div>
+  </ng-template>
 </div>
