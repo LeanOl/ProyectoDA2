@@ -120,4 +120,27 @@ public class ShoppingCartControllerTests
         Assert.AreEqual(expectedActionResult.StatusCode, resultObject.StatusCode);
         Assert.AreEqual(resultValue.Id, resultValue.Id);
     }
+
+    [TestMethod]
+    public void GetCartByUserId_Ok()
+    {
+        // Arrange
+        ShoppingCart expected = _expectedShoppingCart;
+        Guid userId = expected.UserId;
+        var expectedMappedResult = new ShoppingCartResponse(expected);
+        var shoppingCartLogic = new Mock<IShoppingCartLogic>(MockBehavior.Strict);
+        shoppingCartLogic.Setup(m => m.GetShoppingCartByUserId(It.IsAny<Guid>())).Returns(expected);
+        OkObjectResult expectedActionResult = new OkObjectResult(expectedMappedResult);
+
+        // Act
+        IActionResult result = new ShoppingCartController(shoppingCartLogic.Object).GetCartByUserId(userId);
+
+        // Assert
+        shoppingCartLogic.VerifyAll();
+        OkObjectResult resultObject = result as OkObjectResult;
+        ShoppingCartResponse resultValue = resultObject.Value as ShoppingCartResponse;
+        Assert.AreEqual(expectedActionResult.StatusCode, resultObject.StatusCode);
+        Assert.AreEqual(expectedMappedResult.Id, resultValue.Id);
+
+    }
 }

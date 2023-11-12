@@ -108,6 +108,7 @@ namespace Tests.LogicTests
             shoppingCartRepository.Setup(m => m.DeleteProduct(It.IsAny<ShoppingCart>(),It.IsAny<Guid>())).Returns(expectedShoppingCart);
             shoppingCartRepository.Setup(m => m.UpdateShoppingCart(It.IsAny<ShoppingCart>())).Returns(expectedShoppingCart);
             Mock<IPromotionLogic> promotionLogic = new Mock<IPromotionLogic>(MockBehavior.Strict);
+            promotionLogic.Setup(h => h.GetPromotions()).Returns(new List<IPromotion>());
             IShoppingCartLogic shoppingCartLogic = new ShoppingCartLogic(promotionLogic.Object ,shoppingCartRepository.Object);
 
             // Act

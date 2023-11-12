@@ -29,6 +29,13 @@ namespace WebApi.Controllers
             ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse(result);
             return Ok(shoppingCartResponse);
         }
+        [HttpGet("{userId}")]
+        public IActionResult GetCartByUserId([FromRoute]Guid userId)
+        {
+            var result = _shoppingCartLogic.GetShoppingCartByUserId(userId);
+            ShoppingCartResponse shoppingCartResponse = new ShoppingCartResponse(result);
+            return Ok(shoppingCartResponse);
+        }
     }
 
 }

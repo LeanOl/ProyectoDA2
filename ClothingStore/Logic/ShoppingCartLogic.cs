@@ -75,5 +75,10 @@ namespace Logic
             ShoppingCart returnedShoppingCart= UpdateShoppingCart(result);
             return returnedShoppingCart;
         }
+
+        public ShoppingCart GetShoppingCartByUserId(Guid userId)
+        {
+            return _shoppingCartManagement.GetShoppingCartByUserId(userId);
+        }
     }
 }

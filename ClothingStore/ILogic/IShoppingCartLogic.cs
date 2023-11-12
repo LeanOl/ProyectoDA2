@@ -9,5 +9,6 @@ namespace ILogic
         void ApplyBestPromotion(ShoppingCart shoppingCart);
         ShoppingCart UpdateShoppingCart(ShoppingCart received);
         ShoppingCart DeleteProduct(ShoppingCart cart,Guid productId);
+        ShoppingCart GetShoppingCartByUserId(Guid userId);
     }
 }
