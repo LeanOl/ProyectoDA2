@@ -34,6 +34,7 @@
       <div class="col-md-4">
         <hr class="d-md-none" />
         <app-cart-info
+          [cart]="cart"
           (purchaseSuccessful)="onPurchase($event)"
         ></app-cart-info>
       </div>

@@ -6,6 +6,7 @@ import { Product } from '../models/product.model';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { CartProduct } from '../models/cart-product.model';
 import { PurchaseRes } from '../models/purchase-res.model';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class CartService {
   }
 
   addToCart(product: Product): Observable<Cart> {
-    let cartItem = localStorage.getItem('cart');
-    let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
+
+    let cart = this.getCart();
     if (cart.products.some(p => p.productId == product.id)) {
       let productInCart = cart.products.find(p => p.productId === product.id);
       if (productInCart) {
@@ -31,32 +32,28 @@ export class CartService {
     }else {
       cart.products.push({ productId: product.id, quantity: 1 ,product:product});
     }
-    return this.updateCart(cart);
-
-  }
-
-  updateCart(cart: Cart): Observable<Cart> {
-    return this.httpClient.put<Cart>(this.cartUrl, cart).pipe(
-      tap(updatedCart => this.setCart(updatedCart))
-    );
+    if(this.isLogged()){
+      return this.addToCartLogged(cart);
+    }else{
+      return this.updateCartNotLogged(cart);
+    }
   }
 
   decreaseQuantity(product: CartProduct): Observable<boolean> {
-    let cartItem = localStorage.getItem('cart');
-    let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
+    let cart = this.getCart();
     let productInCart = cart.products.find(p => p.productId === product.productId);
     if (productInCart) {
       productInCart.quantity--;
       if (productInCart.quantity === 0) {
         return this.deleteProduct(product);
       }
-      return this.updateCart(cart).pipe(
-        map(() => true),
-        catchError(error => {
-          console.error(error);
-          return of(false);
-        })
-      );
+      if(this.isLogged()){
+        return this.decreaseQuantityLogged(cart);
+      }else{
+        this.updateCartNotLogged(cart);
+        return of(true);
+      }
+    
     }
     return of(false);
   }
@@ -67,13 +64,13 @@ export class CartService {
     let productInCart = cart.products.find(p => p.productId === product.productId);
     if (productInCart) {
       productInCart.quantity++;
-      return this.updateCart(cart).pipe(
-        map(() => true),
-        catchError(error => {
-          console.error(error);
-          return of(false);
-        })
-      );
+      if(this.isLogged()){
+        return this.increaseQuantityLogged(cart);
+      }
+      else{
+        this.updateCartNotLogged(cart);
+        return of(true);
+      }
     }
     return of(false);
   }
@@ -83,30 +80,27 @@ export class CartService {
   }
   deleteProduct(product: CartProduct): Observable<boolean> {
     let productId = product.productId;
-    let cartItem = localStorage.getItem('cart');
-    let cart: Cart = cartItem ? JSON.parse(cartItem) : { products: [] };
-    console.log(cart);
+    let cart = this.getCart();
     cart.products = cart.products.filter(p => p.productId !== product.productId);
-    const options ={
-      body: {
-        cart: cart,
-        productId: productId,
-      }
-    };
-    return this.httpClient.delete<Cart>(this.cartUrl,options).pipe(
-      tap((updatedCart) => {
-        this.setCart(updatedCart);
-      }),
-      map(() => true),
-      catchError(error => {
-        console.error(error);
-        return of(false);
-      })
-    );
+    
+    if(this.isLogged()){
+      return this.deleteProductLogged(productId,cart);
+    }
+    else{
+      this.updateCartNotLogged(cart);
+      return of(true);
+    }
   }
 
   getCart(): Cart {
-    return JSON.parse(localStorage.getItem('cart') || '{ products: [] }');
+    let cart = localStorage.getItem('cart');
+    let parsedCart: Cart;
+    if (!cart) {
+      parsedCart = { id: '', userId: '', products: [], totalPrice: 0, discount: 0, finalPrice: 0, promotionName: ''};
+    } else {
+      parsedCart = JSON.parse(cart);
+    }
+    return parsedCart;
   }
   clearLocalCartProducts(): void {
     let cart =localStorage.getItem('cart');
@@ -127,5 +121,79 @@ export class CartService {
       paymentMethod: paymentMethod
     }
     return this.httpClient.post<PurchaseRes>(this.purchaseUrl, purchaseReq)
+  }
+
+  fuseCarts(cart:Cart): Observable<Cart> {
+    let localCart = this.getCart();
+    let fusedCart:Cart;
+    localCart.products.forEach(product => {
+      if(cart.products.some(p => p.productId == product.productId)){
+        let productInCart = cart.products.find(p => p.productId === product.productId);
+        if (productInCart) {
+          productInCart.quantity += product.quantity;
+        }
+      }else{
+        cart.products.push(product);
+      }
+    });
+    fusedCart = cart;
+    return this.updateCart(fusedCart);
+  }
+  private updateCart(cart: Cart): Observable<Cart> {
+    return this.httpClient.put<Cart>(this.cartUrl, cart).pipe(
+      tap(updatedCart => this.setCart(updatedCart))
+    );
+  }
+
+  private addToCartLogged(cart: Cart): Observable<Cart> {
+    return this.updateCart(cart);
+  }
+
+  private updateCartNotLogged(cart: Cart): Observable<Cart> {
+    this.setCart(cart);
+    return of(cart);
+  }
+
+  private decreaseQuantityLogged(cart: Cart): Observable<boolean> {
+    return this.updateCart(cart).pipe(
+      map(() => true),
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
+  }
+
+  private increaseQuantityLogged(cart: Cart): Observable<boolean> {
+    return this.updateCart(cart).pipe(
+      map(() => true),
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
+  }
+
+  private deleteProductLogged(productId:String, cart:Cart): Observable<boolean> {
+    const options ={
+      body: {
+        cart: cart,
+        productId: productId,
+      }
+    };
+    return this.httpClient.delete<Cart>(this.cartUrl,options).pipe(
+      tap((updatedCart) => {
+        this.setCart(updatedCart);
+      }),
+      map(() => true),
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
+  }
+
+  private isLogged(): boolean {
+    return localStorage.getItem('token') !== null;
   }
 }

@@ -3,6 +3,7 @@ import { Observable, map ,catchError, of} from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../models/login-response.model';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class SessionService {
 
   private sessionUrl = environment.apiUrl + environment.sessionsEndpoint;
 
-  constructor(private httpClient:HttpClient) {
+  constructor(private httpClient:HttpClient,private cartService:CartService) {
   }
 
   login(email: string, password: string): Observable<boolean> {
@@ -63,7 +64,10 @@ export class SessionService {
     localStorage.setItem('token', loginResponse.token);
     localStorage.setItem('email', loginResponse.email);
     localStorage.setItem('role', loginResponse.role.toLowerCase());
-    localStorage.setItem('cart', JSON.stringify(loginResponse.cart));
+    if(loginResponse.cart !== undefined){
+      this.cartService.fuseCarts(loginResponse.cart).subscribe();
+    }
+    
   }
 
   private postLogout(): Observable<boolean> {

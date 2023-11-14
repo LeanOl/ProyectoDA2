@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -9,15 +9,11 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartInfoComponent {
   @Output() purchaseSuccessful = new EventEmitter<boolean>();
-  cart : Cart = {} as Cart ;
+  @Input() cart : Cart = {} as Cart;
   paymentMethod: string = "visa";
   showErrorMessage: boolean = false;
 
   constructor(private cartService: CartService) { }
-
-  ngOnInit(): void {
-    this.cart=this.cartService.getCart()
-  }
 
   makePurchase(){
     this.cartService.makePurchase(this.paymentMethod).subscribe(
