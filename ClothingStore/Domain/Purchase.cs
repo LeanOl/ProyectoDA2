@@ -13,4 +13,5 @@ public class Purchase
     public string PaymentMethod { get; set; }
     public DateTime Date { get; set; }
 
+    
 }

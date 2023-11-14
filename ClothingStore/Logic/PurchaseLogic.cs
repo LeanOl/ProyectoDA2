@@ -46,12 +46,13 @@ public class PurchaseLogic : IPurchaseLogic
 
     public IEnumerable<Purchase> GetAllPurchases()
     {
-        throw new NotImplementedException();
+        return _purchaseManagement.GetAllPurchases();
+
     }
 
     public IEnumerable<Purchase> GetPurchasesByUser(Guid userId)
     {
-        throw new NotImplementedException();
+        return _purchaseManagement.GetPurchasesByUser(userId);
     }
 
 }
