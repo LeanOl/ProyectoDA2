@@ -21,6 +21,7 @@ import { CartItemComponent } from './components/cart/cart-item/cart-item.compone
 import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.component';
 import { CartInfoComponent } from './components/cart/cart-info/cart-info.component';
 import { RegisterFormComponent } from './components/session/register-form/register-form.component';
+import { PurchaseListComponent } from './components/purchase/purchase-list/purchase-list.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RegisterFormComponent } from './components/session/register-form/regist
     CartItemComponent,
     CartMenuComponent,
     CartInfoComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    PurchaseListComponent
   ],
   imports: [
     BrowserModule,
