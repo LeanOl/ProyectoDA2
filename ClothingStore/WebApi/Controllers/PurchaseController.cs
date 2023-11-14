@@ -22,5 +22,13 @@ namespace WebApi.Controllers
 
             return CreatedAtAction(nameof(CreatePurchase), new { id = created.Id }, response);
         }
+
+        public IActionResult GetAllPurchases()
+        {
+            var purchases = _purchaseLogic.GetAllPurchases();
+            List<PurchaseResponse> response = purchases.Select(p => new PurchaseResponse(p)).ToList();
+
+            return Ok(response);
+        }
     }
 }

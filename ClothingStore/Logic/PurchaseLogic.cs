@@ -44,4 +44,9 @@ public class PurchaseLogic : IPurchaseLogic
         return createdPurchase;
     }
 
+    public IEnumerable<Purchase> GetAllPurchases()
+    {
+        throw new NotImplementedException();
+    }
+
 }
