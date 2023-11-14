@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainMenuOptionsComponent } from './components/main-menu-options/main-menu-options.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginFormComponent } from './components/session/login-form/login-form.component';
 import { ProductItemComponent } from './components/product/product-item/product-item.component';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +20,7 @@ import { UserManagementComponent } from './components/user/user-management/user-
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.component';
 import { CartInfoComponent } from './components/cart/cart-info/cart-info.component';
+import { RegisterFormComponent } from './components/session/register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CartInfoComponent } from './components/cart/cart-info/cart-info.compone
     UserManagementComponent,
     CartItemComponent,
     CartMenuComponent,
-    CartInfoComponent
+    CartInfoComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,

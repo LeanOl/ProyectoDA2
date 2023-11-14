@@ -7,13 +7,16 @@
         </div>
         <div class="card-body">
           <form #loginDataForm="ngForm" (submit)="login()">
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="email">E-Mail</label>
               <input type="text" [(ngModel)] = "formEmail" class="form-control" id="email" placeholder="Enter E-Mail" [ngModelOptions]="{standalone: true} ">
             </div>
             <div class="form-group mb-3">
               <label for="password">Password</label>
               <input type="password" [(ngModel)] = "formPassword" class="form-control" id="password" placeholder="Password" [ngModelOptions]="{standalone: true} ">
+            </div>
+            <div class="mb-2">
+              <a routerLink="/register">Dont have an account? Sign up here</a>
             </div>
             <button type="submit" class="btn btn-primary">LogIn</button>
           </form>

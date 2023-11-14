@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { UserRegister } from '../models/user-register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,11 @@ export class UserService {
   getUserToManage() : User {
     return this.userToManage;
   }
+
+   registerUser(user: UserRegister) : Observable<User> {
+    return this.httpClient.post<User>(this.userUrl, user);
+  }
+
   private getHttpAuthorizationHeaders(): HttpHeaders {
    
     let token = localStorage.getItem('token') || '';
