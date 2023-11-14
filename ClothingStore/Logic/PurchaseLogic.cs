@@ -49,4 +49,9 @@ public class PurchaseLogic : IPurchaseLogic
         throw new NotImplementedException();
     }
 
+    public IEnumerable<Purchase> GetPurchasesByUser(Guid userId)
+    {
+        throw new NotImplementedException();
+    }
+
 }
