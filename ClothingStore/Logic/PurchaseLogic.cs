@@ -38,6 +38,8 @@ public class PurchaseLogic : IPurchaseLogic
             Date = DateTime.Now,
             PaymentMethod = purchaseRequest.PaymentMethod
         };
+        ApplyPaymentMethodDiscount(purchase);
+        
         Purchase createdPurchase = _purchaseManagement.AddPurchase(purchase);
         _shoppingCartManagement.ClearShoppingCart(shoppingCart);
 
@@ -55,4 +57,12 @@ public class PurchaseLogic : IPurchaseLogic
         return _purchaseManagement.GetPurchasesByUser(userId);
     }
 
+    private void ApplyPaymentMethodDiscount(Purchase purchase)
+    {
+        if (purchase.PaymentMethod.ToLower() == "paganza")
+        {
+            purchase.FinalPrice *= 0.9m;
+            purchase.Discount = purchase.TotalPrice - purchase.FinalPrice;
+        }
+    }
 }

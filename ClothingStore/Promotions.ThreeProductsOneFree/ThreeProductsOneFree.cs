@@ -1,5 +1,4 @@
-﻿using Domain;
-using IPromotionProject;
+﻿using IPromotionProject;
 
 namespace Promotions
 {

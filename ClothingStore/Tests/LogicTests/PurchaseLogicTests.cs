@@ -39,9 +39,9 @@ public class PurchaseLogicTests
             Id = Guid.NewGuid(),
             UserId = userId,
             ShoppingCartProducts = _userShoppingCartProducts,
-            TotalPrice = 10,
-            FinalPrice = 10,
-            Discount = 0,
+            TotalPrice = 50,
+            FinalPrice = 40,
+            Discount = 10,
             PromotionName = null,
         };
 
@@ -62,9 +62,9 @@ public class PurchaseLogicTests
             Id = Guid.NewGuid(),
             UserId = userId,
             Products = _expectedPurchaseProducts,
-            TotalPrice = 10,
-            FinalPrice = 10,
-            Discount = 0,
+            TotalPrice = 50,
+            FinalPrice = 40,
+            Discount = 10,
             PromotionName = null,
         };
     }
@@ -84,7 +84,7 @@ public class PurchaseLogicTests
         PurchaseLogic purchaseLogic = new PurchaseLogic(mockPurchaseManagement.Object, mockShoppingCartManagement.Object);
         
         // Act
-        Purchase result=purchaseLogic.CreatePurchase(new PurchaseRequest() { UserId = _expectedPurchase.UserId });
+        Purchase result=purchaseLogic.CreatePurchase(new PurchaseRequest() { UserId = _expectedPurchase.UserId, PaymentMethod = "cash"});
 
         // Assert
         mockShoppingCartManagement.VerifyAll();
@@ -150,5 +150,7 @@ public class PurchaseLogicTests
         CollectionAssert.AreEquivalent(expectedPurchases, result);
 
     }
+
+    
     
 }
