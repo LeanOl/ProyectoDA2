@@ -44,6 +44,10 @@ const routes: Routes = [
     component: PurchaseListComponent
   },
   {
+    path: 'purchases/:userId',
+    component: PurchaseListComponent
+  },
+  {
     path: '',
     component: MainMenuComponent
   },
