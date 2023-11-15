@@ -9,6 +9,7 @@ import { UserManagementComponent } from './components/user/user-management/user-
 import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.component';
 import { RegisterFormComponent } from './components/session/register-form/register-form.component';
 import { PurchaseListComponent } from './components/purchase/purchase-list/purchase-list.component';
+import { CreateProductComponent } from './components/product/create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'purchases/:userId',
     component: PurchaseListComponent
+  },
+  {
+    path: 'products/create',
+    component: CreateProductComponent
   },
   {
     path: '',

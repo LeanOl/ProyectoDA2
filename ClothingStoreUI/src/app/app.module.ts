@@ -8,7 +8,7 @@ import { LoginFormComponent } from './components/session/login-form/login-form.c
 import { ProductItemComponent } from './components/product/product-item/product-item.component';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { AdminMenuComponent } from './components/menu/admin-menu/admin-menu.component';
 import { MainMenuComponent } from './components/menu/main-menu/main-menu.component';
@@ -25,6 +25,7 @@ import { PurchaseListComponent } from './components/purchase/purchase-list/purch
 import { PurchaseItemComponent } from './components/purchase/purchase-item/purchase-item.component';
 import { PurchaseProductComponent } from './components/purchase/purchase-product/purchase-product.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateProductComponent } from './components/product/create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -47,16 +48,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterFormComponent,
     PurchaseListComponent,
     PurchaseItemComponent,
-    PurchaseProductComponent
+    PurchaseProductComponent,
+    CreateProductComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

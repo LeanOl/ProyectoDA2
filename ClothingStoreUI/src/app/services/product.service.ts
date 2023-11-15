@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductCreateRequest } from '../models/product-create-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,8 @@ export class ProductService {
   }
   setActiveProduct(product: Product): void {
     this.activeProduct = product;
+  }
+  createProduct(product: ProductCreateRequest): Observable<Product> {
+    return this.http.post<Product>(this.productUrl, product);
   }
 }
