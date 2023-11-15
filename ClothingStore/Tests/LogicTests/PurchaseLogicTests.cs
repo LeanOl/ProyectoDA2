@@ -39,9 +39,9 @@ public class PurchaseLogicTests
             Id = Guid.NewGuid(),
             UserId = userId,
             ShoppingCartProducts = _userShoppingCartProducts,
-            TotalPrice = 10,
-            FinalPrice = 10,
-            Discount = 0,
+            TotalPrice = 50,
+            FinalPrice = 40,
+            Discount = 10,
             PromotionName = null,
         };
 
@@ -62,9 +62,9 @@ public class PurchaseLogicTests
             Id = Guid.NewGuid(),
             UserId = userId,
             Products = _expectedPurchaseProducts,
-            TotalPrice = 10,
-            FinalPrice = 10,
-            Discount = 0,
+            TotalPrice = 50,
+            FinalPrice = 40,
+            Discount = 10,
             PromotionName = null,
         };
     }
@@ -150,5 +150,7 @@ public class PurchaseLogicTests
         CollectionAssert.AreEquivalent(expectedPurchases, result);
 
     }
+
+    
     
 }
