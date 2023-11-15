@@ -13,5 +13,22 @@ public class Purchase
     public string PaymentMethod { get; set; }
     public DateTime Date { get; set; }
 
-    
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is Purchase)
+        {
+            var purchase = obj as Purchase;
+            return this.Id.Equals(purchase.Id) &&
+                   this.UserId.Equals(purchase.UserId);
+        }
+
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, UserId);
+    }
+
 }

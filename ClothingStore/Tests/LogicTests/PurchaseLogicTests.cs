@@ -125,7 +125,7 @@ public class PurchaseLogicTests
 
         // Assert
         mockPurchaseManagement.VerifyAll();
-        Assert.AreEqual(expectedPurchases[0].Id, result[0].Id);
+        CollectionAssert.AreEquivalent(expectedPurchases, result);
         
     }
 
@@ -147,7 +147,7 @@ public class PurchaseLogicTests
 
         // Assert
         mockPurchaseManagement.VerifyAll();
-        Assert.AreEqual(expectedPurchases[0].Id, result[0].Id);
+        CollectionAssert.AreEquivalent(expectedPurchases, result);
 
     }
     
