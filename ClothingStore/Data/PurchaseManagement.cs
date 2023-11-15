@@ -17,4 +17,14 @@ public class PurchaseManagement : GenericRepository<Purchase> , IPurchaseManagem
         Context.SaveChanges();
         return purchase;
     }
+
+    public IEnumerable<Purchase> GetAllPurchases()
+    {
+        return Context.Set<Purchase>().Include(purchase => purchase.Products).ThenInclude(product => product.Product);
+    }
+
+    public IEnumerable<Purchase> GetPurchasesByUser(Guid userId)
+    {
+        return Context.Set<Purchase>().Include(purchase => purchase.Products).ThenInclude(product => product.Product).Where(purchase => purchase.UserId == userId);
+    }
 }

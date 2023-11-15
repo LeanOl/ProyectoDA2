@@ -106,5 +106,49 @@ public class PurchaseLogicTests
         // Assert
         Assert.ThrowsException<EmptyProductsPurchaseException>(() => purchaseLogic.CreatePurchase(new PurchaseRequest() { UserId = _expectedPurchase.UserId }));
     }
+
+    [TestMethod]
+    public void GetAllPurchases_Ok()
+    {
+        // Arrange
+        List<Purchase> expectedPurchases = new List<Purchase>
+        {
+            _expectedPurchase
+        };
+        Mock<IPurchaseManagement> mockPurchaseManagement = new Mock<IPurchaseManagement>(MockBehavior.Strict);
+        Mock<IShoppingCartManagement> mockShoppingCartManagement = new Mock<IShoppingCartManagement>();
+        mockPurchaseManagement.Setup(x => x.GetAllPurchases()).Returns(expectedPurchases);
+        PurchaseLogic purchaseLogic = new PurchaseLogic(mockPurchaseManagement.Object, mockShoppingCartManagement.Object);
+
+        // Act
+        List<Purchase> result = purchaseLogic.GetAllPurchases().ToList();
+
+        // Assert
+        mockPurchaseManagement.VerifyAll();
+        CollectionAssert.AreEquivalent(expectedPurchases, result);
+        
+    }
+
+    [TestMethod]
+    public void GetPurchasesByUser_Ok()
+    {
+        // Arrange
+        List<Purchase> expectedPurchases = new List<Purchase>
+        {
+            _expectedPurchase
+        };
+        Mock<IPurchaseManagement> mockPurchaseManagement = new Mock<IPurchaseManagement>(MockBehavior.Strict);
+        Mock<IShoppingCartManagement> mockShoppingCartManagement = new Mock<IShoppingCartManagement>();
+        mockPurchaseManagement.Setup(x => x.GetPurchasesByUser(It.IsAny<Guid>())).Returns(expectedPurchases);
+        PurchaseLogic purchaseLogic = new PurchaseLogic(mockPurchaseManagement.Object, mockShoppingCartManagement.Object);
+
+        // Act
+        List<Purchase> result = purchaseLogic.GetPurchasesByUser(_expectedPurchase.UserId).ToList();
+
+        // Assert
+        mockPurchaseManagement.VerifyAll();
+        CollectionAssert.AreEquivalent(expectedPurchases, result);
+
+    }
     
 }

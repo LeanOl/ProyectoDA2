@@ -44,4 +44,15 @@ public class PurchaseLogic : IPurchaseLogic
         return createdPurchase;
     }
 
+    public IEnumerable<Purchase> GetAllPurchases()
+    {
+        return _purchaseManagement.GetAllPurchases();
+
+    }
+
+    public IEnumerable<Purchase> GetPurchasesByUser(Guid userId)
+    {
+        return _purchaseManagement.GetPurchasesByUser(userId);
+    }
+
 }

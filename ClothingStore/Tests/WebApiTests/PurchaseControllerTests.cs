@@ -93,11 +93,61 @@ public class PurchaseControllerTests
         
 
         // Act
-        var result = purchaseController.CreatePurchase(receivedRequest);
+        IActionResult result = purchaseController.CreatePurchase(receivedRequest);
         PurchaseResponse resultValue = ((CreatedAtActionResult)result).Value as PurchaseResponse;
 
         // Assert
+        Assert.AreEqual(expectedActionResult.StatusCode, ((CreatedAtActionResult)result).StatusCode);
         Assert.AreEqual(resultValue.PurchaseId, expectedResponse.PurchaseId);
+
+    }
+
+    [TestMethod]
+    public void GetAllPurchases_Ok()
+    {
+        // Arrange
+        List<Purchase> expectedPurchases = new List<Purchase>
+        {
+            _expectedPurchase
+        };
+        Mock<IPurchaseLogic> mockPurchaseLogic = new Mock<IPurchaseLogic>();
+        mockPurchaseLogic.Setup(m => m.GetAllPurchases()).Returns(expectedPurchases);
+        PurchaseController purchaseController = new PurchaseController(mockPurchaseLogic.Object);
+        List<PurchaseResponse> expectedResponse = expectedPurchases.ConvertAll(purchase => new PurchaseResponse(purchase));
+        OkObjectResult expectedActionResult = new OkObjectResult(expectedResponse);
+
+        // Act
+        IActionResult result = purchaseController.GetAllPurchases();
+        List<PurchaseResponse> resultValue = ((OkObjectResult)result).Value as List<PurchaseResponse>;
+
+        // Assert
+        Assert.AreEqual(expectedActionResult.StatusCode, ((OkObjectResult)result).StatusCode);
+        Assert.AreEqual(resultValue[0].PurchaseId, expectedResponse[0].PurchaseId);
+
+    }
+
+    [TestMethod]
+    public void GetPurchasesByUser_Ok()
+    {
+        // Arrange
+        List<Purchase> expectedPurchases = new List<Purchase>
+        {
+            _expectedPurchase
+        };
+        Guid userId = _userId;
+        Mock<IPurchaseLogic> mockPurchaseLogic = new Mock<IPurchaseLogic>();
+        mockPurchaseLogic.Setup(m => m.GetPurchasesByUser(It.IsAny<Guid>())).Returns(expectedPurchases);
+        PurchaseController purchaseController = new PurchaseController(mockPurchaseLogic.Object);
+        List<PurchaseResponse> expectedResponse = expectedPurchases.ConvertAll(purchase => new PurchaseResponse(purchase));
+        OkObjectResult expectedActionResult = new OkObjectResult(expectedResponse);
+
+        // Act
+        IActionResult result = purchaseController.GetPurchasesByUser(userId);
+        List<PurchaseResponse> resultValue = ((OkObjectResult)result).Value as List<PurchaseResponse>;
+
+        // Assert
+        Assert.AreEqual(expectedActionResult.StatusCode, ((OkObjectResult)result).StatusCode);
+        Assert.AreEqual(resultValue[0].PurchaseId, expectedResponse[0].PurchaseId);
 
     }
 }
