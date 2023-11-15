@@ -9,16 +9,16 @@ public class ThreeProductFidelity : IPromotion
     public decimal GetDiscount(IEnumerable<ProductDto> products)
     {
         
-        var productsByCategory = products.GroupBy(p => p.Category);
+        var productsByBrand = products.GroupBy(p => p.Brand);
 
-        decimal discount = FindDiscount(productsByCategory);
+        decimal discount = FindDiscount(productsByBrand);
         return discount;
     }
 
-    private decimal FindDiscount(IEnumerable<IGrouping<string, ProductDto>> productsByCategory)
+    private decimal FindDiscount(IEnumerable<IGrouping<string, ProductDto>> productsByBrand)
     {
         decimal discount = 0;
-        foreach (var categoryGroup in productsByCategory)
+        foreach (var categoryGroup in productsByBrand)
         {
             if (categoryGroup.Count() >= 3)
             {

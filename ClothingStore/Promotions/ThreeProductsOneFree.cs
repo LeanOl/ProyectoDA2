@@ -5,7 +5,7 @@ namespace Promotions
 {
     public class ThreeProductsOneFree : IPromotion
     {
-        public string Name { get; set; } = "3x1";
+        public string Name { get; set; } = "3x2";
         public decimal GetDiscount(IEnumerable<ProductDto> products )
         {
             var productsByCategory = products.GroupBy(p => p.Category);

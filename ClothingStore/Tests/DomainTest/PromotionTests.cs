@@ -42,6 +42,38 @@ namespace Tests.DomainTest
         }
 
         [TestMethod]
+        public void ThreeProductsOneFree_ApplyDiscountNotOk()
+        {
+            // Arrange
+            ThreeProductsOneFree promotion = new ThreeProductsOneFree();
+            List<ProductDto> products = new List<ProductDto>
+            {
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 10
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 20
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 2",
+                    Price = 30
+                },
+            };
+            decimal expectedDiscount = 0;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }
+
+        [TestMethod]
         public void TotalLook_ApplyDiscountOk()
         {
             // Arrange
@@ -82,6 +114,40 @@ namespace Tests.DomainTest
             Assert.AreEqual(expectedDiscount, result);
         }
 
+        [TestMethod]
+        private void TotalLook_ApplyDiscount_NotOk() {
+            // Arrange
+            TotalLook promotion = new TotalLook();
+            List<ProductDto> products = new List<ProductDto>
+                {
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 10,
+                    Colors = new List<string> { "Red", "Blue" }
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 20,
+                    Colors = new List<string> { "Red", "Green" }
+                },
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 30,
+                    Colors = new List<string> { "Green", "Blue" }
+                },
+            };
+            decimal expectedDiscount = 0;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }   
+
 
         [TestMethod]
         public void TwentyPercentOff_ApplyDiscountOk()
@@ -102,6 +168,28 @@ namespace Tests.DomainTest
                 },
             };
             decimal expectedDiscount = 4;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }
+
+        [TestMethod]
+        public void TwentyPercentOff_ApplyDiscountNotOk()
+        {
+            // Arrange
+            TwentyPercentOff promotion = new TwentyPercentOff();
+            List<ProductDto> products = new List<ProductDto>
+            {
+                new ProductDto()
+                {
+                    Category = "Test Category 1",
+                    Price = 10,
+                }
+            };
+            decimal expectedDiscount = 0;
 
             // Act
             decimal result = promotion.GetDiscount(products);
@@ -134,6 +222,38 @@ namespace Tests.DomainTest
                 }
             };
             decimal expectedDiscount = 30;
+
+            // Act
+            decimal result = promotion.GetDiscount(products);
+
+            // Assert
+            Assert.AreEqual(expectedDiscount, result);
+        }
+
+        [TestMethod]
+        public void ThreeProductFidelity_ApplyDiscountNotOk()
+        {
+            // Arrange
+            ThreeProductFidelity promotion = new ThreeProductFidelity();
+            List<ProductDto> products = new List<ProductDto>
+            {
+                new ProductDto()
+                {
+                    Brand = "Brand 1",
+                    Price = 10
+                },
+                new ProductDto()
+                {
+                    Brand = "Brand 1",
+                    Price = 20
+                },
+                new ProductDto()
+                {
+                    Brand = "Brand 3",
+                    Price = 30
+                }
+            };
+            decimal expectedDiscount = 0;
 
             // Act
             decimal result = promotion.GetDiscount(products);
