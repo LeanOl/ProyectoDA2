@@ -10,6 +10,8 @@ public class PurchaseResponse
     public decimal TotalPrice { get; set; }
     public decimal TotalDiscount { get; set; }
     public decimal FinalPrice { get; set; }
+    public string? PromotionName { get; set; }
+    public string PaymentMethod { get; set; }
     public DateTime Date { get; set; }
    
 
@@ -21,6 +23,8 @@ public class PurchaseResponse
         TotalPrice = purchase.TotalPrice;
         TotalDiscount = purchase.Discount;
         FinalPrice = purchase.FinalPrice;
+        PromotionName = purchase.PromotionName;
+        PaymentMethod = purchase.PaymentMethod;
         Date = purchase.Date;
     }
 }

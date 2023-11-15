@@ -8,6 +8,7 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { UserManagementComponent } from './components/user/user-management/user-management.component';
 import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.component';
 import { RegisterFormComponent } from './components/session/register-form/register-form.component';
+import { PurchaseListComponent } from './components/purchase/purchase-list/purchase-list.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterFormComponent
+  },
+  {
+    path: 'purchases',
+    component: PurchaseListComponent
   },
   {
     path: '',

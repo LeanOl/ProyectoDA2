@@ -7,5 +7,7 @@ export interface PurchaseRes{
   totalPrice: number;
   totalDiscount: number;
   finalPrice: number;
+  promotionName: string;
+  paymentMethod: string;
   date: Date;
 }

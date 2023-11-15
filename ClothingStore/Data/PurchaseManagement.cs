@@ -20,11 +20,11 @@ public class PurchaseManagement : GenericRepository<Purchase> , IPurchaseManagem
 
     public IEnumerable<Purchase> GetAllPurchases()
     {
-        return Context.Set<Purchase>().Include(purchase => purchase.Products).ThenInclude(product => product.Product);
+        return Context.Set<Purchase>().Include(purchase => purchase.Products).ThenInclude(product => product.Product).ThenInclude(product=>product.Colors);
     }
 
     public IEnumerable<Purchase> GetPurchasesByUser(Guid userId)
     {
-        return Context.Set<Purchase>().Include(purchase => purchase.Products).ThenInclude(product => product.Product).Where(purchase => purchase.UserId == userId);
+        return Context.Set<Purchase>().Include(purchase => purchase.Products).ThenInclude(product => product.Product).ThenInclude(product=>product.Colors).Where(purchase => purchase.UserId == userId);
     }
 }

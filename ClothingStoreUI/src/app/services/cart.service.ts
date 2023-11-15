@@ -14,7 +14,7 @@ import { SessionService } from './session.service';
 export class CartService {
 
   cartUrl = environment.apiUrl + environment.cartEndpoint;
-  purchaseUrl = environment.apiUrl + environment.purchaseEndpoint;
+
   constructor(private httpClient:HttpClient) { }
 
   setCart(cart: Cart): void {
@@ -53,7 +53,7 @@ export class CartService {
         this.updateCartNotLogged(cart);
         return of(true);
       }
-    
+
     }
     return of(false);
   }
@@ -82,7 +82,7 @@ export class CartService {
     let productId = product.productId;
     let cart = this.getCart();
     cart.products = cart.products.filter(p => p.productId !== product.productId);
-    
+
     if(this.isLogged()){
       return this.deleteProductLogged(productId,cart);
     }
@@ -115,13 +115,7 @@ export class CartService {
     }
   }
 
-  makePurchase(paymentMethod:string): Observable<PurchaseRes> {
-    const purchaseReq = {
-      userId: this.getCart().userId,
-      paymentMethod: paymentMethod
-    }
-    return this.httpClient.post<PurchaseRes>(this.purchaseUrl, purchaseReq)
-  }
+
 
   fuseCarts(cart:Cart): Observable<Cart> {
     let localCart = this.getCart();

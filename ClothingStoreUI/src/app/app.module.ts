@@ -22,6 +22,8 @@ import { CartMenuComponent } from './components/cart/cart-menu/cart-menu.compone
 import { CartInfoComponent } from './components/cart/cart-info/cart-info.component';
 import { RegisterFormComponent } from './components/session/register-form/register-form.component';
 import { PurchaseListComponent } from './components/purchase/purchase-list/purchase-list.component';
+import { PurchaseItemComponent } from './components/purchase/purchase-item/purchase-item.component';
+import { PurchaseProductComponent } from './components/purchase/purchase-product/purchase-product.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { PurchaseListComponent } from './components/purchase/purchase-list/purch
     CartMenuComponent,
     CartInfoComponent,
     RegisterFormComponent,
-    PurchaseListComponent
+    PurchaseListComponent,
+    PurchaseItemComponent,
+    PurchaseProductComponent
   ],
   imports: [
     BrowserModule,

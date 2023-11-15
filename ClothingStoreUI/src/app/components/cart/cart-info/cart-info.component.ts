@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
+import { PurchaseService } from 'src/app/services/purchase.service';
 
 @Component({
   selector: 'app-cart-info',
@@ -13,10 +14,10 @@ export class CartInfoComponent {
   paymentMethod: string = "visa";
   showErrorMessage: boolean = false;
 
-  constructor(private cartService: CartService) { }
+  constructor(private purchaseService: PurchaseService, private cartService:CartService) { }
 
   makePurchase(){
-    this.cartService.makePurchase(this.paymentMethod).subscribe(
+    this.purchaseService.makePurchase(this.paymentMethod).subscribe(
       {
         next: (res) => {
           this.cartService.clearLocalCartProducts();
