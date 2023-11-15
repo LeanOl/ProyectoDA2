@@ -84,7 +84,7 @@ public class PurchaseLogicTests
         PurchaseLogic purchaseLogic = new PurchaseLogic(mockPurchaseManagement.Object, mockShoppingCartManagement.Object);
         
         // Act
-        Purchase result=purchaseLogic.CreatePurchase(new PurchaseRequest() { UserId = _expectedPurchase.UserId });
+        Purchase result=purchaseLogic.CreatePurchase(new PurchaseRequest() { UserId = _expectedPurchase.UserId, PaymentMethod = "cash"});
 
         // Assert
         mockShoppingCartManagement.VerifyAll();
