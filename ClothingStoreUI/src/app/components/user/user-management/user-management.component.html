@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="isAdmin()">
             <div class="col-md-8">
                 <div class="input-group">
                     <div *ngIf="!editingRole">
@@ -61,8 +61,28 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-success" (click)="updateUser()">Modify User</button>
-        <button class="btn btn-danger" (click)="deleteUser()">Delete User</button>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <div *ngIf="!editingPassword">
+                        <p class="card-text">Password</p>
+                    </div>
+                    <div *ngIf="editingPassword">
+                        <input type="password" [(ngModel)]="newPassword" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="input-group-append">
+                        <div *ngIf="!editingPassword">
+                            <button class="btn btn-outline-secondary margin" (click)="startEdit('password')">Edit Password</button>
+                        </div>
+                        <div *ngIf="editingPassword">
+                            <button class="btn btn-danger" (click)="cancelEdit('password')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success mt-4" (click)="updateUser()">Modify User</button>
+        <button class="btn btn-danger mt-4" (click)="deleteUser()">Delete User</button>
     </div>
 </div>
 <div *ngIf="message" [ngClass]="{'alert alert-success': messageType === 'success', 'alert alert-danger': messageType === 'error'}">

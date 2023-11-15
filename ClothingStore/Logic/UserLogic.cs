@@ -32,20 +32,31 @@ namespace Logic
             _repository.Delete(user);
         }
 
+        public UserResponse GetUser(Guid id)
+        {
+            User user = _repository.Get(x => x.Id == id);
+            return new UserResponse(user);
+        }
+
         public UserResponse UpdateUser(Guid id, UserRequest updatedUser)
         {
             User user = _repository.Get(x => x.Id == id);
-            if (user.Email != null || !"".Equals(updatedUser.Email.Trim()))
+            if (updatedUser.Email != null && !"".Equals(updatedUser.Email.Trim()))
             {
                 user.Email = updatedUser.Email;
             }
-            if (user.DeliveryAddress != null || !"".Equals(updatedUser.DeliveryAddress.Trim()))
+            if (updatedUser.DeliveryAddress != null && !"".Equals(updatedUser.DeliveryAddress.Trim()))
             {
                 user.DeliveryAddress = updatedUser.DeliveryAddress;
             }
-            if (user.Role != null || !"".Equals(updatedUser.Role.Trim()))
+            if (updatedUser.Role != null && !"".Equals(updatedUser.Role.Trim()))
             {
                 user.Role = updatedUser.Role;
+            }
+
+            if (updatedUser.Password != null && !"".Equals(updatedUser.Password.Trim()))
+            {
+                user.Password = updatedUser.Password;
             }
             user.SelfValidations(user.Email, user.Role);
             return new UserResponse(_repository.Update(user));

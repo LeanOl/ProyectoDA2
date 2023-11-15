@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 import { UserRegister } from '../models/user-register.model';
+import { UserRequest } from '../models/user-req.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
 
   userUrl = environment.apiUrl + environment.usersEndpoint;
   userToManage: User;
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient) {
     this.userToManage = {
       id: 'Default',
       email: 'Default',
@@ -21,11 +22,11 @@ export class UserService {
     };
   }
 
-  getAllUsers() : Observable<User[]> { 
+  getAllUsers() : Observable<User[]> {
     return this.httpClient.get<User[]>(this.userUrl,{headers: this.getHttpAuthorizationHeaders()});
   }
 
-  updateUser(user: User) : Observable<User> {
+  updateUser(user: UserRequest) : Observable<User> {
     return this.httpClient.put<User>(this.userUrl + '/' + user.id, user);
   }
 
@@ -45,8 +46,12 @@ export class UserService {
     return this.httpClient.post<User>(this.userUrl, user);
   }
 
+  getUserById(id: string) : Observable<User> {
+    return this.httpClient.get<User>(this.userUrl + '/' + id);
+  }
+
   private getHttpAuthorizationHeaders(): HttpHeaders {
-   
+
     let token = localStorage.getItem('token') || '';
     let headers = new HttpHeaders({
       Authorization:token

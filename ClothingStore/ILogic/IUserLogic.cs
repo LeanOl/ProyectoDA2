@@ -9,5 +9,6 @@ namespace ILogic
         IEnumerable<UserResponse> GetAllUsers();
         void DeleteUser(Guid id);
         UserResponse UpdateUser(Guid id, UserRequest isAny);
+        UserResponse GetUser(Guid id);
     }
 }

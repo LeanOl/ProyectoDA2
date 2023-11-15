@@ -31,6 +31,13 @@ namespace WebApi.Controllers
         
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetUser([FromRoute] Guid id)
+        {
+            var result = _userLogic.GetUser(id);
+            return Ok(result);
+        }
+
         [HttpGet]
         [AuthorizationFilter(RoleNeeded = "ADMIN")]
         public IActionResult GetAllUsers()
