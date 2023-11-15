@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { PurchaseRes } from 'src/app/models/purchase-res.model';
 import { PurchaseService } from 'src/app/services/purchase.service';
 

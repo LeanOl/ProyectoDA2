@@ -24,6 +24,7 @@ import { RegisterFormComponent } from './components/session/register-form/regist
 import { PurchaseListComponent } from './components/purchase/purchase-list/purchase-list.component';
 import { PurchaseItemComponent } from './components/purchase/purchase-item/purchase-item.component';
 import { PurchaseProductComponent } from './components/purchase/purchase-product/purchase-product.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PurchaseProductComponent } from './components/purchase/purchase-product
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
