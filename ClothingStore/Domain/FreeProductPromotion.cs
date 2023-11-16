@@ -30,6 +30,7 @@
         private IEnumerable<Product> GetLessValueableProducts(IEnumerable<Product> products)
         {
             return products
+                .Where(p => !p.Excluded)
                 .OrderBy(x => x.Price)
                 .Take(FreeProductCount);
         }
