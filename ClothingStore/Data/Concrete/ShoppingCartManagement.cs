@@ -46,7 +46,7 @@ namespace Data.Concrete
             }
         }
 
-        public IEnumerable<ShoppingCartProducts> GetProductsInCartByUserIdNotExcluded(Guid cartId)
+        public IEnumerable<ShoppingCartProducts> GetShoppingCartProductsByUserIdNotExcluded(Guid cartId)
         {
             var shoppingCart = GetShoppingCartByUserId(cartId);
             if (shoppingCart != null) { 
