@@ -1,5 +1,6 @@
 export const environment = {
-    apiUrl: 'https://localhost:7297/api',
+    production: true,
+    apiUrl: 'http://localhost:6969/api',
     productsEndpoint: '/products',
     sessionsEndpoint: '/sessions',
     usersEndpoint: '/users',
