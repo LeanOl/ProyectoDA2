@@ -22,6 +22,7 @@ export class CreateProductComponent {
       brand: '',
       category: '',
       stock: 1,
+      excluded: false,
       colors: this.fb.array([]),
     });
   }
@@ -49,6 +50,7 @@ export class CreateProductComponent {
       category: this.productForm.value.category,
       colors: this.productForm.value.colors,
       stock: this.productForm.value.stock,
+      excluded: this.productForm.value.excluded,
     }
     this.productService.createProduct(product).subscribe({
       next: (product: Product) => {

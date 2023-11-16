@@ -6,4 +6,5 @@ export interface ProductCreateRequest {
     category: string;
     colors: string[];
     stock: number;
+    excluded:boolean;
 }

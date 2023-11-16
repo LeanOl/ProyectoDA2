@@ -51,7 +51,7 @@ namespace Logic
 
         private static IEnumerable<ProductDto> ConvertToProductsDto(ShoppingCart shoppingCart)
         {
-            IEnumerable<Product> products = shoppingCart.GetProducts();
+            IEnumerable<Product> products = shoppingCart.GetProductsNotExcluded();
             IEnumerable<ProductDto> productsDto = products.Select(p => new ProductDto(p));
             return productsDto;
         }
