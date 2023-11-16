@@ -23,7 +23,12 @@
     <ProjectReference Include="..\APIModels\APIModels.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Exceptions\Exceptions.csproj" />
+    <ProjectReference Include="..\IPromotionProject\IPromotionProject.csproj" />
     <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\Promotions.ThreeProductFidelity\Promotions.ThreeProductFidelity.csproj" />
+    <ProjectReference Include="..\Promotions.ThreeProductsOneFree\Promotions.ThreeProductsOneFree.csproj" />
+    <ProjectReference Include="..\Promotions.TotalLook\Promotions.TotalLook.csproj" />
+    <ProjectReference Include="..\Promotions.TwentyPercentOff\Promotions.TwentyPercentOff.csproj" />
     <ProjectReference Include="..\WebApi\WebApi.csproj" />
   </ItemGroup>
 

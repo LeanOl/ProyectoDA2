@@ -12,6 +12,8 @@ namespace Domain
         public string Brand { get; set; }
         public string Category { get; set; }
         public List<ProductColor> Colors { get; set; }
+        public int Stock { get; set; }
+        public bool Excluded { get; set; }
 
         public Product()
         {

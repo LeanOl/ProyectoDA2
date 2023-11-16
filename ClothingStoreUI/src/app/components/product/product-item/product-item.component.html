@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">Price: {{ product.price | currency}}</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Brand: {{ product.brand }}</li>
+      <li class="list-group-item">Category: {{ product.category }}</li>
+    </ul>
+    <div class="d-flex justify-content-between" >
+      <button class="btn btn-primary mt-3" (click)="addToCart()">Add to Cart</button>
+      <button class="btn btn-primary mt-3" routerLink="/viewproduct" (click)="setActiveProduct()">View product page</button>
+    </div>
+  </div>
+  <div class="alert alert-success" role="alert" *ngIf="showAlert">
+    Product added to cart!
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="showErrorAlert">
+    There was an error adding the product to the cart. Please try again later.
+  </div>
+</div>
+

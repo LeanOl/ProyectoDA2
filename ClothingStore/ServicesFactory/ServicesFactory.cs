@@ -1,15 +1,14 @@
-﻿using Data.Interfaces;
-using Data.Concrete;
+﻿using IData;
 using Domain;
-using Logic.Concrete;
-using Logic.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Data;
+using ILogic;
+using Logic;
 
 namespace ServicesFactory
 {
-	public class ServicesFactory
+    public class ServicesFactory
 	{
 		public ServicesFactory()
 		{
@@ -19,7 +18,6 @@ namespace ServicesFactory
         {
             serviceCollection.AddDbContext<DbContext, ClothingStoreContext>();
             serviceCollection.AddScoped<IGenericRepository<User>, UserManagement>();
-            serviceCollection.AddScoped<IGenericRepository<Promotion>,PromotionManagement>();
             serviceCollection.AddScoped<IGenericRepository<Session>, SessionManagement>();
             serviceCollection.AddScoped<IGenericRepository<Product>, ProductManagement>();
             serviceCollection.AddScoped<IPromotionLogic, PromotionLogic>();
@@ -27,6 +25,13 @@ namespace ServicesFactory
             serviceCollection.AddScoped<ISessionService, SessionService>();
             serviceCollection.AddScoped<IProductLogic, ProductLogic>();
             serviceCollection.AddScoped<IProductManagement, ProductManagement>();
+            serviceCollection.AddScoped<IShoppingCartLogic, ShoppingCartLogic>();
+            serviceCollection.AddScoped<IShoppingCartManagement, ShoppingCartManagement>();
+            serviceCollection.AddScoped<IPurchaseLogic, PurchaseLogic>();
+            serviceCollection.AddScoped<IPurchaseManagement, PurchaseManagement>();
+
+
+
         }
     }
 }

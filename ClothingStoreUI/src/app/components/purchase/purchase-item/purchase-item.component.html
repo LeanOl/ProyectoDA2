@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header" id="headingOne">
+    <h5 class="mb-0">
+      <button
+        class="btn"
+        type="button"
+        (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseOne"
+      >
+        <div class="row">
+          <div class="col-12 text-left mb-4">
+            Purchase ID: <strong>{{ purchase.purchaseId }}</strong> User ID:
+            <strong>{{ purchase.userId }}</strong>
+          </div>
+          <div class="col-6 text-left">
+            Date: <strong>{{ purchase.date | date }}</strong>
+          </div>
+          <div class="col-6 text-right">
+            Final Price: <strong>{{ purchase.finalPrice | currency }}</strong>
+          </div>
+        </div>
+      </button>
+    </h5>
+  </div>
+
+  <div id="collapseOne" [ngbCollapse]="isCollapsed">
+    <div class="card-body">
+      <p><b>User ID:</b> {{ purchase.userId }}</p>
+      <p><b>Date:</b> {{ purchase.date | date }}</p>
+      <p>Total Price: {{ purchase.totalPrice | currency }}</p>
+      <p>Discount: {{ purchase.totalDiscount | currency }}</p>
+      <p>Final Price: {{ purchase.finalPrice | currency }}</p>
+      <p>Payment Method: {{ purchase.paymentMethod }}</p>
+      <p>Promotion applied: {{ purchase.promotionName }}</p>
+      <h5>Products:</h5>
+      <ul>
+        <li *ngFor="let product of purchase.products">
+          <app-purchase-product [product]="product"></app-purchase-product>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

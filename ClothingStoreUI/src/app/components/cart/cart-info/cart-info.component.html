@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Cart Info</h5>
+    <p class="card-text">Full Price: {{ cart.totalPrice | currency }}</p>
+    <p class="card-text">Discount: {{ cart.discount | currency }}</p>
+    <p class="card-text">Promotion: {{ cart.promotionName }}</p>
+    <p class="card-text">
+      Total: <b>{{ cart.finalPrice | currency }}</b>
+    </p>
+    <div class="form-group">
+      <label for="paymentMethod">Payment Method</label>
+      <select
+        class="form-control"
+        id="paymentMethod"
+        [(ngModel)]="paymentMethod"
+      >
+        <optgroup label="Credit">
+          <option value="visa">Visa</option>
+          <option value="mastercard">Mastercard</option>
+        </optgroup>
+        <optgroup label="Debit">
+          <option value="santander">Santander</option>
+          <option value="bbva">BBVA</option>
+          <option value="itau">ITAU</option>
+        </optgroup>
+        <option value="paypal">PayPal</option>
+        <option value="paganza">Paganza</option>
+      </select>
+    </div>
+    <button class="btn btn-primary mt-4" (click)="makePurchase()">
+      Make Purchase
+    </button>
+    <div class="alert alert-danger mt-4" role="alert" *ngIf="showErrorMessage">
+      There was an error making the purchase.
+    </div>
+  </div>
+</div>

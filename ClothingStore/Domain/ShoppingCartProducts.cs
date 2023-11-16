@@ -4,9 +4,7 @@ namespace Domain
 {
     public class ShoppingCartProducts
     {
-        [Key]
         public Guid ShoppingCartId { get; set; }
-        public ShoppingCart ShoppingCart { get; set; }
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
@@ -14,11 +12,11 @@ namespace Domain
         public ShoppingCartProducts()
         {
         }
-        public ShoppingCartProducts(Guid shoppingCartId, Guid productId, int quantity)
+        public ShoppingCartProducts(Guid shoppingCartId, Product product, int quantity)
         {
-            ShoppingCartId = Guid.NewGuid();
             ShoppingCartId = shoppingCartId;
-            ProductId = productId;
+            Product = product;
+            ProductId = product.Id;
             Quantity = quantity;
         }
 

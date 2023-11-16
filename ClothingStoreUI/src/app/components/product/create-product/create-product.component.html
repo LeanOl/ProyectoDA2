@@ -1,0 +1,117 @@
+<div class="container h-100">
+  <h1 class="text-center mb-4">Create Product</h1>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-md-7">
+      <div class="p-3">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+          <div class="form-group col-md-7">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+            />
+          </div>
+
+          <div class="form-group col-md-7">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              formControlName="price"
+            />
+          </div>
+
+          <div class="form-group col-md-7">
+            <label for="description">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              formControlName="description"
+            ></textarea>
+          </div>
+
+          <div class="form-group col-md-7">
+            <label for="brand">Brand</label>
+            <input
+              type="text"
+              class="form-control"
+              id="brand"
+              formControlName="brand"
+            />
+          </div>
+
+          <div class="form-group col-md-7">
+            <label for="category">Category</label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              formControlName="category"
+            />
+          </div>
+          <div class="form-group col-md-7">
+            <label for="stock">Stock</label>
+            <input
+              type="number"
+              class="form-control"
+              id="stock"
+              formControlName="stock"
+            />
+          </div>
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="excluded"
+              formControlName="excluded"
+            />
+            <label class="form-check-label" for="excluded">excluded</label>
+          </div>
+          <div
+            formArrayName="colors"
+            *ngFor="let color of getColorsFormArray().controls; let i = index"
+          >
+            <label for="color{{ i }}" class="col-sm-2 col-form-label"
+              >Color {{ i + 1 }}</label
+            >
+            <div class="form-group row">
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="color{{ i }}"
+                  [formControlName]="i"
+                />
+              </div>
+              <div class="col-sm-2">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeColor(i)"
+                >
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-secondary" (click)="addColor()">
+            Add Color
+          </button>
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+              Create Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showAlert" class="alert alert-warning" role="alert">
+  {{ alertMessage }}
+</div>

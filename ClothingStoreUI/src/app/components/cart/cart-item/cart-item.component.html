@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{item.product.name}}</h5>
+    <p class="card-text">{{item.product.description}}</p>
+    <p class="card-text">Price: {{item.product.price}}</p>
+    <p class="card-text">Quantity: {{item.quantity}}</p>
+    <div class="input-group mb-3">
+      <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity(item)">-</button>
+      <input type="text" class="form-control" [(ngModel)]="item.quantity" readonly placeholder="quantity" >
+      <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity(item)">+</button>
+    </div>
+    <a class="btn btn-primary" (click)="removeFromCart(item)">Remove from Cart</a>
+  </div>
+</div>

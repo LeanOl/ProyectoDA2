@@ -1,0 +1,7 @@
+<div>
+  <ul class="list-group">
+    <li *ngFor="let purchase of purchases" class="list-group-item">
+      <app-purchase-item [purchase]="purchase"></app-purchase-item>
+    </li>
+  </ul>
+</div>
