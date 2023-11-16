@@ -61,6 +61,15 @@
               formControlName="stock"
             />
           </div>
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="excluded"
+              formControlName="excluded"
+            />
+            <label class="form-check-label" for="excluded">excluded</label>
+          </div>
           <div
             formArrayName="colors"
             *ngFor="let color of getColorsFormArray().controls; let i = index"

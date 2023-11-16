@@ -43,6 +43,27 @@ namespace Domain
             return products;
         }
 
+        public List<Product> GetProductsNotExcluded()
+        {
+            if (ShoppingCartProducts == null || ShoppingCartProducts.Count == 0)
+            {
+                return new List<Product>();
+            }
+
+            var products = new List<Product>();
+            foreach (var product in ShoppingCartProducts)
+            {
+                if (!product.Product.Excluded)
+                {
+                    for (int i = 0; i < product.Quantity; i++)
+                    {
+                        products.Add(product.Product);
+                    }
+                }
+            }
+            return products;
+        }
+
         public void UpdatePrices()
         {
             TotalPrice = GetTotalPrice();
