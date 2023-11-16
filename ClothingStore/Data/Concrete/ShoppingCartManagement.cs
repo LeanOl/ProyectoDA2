@@ -46,6 +46,15 @@ namespace Data.Concrete
             }
         }
 
+        public IEnumerable<ShoppingCartProducts> GetProductsInCartByUserIdNotExcluded(Guid cartId)
+        {
+            var shoppingCart = GetShoppingCartByUserId(cartId);
+            if (shoppingCart != null) { 
+                return shoppingCart.ShoppingCartProducts.Where(p=> !p.Product.Excluded).ToList();
+            }
+            return new List<ShoppingCartProducts>();
+        }
+
         public IEnumerable<ShoppingCartProducts> GetProductsInCartByUserId(Guid cartId)
         {
             var shoppingCart = GetShoppingCartByUserId(cartId);
